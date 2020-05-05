@@ -149,6 +149,141 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Journey.obj: src/Journey.cpp.obj
+
+.PHONY : src/Journey.obj
+
+# target to build an object file
+src/Journey.cpp.obj:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Journey.cpp.obj
+.PHONY : src/Journey.cpp.obj
+
+src/Journey.i: src/Journey.cpp.i
+
+.PHONY : src/Journey.i
+
+# target to preprocess a source file
+src/Journey.cpp.i:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Journey.cpp.i
+.PHONY : src/Journey.cpp.i
+
+src/Journey.s: src/Journey.cpp.s
+
+.PHONY : src/Journey.s
+
+# target to generate assembly for a file
+src/Journey.cpp.s:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Journey.cpp.s
+.PHONY : src/Journey.cpp.s
+
+src/Person.obj: src/Person.cpp.obj
+
+.PHONY : src/Person.obj
+
+# target to build an object file
+src/Person.cpp.obj:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Person.cpp.obj
+.PHONY : src/Person.cpp.obj
+
+src/Person.i: src/Person.cpp.i
+
+.PHONY : src/Person.i
+
+# target to preprocess a source file
+src/Person.cpp.i:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Person.cpp.i
+.PHONY : src/Person.cpp.i
+
+src/Person.s: src/Person.cpp.s
+
+.PHONY : src/Person.s
+
+# target to generate assembly for a file
+src/Person.cpp.s:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Person.cpp.s
+.PHONY : src/Person.cpp.s
+
+src/Request.obj: src/Request.cpp.obj
+
+.PHONY : src/Request.obj
+
+# target to build an object file
+src/Request.cpp.obj:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Request.cpp.obj
+.PHONY : src/Request.cpp.obj
+
+src/Request.i: src/Request.cpp.i
+
+.PHONY : src/Request.i
+
+# target to preprocess a source file
+src/Request.cpp.i:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Request.cpp.i
+.PHONY : src/Request.cpp.i
+
+src/Request.s: src/Request.cpp.s
+
+.PHONY : src/Request.s
+
+# target to generate assembly for a file
+src/Request.cpp.s:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Request.cpp.s
+.PHONY : src/Request.cpp.s
+
+src/Time.obj: src/Time.cpp.obj
+
+.PHONY : src/Time.obj
+
+# target to build an object file
+src/Time.cpp.obj:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Time.cpp.obj
+.PHONY : src/Time.cpp.obj
+
+src/Time.i: src/Time.cpp.i
+
+.PHONY : src/Time.i
+
+# target to preprocess a source file
+src/Time.cpp.i:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Time.cpp.i
+.PHONY : src/Time.cpp.i
+
+src/Time.s: src/Time.cpp.s
+
+.PHONY : src/Time.s
+
+# target to generate assembly for a file
+src/Time.cpp.s:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Time.cpp.s
+.PHONY : src/Time.cpp.s
+
+src/Vehicle.obj: src/Vehicle.cpp.obj
+
+.PHONY : src/Vehicle.obj
+
+# target to build an object file
+src/Vehicle.cpp.obj:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Vehicle.cpp.obj
+.PHONY : src/Vehicle.cpp.obj
+
+src/Vehicle.i: src/Vehicle.cpp.i
+
+.PHONY : src/Vehicle.i
+
+# target to preprocess a source file
+src/Vehicle.cpp.i:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Vehicle.cpp.i
+.PHONY : src/Vehicle.cpp.i
+
+src/Vehicle.s: src/Vehicle.cpp.s
+
+.PHONY : src/Vehicle.s
+
+# target to generate assembly for a file
+src/Vehicle.cpp.s:
+	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/src/Vehicle.cpp.s
+.PHONY : src/Vehicle.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,6 +296,21 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Journey.obj
+	@echo ... src/Journey.i
+	@echo ... src/Journey.s
+	@echo ... src/Person.obj
+	@echo ... src/Person.i
+	@echo ... src/Person.s
+	@echo ... src/Request.obj
+	@echo ... src/Request.i
+	@echo ... src/Request.s
+	@echo ... src/Time.obj
+	@echo ... src/Time.i
+	@echo ... src/Time.s
+	@echo ... src/Vehicle.obj
+	@echo ... src/Vehicle.i
+	@echo ... src/Vehicle.s
 .PHONY : help
 
 
