@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CAL_PROJ.dir/main.cpp.obj"
-  "CAL_PROJ.pdb"
   "CAL_PROJ.exe"
   "CAL_PROJ.exe.manifest"
+  "CAL_PROJ.pdb"
+  "CMakeFiles/CAL_PROJ.dir/main.cpp.obj"
   "libCAL_PROJ.dll.a"
 )
 

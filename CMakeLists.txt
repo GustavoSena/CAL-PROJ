@@ -3,4 +3,4 @@ project(CAL_PROJ)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(CAL_PROJ main.cpp src/Person.h)
+add_executable(CAL_PROJ main.cpp src/Person.h src/Graph.h src/MutablePriorityQueue.h)

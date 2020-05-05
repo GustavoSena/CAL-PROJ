@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/user/Desktop/CAL-PROJ
+# Install script for directory: C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/user/Desktop/CAL-PROJ/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
