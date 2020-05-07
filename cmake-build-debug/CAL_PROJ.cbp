@@ -113,6 +113,9 @@
 		<Unit filename="C:/Users/user/Desktop/CAL-PROJ/src/Vehicle.h">
 			<Option target="CAL_PROJ"/>
 		</Unit>
+		<Unit filename="C:/Users/user/Desktop/CAL-PROJ/src/utils.h">
+			<Option target="CAL_PROJ"/>
+		</Unit>
 		<Unit filename="C:/Users/user/Desktop/CAL-PROJ/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -22,7 +22,7 @@ protected:
 
 
 public:
-    Person(int id, const string &name, const vector<Person> &network, const string &address) : id(id), name(name), network(network), address(address){}
+    Person(int id, const string &name, const vector<Person*> &network, const string &address) : id(id), name(name), network(network), address(address){}
 
     int getId() const;
 
@@ -43,9 +43,12 @@ public:
 
 class Passenger : Person {
 public:
-    Passenger(int id, const string &name, const vector<Person> &network) : Person(id, name, network) {}
+    Passenger(int id, const string &name, const vector<Person*> &network, const string &address) : Person(id, name, network, address) {}
 
 };
+
+class Vehicle;
+
 
 class Driver : Person {
 private:
