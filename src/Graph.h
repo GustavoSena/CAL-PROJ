@@ -1,10 +1,9 @@
-/*
- * Graph.h
- */
-#ifndef GRAPH_H_
-#define GRAPH_H_
+
+#ifndef CAL_PROJ_GRAPH_H
+#define CAL_PROJ_GRAPH_H
 
 #include <vector>
+#include <iostream>
 #include <queue>
 #include <limits>
 #include <algorithm>
@@ -414,4 +413,4 @@ vector<Vertex<T>*> Graph<T>::calculateKruskal() {
 
 
 
-#endif /* GRAPH_H_ */
+#endif CAL_PROJ_GRAPH_H

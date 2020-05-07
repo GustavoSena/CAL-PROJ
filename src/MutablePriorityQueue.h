@@ -1,13 +1,7 @@
-/*
- * MutablePriorityQueue.h
- * A simple implementation of mutable priority queues, required by Dijkstra algorithm.
- *
- * Created on: 17/03/2018
- *      Author: João Pascoal Faria
- */
 
-#ifndef SRC_MUTABLEPRIORITYQUEUE_H_
-#define SRC_MUTABLEPRIORITYQUEUE_H_
+
+#ifndef CAL_PROJ_SRC_MUTABLEPRIORITYQUEUE_H
+#define CAL_PROJ_SRC_MUTABLEPRIORITYQUEUE_H
 
 #include <vector>
 
@@ -102,4 +96,4 @@ void MutablePriorityQueue<T>::set(unsigned i, T * x) {
 	x->queueIndex = i;
 }
 
-#endif /* SRC_MUTABLEPRIORITYQUEUE_H_ */
+#endif CAL_PROJ_SRC_MUTABLEPRIORITYQUEUE_H
