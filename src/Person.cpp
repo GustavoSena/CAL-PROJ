@@ -28,6 +28,14 @@ void Person::setNetwork(const vector<Person*> &network) {
     this->network = network;
 }
 
+const string &Person::getAddress() const {
+    return address;
+}
+
+void Person::setAddress(const string &address) {
+    Person::address = address;
+}
+
 Vehicle *Driver::getVehicle() const {
     return vehicle;
 }

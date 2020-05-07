@@ -17,10 +17,12 @@ protected:
     int id;
     string name;
     vector<Person*> network;
+    string address;
+    //adicionar destinos frequentes
 
 
 public:
-    Person(int id, const string &name, const vector<Person> &network) : id(id), name(name), network(network) {}
+    Person(int id, const string &name, const vector<Person> &network, const string &address) : id(id), name(name), network(network), address(address){}
 
     int getId() const;
 
@@ -31,6 +33,10 @@ public:
     const vector<Person*> &getNetwork() const;
 
     void setNetwork(const vector<Person*> &network);
+
+    const string &getAddress() const;
+
+    void setAddress(const string &address);
 };
 
 

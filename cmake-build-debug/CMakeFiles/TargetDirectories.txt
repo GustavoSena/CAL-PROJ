@@ -1,3 +1,0 @@
-C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/cmake-build-debug/CMakeFiles/CAL_PROJ.dir
-C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/cmake-build-debug/CMakeFiles/rebuild_cache.dir

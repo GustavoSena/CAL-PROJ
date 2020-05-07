@@ -11,6 +11,8 @@
 
 class Journey {
 public:
+    Journey();
+
     const Time &getStartTime() const;
 
     void setStartTime(const Time &startTime);
@@ -19,13 +21,15 @@ public:
 
     void setArrivalTimes(const vector<Time> &arrivalTimes);
 
-    const vector<Passenger & getPassenger() const;
+    const vector<Passenger*>  getPassenger() const;
 
-    void setPassenger(const vector<Passenger & passenger);
+    void setPassenger(const vector<Passenger*>  passenger);
 
     Driver *getDriver() const;
 
     void setDriver(Driver *driver);
+
+public:
 
 private:
     Time startTime;
