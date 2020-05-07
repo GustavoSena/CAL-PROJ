@@ -1,0 +1,3 @@
+C:/Users/user/Desktop/CAL-PROJ/MeetupRider/cmake-build-debug/CMakeFiles/MeetupRider.dir
+C:/Users/user/Desktop/CAL-PROJ/MeetupRider/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/user/Desktop/CAL-PROJ/MeetupRider/cmake-build-debug/CMakeFiles/rebuild_cache.dir
