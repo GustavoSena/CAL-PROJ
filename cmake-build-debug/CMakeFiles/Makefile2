@@ -73,12 +73,12 @@ preinstall:
 CMakeFiles/CAL_PROJ.dir/all:
 	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/depend
 	$(MAKE) -f CMakeFiles\CAL_PROJ.dir\build.make CMakeFiles/CAL_PROJ.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\gmend\OneDrive\Ambiente de Trabalho\CAL-PROJ\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target CAL_PROJ"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\gmend\OneDrive\Ambiente de Trabalho\CAL-PROJ\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7 "Built target CAL_PROJ"
 .PHONY : CMakeFiles/CAL_PROJ.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/CAL_PROJ.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\gmend\OneDrive\Ambiente de Trabalho\CAL-PROJ\cmake-build-debug\CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\gmend\OneDrive\Ambiente de Trabalho\CAL-PROJ\cmake-build-debug\CMakeFiles" 7
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/CAL_PROJ.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\gmend\OneDrive\Ambiente de Trabalho\CAL-PROJ\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/CAL_PROJ.dir/rule

@@ -86,10 +86,37 @@
 		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Graph.h">
 			<Option target="CAL_PROJ"/>
 		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Journey.cpp">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Journey.h">
+			<Option target="CAL_PROJ"/>
+		</Unit>
 		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/MutablePriorityQueue.h">
 			<Option target="CAL_PROJ"/>
 		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Person.cpp">
+			<Option target="CAL_PROJ"/>
+		</Unit>
 		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Person.h">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Request.cpp">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Request.h">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Time.cpp">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Time.h">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Vehicle.cpp">
+			<Option target="CAL_PROJ"/>
+		</Unit>
+		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/src/Vehicle.h">
 			<Option target="CAL_PROJ"/>
 		</Unit>
 		<Unit filename="C:/Users/gmend/OneDrive/Ambiente de Trabalho/CAL-PROJ/CMakeLists.txt">
