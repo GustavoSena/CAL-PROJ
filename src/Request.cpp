@@ -21,6 +21,7 @@ const Time &Request::getMaxStartTime() const {
 }
 
 void Request::setMaxStartTime(const Time &maxStartTime) {
+void Request::setMaxStartTime(const Time &maxStartTime) {
     Request::maxStartTime = maxStartTime;
 }
 
