@@ -59,24 +59,38 @@ void mapViewer(string edge_file, string node_file)
     vector<string> tmp;
     string text_line;
     getline(n_data,text_line);
+    cout << text_line << endl;
     int n_nodes = stoi(text_line);
     for (int i = 0; i < n_nodes; i++){
 
         getline(n_data, text_line);
         tmp = split(text_line, ';', 3);
-        gv->addNode(stoi(tmp[0]), stoi(tmp[1]), stoi(tmp[2]));
+        cout << tmp[0] << endl;
+        cout << tmp[1] << endl;
+        cout << tmp[2] << endl;
+        int a1 = stoi(tmp[0]);
+        int a2 = stoi(tmp[1]);
+        int a3 = stoi(tmp[2]);
+        gv->addNode(a1,a2,a3);
 
     }
 
 
     string text;
     getline(e_data, text);
+    cout << text << endl;
     int n_edges = stoi(text);
     for(int i = 0; i < n_edges; i++)
     {
         getline(e_data, text);
         tmp = split(text, ';', 3);
-        gv->addEdge(stoi(tmp[0]), stoi(tmp[1]), stoi(tmp[2]), EdgeType::DIRECTED );
+        cout << tmp[0] << endl;
+        cout << tmp[1] << endl;
+        cout << tmp[2] << endl;
+        int a1 = stoi(tmp[0]);
+        int a2 = stoi(tmp[1]);
+        int a3 = stoi(tmp[2]);
+        gv->addEdge(a1, a2, a3, EdgeType::DIRECTED);
     }
 }
 
