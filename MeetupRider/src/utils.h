@@ -113,11 +113,10 @@ void mapViewer(string edge_file, string node_file)
     getchar();
     gv->closeWindow();
 
+
+
+
 }
-
-
-
-
 
 
 #endif //CAL_PROJ_UTILS_H

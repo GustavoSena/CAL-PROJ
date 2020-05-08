@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="602503f3-e552-43ba-bd6b-c4df84d7dcab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/MeetupRider.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MeetupRider.exe" afterDir="false" />
@@ -70,7 +69,7 @@
       <workItem from="1588851843901" duration="287000" />
       <workItem from="1588852286756" duration="866000" />
       <workItem from="1588869923490" duration="147000" />
-      <workItem from="1588934439208" duration="4907000" />
+      <workItem from="1588934439208" duration="5158000" />
     </task>
     <servers />
   </component>
