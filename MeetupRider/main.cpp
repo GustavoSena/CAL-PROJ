@@ -13,8 +13,8 @@
 
 int main() {
 
-    string porto_nodes = "maps/Porto/nodes_x_y_porto.txt";
-    string porto_edges = "maps/Porto/edges_porto.txt";
+    string porto_nodes = "C:\\Users\\user\\Desktop\\CAL-PROJ\\MeetupRider\\maps\\8x8\\nodes.txt";
+    string porto_edges = "C:\\Users\\user\\Desktop\\CAL-PROJ\\MeetupRider\\maps\\8x8\\edges.txt";
 
     mapViewer(porto_edges, porto_nodes);
 
