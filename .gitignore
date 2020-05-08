@@ -1,10 +1,2 @@
-
-*.exe
-*.exe
-*.a
-*.obj
-*.xml
-*.xml
-*.obj
-*.a
-*.exe
+cmake*
+.idea
