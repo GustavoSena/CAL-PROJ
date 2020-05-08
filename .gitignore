@@ -1,5 +1,5 @@
-MeetupRider/cmake-build-debug/
-MeetupRider/.idea/
+cmake-build-debug/
+.idea/
 *.a
 *.obj
 *.xml
