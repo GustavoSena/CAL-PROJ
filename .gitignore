@@ -4,3 +4,7 @@
 *.a
 *.obj
 *.xml
+*.xml
+*.obj
+*.a
+*.exe
