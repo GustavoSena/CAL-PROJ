@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="602503f3-e552-43ba-bd6b-c4df84d7dcab" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/MeetupRider.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
@@ -119,6 +120,12 @@
       <change beforePath="$PROJECT_DIR$/../src/graphViewer/graphviewer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphviewer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/graphViewer/graphviewer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphviewer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.h" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MeetupRider.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/MeetupRider.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MeetupRider.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.h" afterDir="false" />
+>>>>>>> a9402f50847cbdbfd0071fccd6688f4d79e2428a
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +149,24 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MeetupRider/MeetupRider" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+>>>>>>> a9402f50847cbdbfd0071fccd6688f4d79e2428a
   </component>
   <component name="RunManager">
     <configuration name="MeetupRider" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="MeetupRider" TARGET_NAME="MeetupRider" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="MeetupRider" RUN_TARGET_NAME="MeetupRider">
@@ -162,8 +186,14 @@
       <option name="presentableId" value="Default" />
       <updated>1588851842649</updated>
       <workItem from="1588851843901" duration="287000" />
+<<<<<<< HEAD
       <workItem from="1588852286756" duration="586000" />
       <workItem from="1588855412526" duration="2557000" />
+=======
+      <workItem from="1588852286756" duration="866000" />
+      <workItem from="1588869923490" duration="147000" />
+      <workItem from="1588934439208" duration="5158000" />
+>>>>>>> a9402f50847cbdbfd0071fccd6688f4d79e2428a
     </task>
     <servers />
   </component>

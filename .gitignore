@@ -1,0 +1,6 @@
+MeetupRider/cmake-build-debug/
+MeetupRider/.idea/
+*.a
+*.obj
+*.xml
+*.exe
