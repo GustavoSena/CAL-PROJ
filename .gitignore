@@ -1,5 +1,7 @@
 cmake-build-debug/
 .idea/
+.vs/
+out/
 *.a
 *.obj
 *.xml
