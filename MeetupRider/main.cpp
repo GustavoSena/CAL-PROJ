@@ -5,19 +5,18 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include "src/graphviewer.h"
-#include "src/utils.h"
+#include "src/Base.h"
 
 
-
+using namespace std;
 
 int main() {
 
+    string node_text = "C:\\Users\\user\\Desktop\\CAL-PROJ\\MeetupRider\\maps\\8x8\\nodes.txt";
+    string edge_text = "C:\\Users\\user\\Desktop\\CAL-PROJ\\MeetupRider\\maps\\8x8\\edges.txt";
+    Base b;
+    b.loadGraph(node_text, edge_text);
 
-    string porto_nodes = "C:\\Users\\user\\Desktop\\CAL-PROJ\\MeetupRider\\maps\\8x8\\nodes.txt";
-    string porto_edges = "C:\\Users\\user\\Desktop\\CAL-PROJ\\MeetupRider\\maps\\8x8\\edges.txt";
-
-    mapViewer(porto_edges, porto_nodes);
-
+    cout << "Size of graph: " << b.getGraph().getGraphSize();
 
 }
