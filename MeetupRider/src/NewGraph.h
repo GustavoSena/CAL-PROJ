@@ -28,6 +28,7 @@ private:
     int x;
     int y;
     vector<Edge> adj;
+    bool visited; //For connectivity
 
     void addEdge(Vertex * dest);
 public:
@@ -87,6 +88,10 @@ public:
 class Graph{
 private:
     vector<Vertex *> vertexSet;
+    //Floyd Warshall Algorithm
+    double ** W = nullptr; //Distance
+    int ** P = nullptr; //Path
+
 
 public:
     Graph();
@@ -100,8 +105,12 @@ public:
     bool addEdge(int id1, int id2);
     int getGraphSize() const;
 
+    //Floyd Warshall Algorithm
+    int findVertexIdx(const int id) const;
+    void floydWarshallShortestPath();
+    vector<int> getFloydWarshallPath(const int orig, const int dest) const;
 
-
+    bool areVertexConnected(int id1, int id2);
 
 };
 
