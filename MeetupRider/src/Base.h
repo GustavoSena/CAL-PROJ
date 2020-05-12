@@ -6,6 +6,7 @@
 #define MEETUPRIDER_BASE_H
 
 #include <vector>
+#include <fstream>
 #include "NewGraph.h"
 #include "Person.h"
 #include "Request.h"
@@ -23,9 +24,18 @@ private:
     vector<Journey *> journeys;
 public:
 
-    Base(string text_line);
+    Base(string fileName);
 
     Base();
+
+
+    void loadClients(string fileName);
+
+    void loadDrivers(string fileName);
+
+    void loadRequests(string fileName);
+
+    void loadJourneys(string fileName);
 
     const Graph &getGraph() const;
 

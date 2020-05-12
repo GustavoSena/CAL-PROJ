@@ -4,15 +4,56 @@
 
 #include "Base.h"
 
-
-Base::Base(string text_line) { //função para dar load de tudo sendo text_line o nome do ficheiro
-
-}
-
 Base::Base(){
 
 }
 
+Base::Base(string fileName) {
+
+    ifstream a_file;
+    a_file.open(fileName);
+    int counter =0;
+    string temp;
+    while(getline(a_file, temp)) {
+        switch(counter){
+            case 0:
+                cout<<"load clients\n";
+                loadClients(temp);
+                break;
+            case 1:
+                loadDrivers(temp);
+                break;
+            case 2:
+                loadJourneys(temp);
+                break;
+            case 3:
+                loadRequests(temp);
+                break;
+            default:
+                break;
+
+        }
+        counter++;
+    }
+    a_file.close();
+}
+
+
+void Base::loadDrivers(string fileName){
+
+}
+
+void Base::loadClients(string fileName){
+
+}
+
+void Base::loadRequests(string fileName){
+
+}
+
+void Base::loadJourneys(string fileName){
+
+}
 
 const Graph &Base::getGraph() const {
     return graph;
