@@ -55,6 +55,8 @@ private:
     Vehicle * vehicle;
 
 public:
+    Driver(int id, const string &name, const vector<Person*> & network, const string & address, Vehicle *vehicle);
+
     Vehicle *getVehicle() const;
 
     void setVehicle(Vehicle *vehicle);

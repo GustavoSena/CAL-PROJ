@@ -43,3 +43,9 @@ Vehicle *Driver::getVehicle() const {
 void Driver::setVehicle(Vehicle *vehicle) {
     Driver::vehicle = vehicle;
 }
+
+Driver::Driver(int id, const string &name, const vector<Person*> &network, const string &address, Vehicle * vehicle) : Person(id, name, network, address) {
+
+    this->vehicle = vehicle;
+
+}

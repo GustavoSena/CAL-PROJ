@@ -123,4 +123,38 @@ void Base::loadGraph(string node_text, string edge_text) {
         vector<int> edge_values = getEdgeValues(text_line);
         this->graph.addEdge(edge_values[0], edge_values[1]);
     }
+
+
+
+}
+
+void Base::sign_up(string type) //type = passenger || type = driver
+{
+    string name, address;
+
+    system("cls");
+    cout << "Insert name\n";
+    getline(cin, name);
+    cout << "Insert address\n";
+    getline(cin, address);
+    //ver como fazer para adicionar as pessoas conhecidas - mostrar os utilizadores e perguntar quem conhece?
+    vector<Person*> network;
+    lastId++;
+    if(type == "passenger")
+    {
+        Passenger p(lastId, name, network, address);
+        passengers.push_back(&p);
+    }
+    else
+    {
+        int capacity;
+        cout << "Insert vehicle capacity\n";
+        cin >> capacity;
+        lastCarId++;
+        Vehicle v(lastCarId, capacity, lastId);
+        Driver d(lastId, name, network, address, &v);
+        drivers.push_back(&d);
+    }
+
+
 }

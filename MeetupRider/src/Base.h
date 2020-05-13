@@ -22,6 +22,9 @@ private:
     vector<Driver *> drivers;
     vector<Request *> requests;
     vector<Journey *> journeys;
+    int lastId; //the last id used for passengers and drivers
+    int lastCarId; //the last id used for cars
+
 public:
 
     Base(string fileName);
@@ -59,6 +62,9 @@ public:
 
     void loadGraph(string node_text, string edge_text);
 
+    void sign_up(string type); //Not tested yet
+
+    void sign_in();
 
 
 };
