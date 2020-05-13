@@ -213,7 +213,6 @@ vector<int> Graph::getFloydWarshallPath(const int orig, const int dest) const {
 }
 
 //Connectivity - https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices-in-a-given-graph/
-//Falta testar
 bool Graph::areVertexConnected(int id1, int id2)
 {
     if(id1 == id2)
