@@ -37,7 +37,7 @@ public:
 
     void loadJourneys(string fileName);
 
-    const Graph &getGraph() const;
+     Graph &getGraph() ;
 
     void setGraph(const Graph &graph);
 

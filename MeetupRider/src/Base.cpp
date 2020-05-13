@@ -55,7 +55,7 @@ void Base::loadJourneys(string fileName){
 
 }
 
-const Graph &Base::getGraph() const {
+Graph &Base::getGraph()  {
     return graph;
 }
 
