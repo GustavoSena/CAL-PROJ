@@ -13,6 +13,27 @@ using namespace std;
 
 class Person{
 
+public:
+    Person(int id, string &name, vector<Person*> &network,string &address) : id(id), name(name), network(network), address(address){}
+
+    int getId() const;
+
+    void setId(int id);
+
+    void setName(const string &name);
+
+    vector<Person*> &getNetwork();
+
+    void setNetwork(const vector<Person*> &network);
+
+    string &getAddress();
+
+    void setAddress(const string &address);
+
+    string getName();
+
+
+
 protected:
     int id;
     string name;
@@ -21,36 +42,23 @@ protected:
     //adicionar destinos frequentes
 
 
-public:
-    Person(int id, const string &name, const vector<Person*> &network, const string &address) : id(id), name(name), network(network), address(address){}
 
-    int getId() const;
-
-    void setId(int id);
-    const string &getName() const;
-    void setName(const string &name);
-
-    const vector<Person*> &getNetwork() const;
-
-    void setNetwork(const vector<Person*> &network);
-
-    const string &getAddress() const;
-
-    void setAddress(const string &address);
 };
 
 
 
-class Passenger : Person {
+class Passenger : public Person {
 public:
-    Passenger(int id, const string &name, const vector<Person*> &network, const string &address) : Person(id, name, network, address) {}
+    Passenger(int id, string &name, vector<Person*> &network, string &address) : Person(id, name, network, address) {}
+
+
 
 };
 
 class Vehicle;
 
 
-class Driver : Person {
+class Driver : public Person {
 private:
     Vehicle * vehicle;
 

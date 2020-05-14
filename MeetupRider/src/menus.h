@@ -7,14 +7,14 @@
 
 #include <string>
 #include <iostream>
+#include "Base.h"
 
 using namespace std;
 
 
-void main_menu();
+void main_menu(Base base);
 
-void passenger_menu();
+void next_menu(Base base, string type);
 
-void driver_menu();
 
 #endif //MEETUPRIDER_MENUS_H

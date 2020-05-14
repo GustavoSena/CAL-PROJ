@@ -158,3 +158,52 @@ void Base::sign_up(string type) //type = passenger || type = driver
 
 
 }
+
+int Base::sign_in(string type)
+{
+    bool retry = true;
+    int answer;
+    do{
+
+        system("cls");
+        cout << "Choose your account:" << endl;
+        int tmp_id = 1;
+        if(type == "passenger")
+        {
+            for(auto p : passengers)
+            {
+                cout << tmp_id << ". " <<p->getName()<< endl;
+                tmp_id++;
+            }
+            cin>>answer;
+            if (answer >= 1 && answer <= passengers.size())
+            {
+                retry = false;
+                return passengers[answer-1]->getId();
+            } else{
+                cout << "Invalid answer! Try again"<< endl;
+        }
+
+
+        } else{
+            for(auto d: drivers)
+            {
+                cout << tmp_id << ". " <<d->getName()<< endl;
+                tmp_id++;
+            }
+            cin>>answer;
+            if(answer >= 1 && answer <= drivers.size())
+            {
+                retry = false;
+                return drivers[answer-1]->getId();
+            }
+            else
+            {
+                cout << "Invalid answer! Try again"<< endl;
+            }
+        }
+
+    }while(retry);
+
+
+}

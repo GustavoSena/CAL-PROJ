@@ -64,7 +64,7 @@ public:
 
     void sign_up(string type); //Not tested yet
 
-    void sign_in();
+    int sign_in(string type); //Not tested yet, retorna id da pessoa
 
 
 };
