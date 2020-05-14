@@ -247,3 +247,63 @@ bool Graph::areVertexConnected(int id1, int id2)
 
 }
 
+//Dijkstra
+/*
+template<class T>
+Vertex<T> *Graph<T>::initSSource(const T &orig) {
+    for (auto v : vertexSet){
+        v->dist = INF;
+        v->path = nullptr;
+    }
+    auto s = findVertex(orig);
+    s->dist = 0;
+    return s;
+}
+
+template<class T>
+bool Graph<T>::relax(Vertex<T> *v, Vertex<T> *w, double weight) {
+    if (v->dist + weight < w->dist){
+        w->dist = v->dist + weight;
+        w->path = v;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+template<class T>
+void Graph<T>::dijkstraShortestPath(const T &orig){
+    auto s = initSSource(orig);
+    MutablePriorityQueue<Vertex<T>> q;
+    q.insert(s);
+    while(!q.empty()){
+        auto v = q.extractMin();
+        for(auto e : v->adj){
+            auto oldDist = e.dest->dist;
+            if(relax(v, e.dest, e.weight)){
+                if (oldDist == INF){
+                    q.insert(e.dest);
+                }
+                else{
+                    q.decreaseKey(e.dest);
+                }
+            }
+        }
+    }
+}
+
+template<class T>
+vector<int> Graph<T>::getDijkstraPath(const T &orig, const T &dest) const {
+    vector<int> result;
+    auto v = findVertex(dest);
+    if(v->dist == INF || v == nullptr){
+        return result;
+    }
+    for( ; v != nullptr; v = v->path){
+        result.push_back(v->id);
+    }
+    reverse(result.begin(), result.end());
+    return result;
+}
+*/
