@@ -25,6 +25,12 @@ class Graph;
 
 //Node
 class Vertex{
+    //T info; //content of the vertex
+    double dist = 0;
+    //Vertex<T> *path = NULL;
+    int queueIndex = 0; //Required by MutablePriorityQueue
+    bool processing = false; //Auxiliary field
+    //void addEdge(Vertex<T> *dest, double w);
 private:
     int id;
     int x;
@@ -113,6 +119,12 @@ public:
     vector<int> getFloydWarshallPath(const int orig, const int dest) const;
 
     bool areVertexConnected(int id1, int id2);
+
+    //Dijkstra
+    //Vertex<T> * initSSource(const T &orig);
+    //bool relax(Vertex<T> *v, Vertex<T> *w, double weight);
+    //void dijkstraShortestPath(const T &orig);
+    //vector<int> getDijkstraPath(const T &orig, const T &dest) const;
 
 };
 
