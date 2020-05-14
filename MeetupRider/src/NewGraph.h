@@ -13,6 +13,8 @@
 #include <unordered_set>
 #include <cmath>
 
+#include "MutablePriorityQueue.h"
+
 using namespace std;
 
 class Edge;
