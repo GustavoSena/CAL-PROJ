@@ -18,6 +18,6 @@ int main() {
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
 
-    main_menu();
+
 
 }

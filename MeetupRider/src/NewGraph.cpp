@@ -248,20 +248,20 @@ bool Graph::areVertexConnected(int id1, int id2)
 }
 
 //Dijkstra
-/*
-template<class T>
-Vertex<T> *Graph<T>::initSSource(const T &orig) {
+
+
+Vertex *Graph::initSSource(int orig_id) {
     for (auto v : vertexSet){
         v->dist = INF;
         v->path = nullptr;
     }
-    auto s = findVertex(orig);
+    auto s = findVertex(orig_id);
     s->dist = 0;
     return s;
 }
 
-template<class T>
-bool Graph<T>::relax(Vertex<T> *v, Vertex<T> *w, double weight) {
+
+bool Graph::relax(Vertex *v, Vertex *w, double weight) {
     if (v->dist + weight < w->dist){
         w->dist = v->dist + weight;
         w->path = v;
@@ -272,10 +272,10 @@ bool Graph<T>::relax(Vertex<T> *v, Vertex<T> *w, double weight) {
     }
 }
 
-template<class T>
-void Graph<T>::dijkstraShortestPath(const T &orig){
-    auto s = initSSource(orig);
-    MutablePriorityQueue<Vertex<T>> q;
+
+void Graph::dijkstraShortestPath(int orig_id){
+    auto s = initSSource(orig_id);
+    MutablePriorityQueue<Vertex> q;
     q.insert(s);
     while(!q.empty()){
         auto v = q.extractMin();
@@ -293,10 +293,10 @@ void Graph<T>::dijkstraShortestPath(const T &orig){
     }
 }
 
-template<class T>
-vector<int> Graph<T>::getDijkstraPath(const T &orig, const T &dest) const {
+
+vector<int> Graph::getDijkstraPath(int orig_id, int dest_id)  {
     vector<int> result;
-    auto v = findVertex(dest);
+    auto v = findVertex(dest_id);
     if(v->dist == INF || v == nullptr){
         return result;
     }
@@ -306,4 +306,4 @@ vector<int> Graph<T>::getDijkstraPath(const T &orig, const T &dest) const {
     reverse(result.begin(), result.end());
     return result;
 }
-*/
+

@@ -25,18 +25,17 @@ class Graph;
 
 //Node
 class Vertex{
-    //T info; //content of the vertex
-    double dist = 0;
-    //Vertex<T> *path = NULL;
-    int queueIndex = 0; //Required by MutablePriorityQueue
-    bool processing = false; //Auxiliary field
-    //void addEdge(Vertex<T> *dest, double w);
 private:
     int id;
     int x;
     int y;
     vector<Edge> adj;
     bool visited; //For connectivity
+    //Dijkstra
+    double dist = 0;
+    Vertex *path = NULL;
+    int queueIndex = 0;
+    bool processing = false;
 
     void addEdge(Vertex * dest);
 public:
@@ -121,10 +120,10 @@ public:
     bool areVertexConnected(int id1, int id2);
 
     //Dijkstra
-    //Vertex<T> * initSSource(const T &orig);
-    //bool relax(Vertex<T> *v, Vertex<T> *w, double weight);
-    //void dijkstraShortestPath(const T &orig);
-    //vector<int> getDijkstraPath(const T &orig, const T &dest) const;
+    Vertex * initSSource(int orig_id);
+    bool relax(Vertex *v, Vertex *w, double weight);
+    void dijkstraShortestPath(int orig_id);
+    vector<int> getDijkstraPath(int orig_id, int dest_id);
 
 };
 
