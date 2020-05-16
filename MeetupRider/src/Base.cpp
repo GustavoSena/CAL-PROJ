@@ -17,8 +17,7 @@ Base::Base(string fileName) {
     while(getline(a_file, temp)) {
         switch(counter){
             case 0:
-                cout<<"load clients\n";
-                loadClients(temp);
+                loadPassengers(temp);
                 break;
             case 1:
                 loadDrivers(temp);
@@ -39,20 +38,101 @@ Base::Base(string fileName) {
 }
 
 
-void Base::loadDrivers(string fileName){
+
+void Base::loadPassengers(string fileName){
+    ifstream a_file;
+    a_file.open("..\\resources\\files\\" + fileName);
+    int counter =0;
+    string temp;
+    Passenger p = Passenger();
+    vector<int> aux = {};
+    while(getline(a_file, temp)) {
+        switch(counter){
+            case 0:
+                p.setId(stoi(temp));
+                break;
+            case 1:
+                p.setName(temp);
+                break;
+            case 2:
+                vector<string> parts = decompose(temp,',');
+                for (string i : parts){
+                    aux.push_back(stoi(i));
+                }
+                p.setNetwork(aux);
+                aux={};
+                break;
+            case 3:
+                p.setAddress(temp);
+                break;
+            case 4:
+                passengers.push_back(new Passenger(p));
+                p= Passenger();
+                break;
+            default:
+                break;
+
+        }
+        counter++;
+    }
+    a_file.close();
+
 
 }
 
-void Base::loadClients(string fileName){
+void Base::loadDrivers(string fileName){
+    ifstream a_file;
+    a_file.open("..\\resources\\files\\" + fileName);
+    int counter =0;
+    string temp;
+    Driver d = Driver();
+    Vehicle v = Vehicle();
+    vector<int> aux = {};
+    while(getline(a_file, temp)) {
+        switch(counter){
+            case 0:
+                d.setId(stoi(temp));
+                break;
+            case 1:
+                d.setName(temp);
+                break;
+            case 2:
+                vector<string> parts = decompose(temp,',');
+                for (string i : parts){
+                    aux.push_back(stoi(i));
+                }
+                d.setNetwork(aux);
+                aux={};
+                break;
+            case 3:
+                d.setAddress(temp);
+                break;
+            case 4:
+                vector<string> parts = decompose(temp,',');
+                v = Vehicle(stoi(parts[0]),stoi(parts[1]),d.getId());
+                d.setVehicle(new Vehicle(v));
+                break;
+            case 5:
+                drivers.push_back(new Driver(d));
+                d= Driver();
+                break;
+            default:
+                break;
 
+        }
+        counter++;
+    }
+    a_file.close();
 }
 
 void Base::loadRequests(string fileName){
-
+    ifstream a_file;
+    a_file.open("..\\resources\\files\\" + fileName);
 }
 
 void Base::loadJourneys(string fileName){
-
+    ifstream a_file;
+    a_file.open("..\\resources\\files\\" + fileName);
 }
 
 const Graph &Base::getGraph() const {

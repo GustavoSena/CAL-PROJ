@@ -16,13 +16,13 @@ class Person{
 protected:
     int id;
     string name;
-    vector<Person*> network;
+    vector<int> network;
     string address;
     //adicionar destinos frequentes
 
 
 public:
-    Person(int id, const string &name, const vector<Person*> &network, const string &address) : id(id), name(name), network(network), address(address){}
+    Person(int id, const string &name, const vector<int> &network, const string &address) : id(id), name(name), network(network), address(address){}
 
     int getId() const;
 
@@ -30,9 +30,9 @@ public:
     const string &getName() const;
     void setName(const string &name);
 
-    const vector<Person*> &getNetwork() const;
+    const vector<int> &getNetwork() const;
 
-    void setNetwork(const vector<Person*> &network);
+    void setNetwork(const vector<int> &network);
 
     const string &getAddress() const;
 
@@ -43,7 +43,8 @@ public:
 
 class Passenger : Person {
 public:
-    Passenger(int id, const string &name, const vector<Person*> &network, const string &address) : Person(id, name, network, address) {}
+    Passenger(int id, const string &name, const vector<int> &network, const string &address) : Person(id, name, network, address) {}
+    Passenger() = default;
 
 };
 
@@ -55,6 +56,9 @@ private:
     Vehicle * vehicle;
 
 public:
+    Driver(int id, const string &name, const vector<int> &network, const string &address) : Person(id, name, network, address) {}
+    Driver() = default;
+
     Vehicle *getVehicle() const;
 
     void setVehicle(Vehicle *vehicle);

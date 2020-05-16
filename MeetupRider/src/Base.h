@@ -29,7 +29,7 @@ public:
     Base();
 
 
-    void loadClients(string fileName);
+    void loadPassengers(string fileName);
 
     void loadDrivers(string fileName);
 

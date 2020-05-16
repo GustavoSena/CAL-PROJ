@@ -10,6 +10,28 @@ void trim(string &str)
     str.erase(str.find_last_not_of(WHITE_SPACE) + 1, string::npos);
 }
 
+vector<string> decompose(string s, char sep) {
+    vector<string> elements;
+    string usage = "";
+    for (unsigned int i = 0; i < s.length(); i++) {
+        if (s[i] == sep) {
+            trim(usage);
+            replaceAccent(usage);
+            elements.push_back(usage);
+            usage = "";
+        }
+        else {
+            usage += s[i];
+
+            if (i == s.length() - 1) {
+                trim(usage);
+                elements.push_back(usage);
+            }
+
+        }
+    }
+    return elements;
+}
 vector<string> split(string str, char delimiter, size_t max_splits)
 {
     str += '\n';

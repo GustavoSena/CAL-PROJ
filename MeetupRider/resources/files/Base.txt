@@ -1,4 +1,4 @@
-Clients.txt
+Passengers.txt
 Drivers.txt
 Journeys.txt
 Requests.txt

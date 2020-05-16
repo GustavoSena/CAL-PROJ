@@ -20,11 +20,11 @@ void Person::setName(const string &name) {
     Person::name = name;
 }
 
-const vector<Person*> & Person::getNetwork() const {
+const vector<int> & Person::getNetwork() const {
     return network;
 }
 
-void Person::setNetwork(const vector<Person*> &network) {
+void Person::setNetwork(const vector<int> &network) {
     this->network = network;
 }
 

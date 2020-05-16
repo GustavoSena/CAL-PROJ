@@ -18,6 +18,8 @@ using namespace std;
 
 void trim(string &str);
 
+vector<string> decompose(string s, char sep);
+
 
 vector<string> split(string str, char delimiter, size_t max_splits);
 

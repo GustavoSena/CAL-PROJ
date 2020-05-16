@@ -11,6 +11,8 @@ class Vehicle{
 public:
     Vehicle(int id, int capacity, int driverId);
 
+    Vehicle() = default;
+
     int getId() const;
 
     void setId(int id);
