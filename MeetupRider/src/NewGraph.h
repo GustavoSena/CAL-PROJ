@@ -59,7 +59,10 @@ public:
 
     double distance(Vertex * v);
 
+    bool operator<(Vertex & vertex); // required by MutablePriorityQueue
+
     friend class Graph;
+    friend class MutablePriorityQueue<Vertex>;
 };
 
 

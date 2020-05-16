@@ -52,6 +52,12 @@ double Vertex::distance(Vertex * v){
     return result;
 }
 
+
+bool Vertex::operator<(Vertex & vertex)
+{
+    return this->dist < vertex.dist;
+}
+
 Edge::Edge(Vertex *orig, Vertex *dest)
 {
     this->orig = orig;

@@ -63,7 +63,7 @@ private:
     Vehicle * vehicle;
 
 public:
-    Driver(int id, const string &name, const vector<Person*> & network, const string & address, Vehicle *vehicle);
+    Driver(int id, string &name, vector<Person*> & network, string & address, Vehicle *vehicle);
 
     Vehicle *getVehicle() const;
 

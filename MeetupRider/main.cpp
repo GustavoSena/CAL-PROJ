@@ -17,6 +17,7 @@ int main() {
     string edge_text = "..\\resources\\maps\\example\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
+    main_menu(b);
 
 
 

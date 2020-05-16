@@ -36,15 +36,6 @@ void Person::setAddress(const string &address) {
     Person::address = address;
 }
 
-int Passenger::getId()
-{
-    return id;
-}
-
-string Passenger::getName()
-{
-    return name;
-}
 
 
 Vehicle *Driver::getVehicle() const {
@@ -55,7 +46,7 @@ void Driver::setVehicle(Vehicle *vehicle) {
     Driver::vehicle = vehicle;
 }
 
-Driver::Driver(int id, const string &name, const vector<Person*> &network, const string &address, Vehicle * vehicle) : Person(id, name, network, address) {
+Driver::Driver(int id, string &name, vector<Person*> &network,  string &address, Vehicle * vehicle) : Person(id, name, network, address) {
 
     this->vehicle = vehicle;
 
