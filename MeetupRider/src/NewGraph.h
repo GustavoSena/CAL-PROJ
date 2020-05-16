@@ -13,6 +13,8 @@
 #include <unordered_set>
 #include <cmath>
 
+#include "MutablePriorityQueue.h"
+
 using namespace std;
 
 class Edge;
@@ -28,6 +30,12 @@ private:
     int x;
     int y;
     vector<Edge> adj;
+    bool visited; //For connectivity
+    //Dijkstra
+    double dist = 0;
+    Vertex *path = NULL;
+    int queueIndex = 0;
+    bool processing = false;
 
     void addEdge(Vertex * dest);
 public:
@@ -51,7 +59,10 @@ public:
 
     double distance(Vertex * v);
 
+    bool operator<(Vertex & vertex); // required by MutablePriorityQueue
+
     friend class Graph;
+    friend class MutablePriorityQueue<Vertex>;
 };
 
 
@@ -87,6 +98,10 @@ public:
 class Graph{
 private:
     vector<Vertex *> vertexSet;
+    //Floyd Warshall Algorithm
+    double ** W = nullptr; //Distance
+    int ** P = nullptr; //Path
+
 
 public:
     Graph();
@@ -100,8 +115,18 @@ public:
     bool addEdge(int id1, int id2);
     int getGraphSize() const;
 
+    //Floyd Warshall Algorithm
+    int findVertexIdx(const int id) const;
+    void floydWarshallShortestPath();
+    vector<int> getFloydWarshallPath(const int orig, const int dest) const;
 
+    bool areVertexConnected(int id1, int id2);
 
+    //Dijkstra
+    Vertex * initSSource(int orig_id);
+    bool relax(Vertex *v, Vertex *w, double weight);
+    void dijkstraShortestPath(int orig_id);
+    vector<int> getDijkstraPath(int orig_id, int dest_id);
 
 };
 

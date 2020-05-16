@@ -6,17 +6,19 @@
 #include <sstream>
 #include <vector>
 #include "src/Base.h"
+#include "src/menus.h"
 
 
 using namespace std;
 
 int main() {
 
-    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
-    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
+    string node_text = "..\\resources\\maps\\example\\nodes.txt";
+    string edge_text = "..\\resources\\maps\\example\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
+    main_menu(b);
 
-    cout << "Size of graph: " << b.getGraph().getGraphSize();
+
 
 }

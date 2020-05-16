@@ -37,3 +37,12 @@ Driver *Journey::getDriver() const {
 void Journey::setDriver(Driver *driver) {
     Journey::driver = driver;
 }
+
+void Journey::setPath(const vector<int> &path) {
+    Journey::path=path;
+
+}
+
+const vector<int> &Journey::getPath() {
+    return path;
+}

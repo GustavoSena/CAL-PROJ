@@ -5,8 +5,9 @@
 #include "Request.h"
 
 Request::Request(const Time &minStartTime, const Time &maxStartTime, const Time &minEndTime, const Time &maxEndTime,
-                 int personId) : minStartTime(minStartTime), maxStartTime(maxStartTime), minEndTime(minEndTime),
-                                 maxEndTime(maxEndTime), personId(personId) {}
+                 Passenger *passenger, int destinationId, int staringId)
+        : minStartTime(minStartTime), maxStartTime(maxStartTime), minEndTime(minEndTime),
+          maxEndTime(maxEndTime), passenger(passenger), destinationId(destinationId), staringId(staringId) {}
 
 const Time &Request::getMinStartTime() const {
     return minStartTime;
@@ -40,10 +41,29 @@ void Request::setMaxEndTime(const Time &maxEndTime) {
     Request::maxEndTime = maxEndTime;
 }
 
-int Request::getPersonId() const {
-    return personId;
+Passenger *Request::getPassenger() {
+    return passenger;
 }
 
-void Request::setPersonId(int personId) {
-    Request::personId = personId;
+void Request::setPassenger(Passenger *passenger) {
+    this->passenger=passenger;
+
 }
+
+const int &Request::getDestinationId() const {
+    return destinationId;
+}
+
+void Request::setDestinationId(const int &id) {
+    Request::destinationId=id;
+}
+
+const int &Request::getStartingId() const {
+    return staringId;
+}
+
+void Request::setStartingId(const int &id) {
+    Request::staringId=id;
+}
+
+

@@ -29,11 +29,13 @@ public:
 
     void setDriver(Driver *driver);
 
-public:
+    void setPath(const vector<int> &path);
+
+    const vector<int> &getPath();
 
 private:
     Time startTime;
-    //incluir aqui o path
+    vector<int> path;
     vector<Time> arrivalTimes;
     vector<Passenger*> passenger;
     Driver *driver;

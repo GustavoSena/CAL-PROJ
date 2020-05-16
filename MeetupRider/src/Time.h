@@ -4,10 +4,16 @@
 
 #ifndef CAL_PROJ_TIME_H
 #define CAL_PROJ_TIME_H
+#include <string>
+#include "utils.h"
 
+
+using namespace std;
 
 class Time {
 public:
+    Time() =default;
+    Time(string time);
     Time(int hour, int minute, int second);
 
     int getHour() const;

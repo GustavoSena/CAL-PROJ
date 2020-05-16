@@ -2,9 +2,14 @@
 Gustavo Sena
 1, 3
 Rua Nova de S. Crispim 516
+
 1, 4
 ::::::::::
 4
 Goncalo Batalhao
 1, 2
 Rua da Travagem 512
+
+2, 8
+::::::::::
+

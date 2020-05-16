@@ -29,3 +29,10 @@ int Time::getSecond() const {
 void Time::setSecond(int second) {
     Time::second = second;
 }
+
+Time::Time(string time) {
+    vector<string>parts = decompose(time,':');
+    setHour(stoi(parts[0]));
+    setMinute(stoi(parts[1]));
+    setSecond(stoi(parts[2]));
+}

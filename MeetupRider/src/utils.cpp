@@ -16,7 +16,7 @@ vector<string> decompose(string s, char sep) {
     for (unsigned int i = 0; i < s.length(); i++) {
         if (s[i] == sep) {
             trim(usage);
-            replaceAccent(usage);
+            //replaceAccent(usage);
             elements.push_back(usage);
             usage = "";
         }

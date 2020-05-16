@@ -12,7 +12,7 @@ void Person::setId(int id) {
     Person::id = id;
 }
 
-const string & Person::getName() const {
+string Person::getName()  {
     return name;
 }
 
@@ -20,7 +20,9 @@ void Person::setName(const string &name) {
     Person::name = name;
 }
 
+
 const vector<int> & Person::getNetwork() const {
+
     return network;
 }
 
@@ -28,7 +30,7 @@ void Person::setNetwork(const vector<int> &network) {
     this->network = network;
 }
 
-const string &Person::getAddress() const {
+string &Person::getAddress() {
     return address;
 }
 
@@ -36,10 +38,23 @@ void Person::setAddress(const string &address) {
     Person::address = address;
 }
 
+
+
 Vehicle *Driver::getVehicle() const {
     return vehicle;
 }
 
 void Driver::setVehicle(Vehicle *vehicle) {
     Driver::vehicle = vehicle;
+}
+
+Driver::Driver(int id, const string &name, const vector<int> &network, const string &address, Vehicle *vehicle): Person(id, name, network, address) {
+
+    this->vehicle = vehicle;
+
+}
+
+Driver::Driver(int id, const string &name, const vector<int> &network, const string &address,
+               const vector<int> &freqPlacesId, Vehicle *vehicle): Person(id, name, network, address, freqPlacesId) {
+    this->vehicle = vehicle;
 }

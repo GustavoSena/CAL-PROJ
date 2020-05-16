@@ -7,11 +7,14 @@
 
 
 #include "Time.h"
+#include "Person.h"
 
 class Request {
 public:
     Request(const Time &minStartTime, const Time &maxStartTime, const Time &minEndTime, const Time &maxEndTime,
-            int personId);
+            Passenger *passenger, int destinationId, int staringId);
+
+    Request()=default;
 
     const Time &getMinStartTime() const;
 
@@ -29,17 +32,29 @@ public:
 
     void setMaxEndTime(const Time &maxEndTime);
 
-    int getPersonId() const;
+    const int &getDestinationId() const;
 
-    void setPersonId(int personId);
+    void setDestinationId(const int &id);
+
+    const int &getStartingId() const;
+
+    void setStartingId(const int &id);
+
+    Passenger *getPassenger();
+
+    void setPassenger(Passenger * passenger);
+
+
+
 
 private:
     Time minStartTime;
     Time maxStartTime;
     Time minEndTime;
     Time maxEndTime;
-    //adicionar o destino
-    int personId;
+    int destinationId;
+    int staringId;
+    Passenger *passenger;
 
 
 };

@@ -52,6 +52,12 @@ double Vertex::distance(Vertex * v){
     return result;
 }
 
+
+bool Vertex::operator<(Vertex & vertex)
+{
+    return this->dist < vertex.dist;
+}
+
 Edge::Edge(Vertex *orig, Vertex *dest)
 {
     this->orig = orig;
@@ -124,3 +130,186 @@ bool Graph::addEdge(int id1, int id2) {
 int Graph::getGraphSize() const {
     return vertexSet.size();
 }
+
+//Floyd Warshall Algorithm
+int Graph::findVertexIdx(const int id) const{
+
+    for (int i = 0; i < vertexSet.size(); i++)
+    {
+        if(vertexSet[i]->id == id)
+            return i;
+    }
+    return -1;
+}
+
+template <class T>
+void deleteMatrix(T **m, int n)
+{
+    if(m != nullptr)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if(m[i]!= nullptr)
+            {
+                delete [] m[i];
+            }
+
+        }
+        delete [] m;
+    }
+}
+
+//Falta testar
+void Graph::floydWarshallShortestPath(){
+    int n = vertexSet.size();
+    deleteMatrix(W, n);
+    deleteMatrix(P, n);
+    W = new double *[n];
+    P = new int *[n];
+    for (int i = 0; i < n; i++)
+    {
+        W[i] = new double[n];
+        P[i] = new int[n];
+        for (int j = 0; j < n; j++)
+        {
+            W[i][j] = i == j? 0 : INF;
+            P[i][j] = -1;
+
+        }
+        for(auto e : vertexSet[i]->adj)
+        {
+            int j = findVertexIdx(e.dest->id);
+            W[i][j] = e.weight;
+            P[i][j] = i;
+        }
+    }
+
+    for (int k = 0; k < n ; k++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if(W[i][k] == INF || W[k][j] == INF) continue;
+                int val = W[i][k] + W[k][j];
+                if (val < W[i][j]){
+                    W[i][j] = val;
+                    P[i][j] = P[k][j];
+                }
+
+            }
+        }
+    }
+
+}
+
+vector<int> Graph::getFloydWarshallPath(const int orig, const int dest) const {
+    vector<int> result;
+    int i = findVertexIdx(orig);
+    int j = findVertexIdx(dest);
+    if(i == -1 || j == -1 || W[i][j] == INF) //missing or disconected
+        return result;
+    for(; j!=-1; j = P[i][j])
+    {
+        result.push_back(vertexSet[j]->id);
+    }
+    reverse(result.begin(), result.end());
+    return result;
+
+}
+
+//Connectivity - https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices-in-a-given-graph/
+bool Graph::areVertexConnected(int id1, int id2)
+{
+    if(id1 == id2)
+        return true;
+    for(auto v : vertexSet)
+    {
+        v->visited = false;
+    }
+    auto orig = findVertex(id1);
+    auto dest = findVertex(id2);
+    queue<Vertex *> q;
+    q.push(orig);
+
+    while(!q.empty())
+    {
+        auto tmp = q.front();
+        q.pop();
+
+        for (auto e : tmp->adj)
+        {
+            if(e.dest == dest)
+                return true;
+            if(!e.dest->visited)
+            {
+                e.dest->visited = true;
+                q.push(e.dest);
+            }
+        }
+    }
+
+    return false;
+
+}
+
+//Dijkstra
+
+
+Vertex *Graph::initSSource(int orig_id) {
+    for (auto v : vertexSet){
+        v->dist = INF;
+        v->path = nullptr;
+    }
+    auto s = findVertex(orig_id);
+    s->dist = 0;
+    return s;
+}
+
+
+bool Graph::relax(Vertex *v, Vertex *w, double weight) {
+    if (v->dist + weight < w->dist){
+        w->dist = v->dist + weight;
+        w->path = v;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+void Graph::dijkstraShortestPath(int orig_id){
+    auto s = initSSource(orig_id);
+    MutablePriorityQueue<Vertex> q;
+    q.insert(s);
+    while(!q.empty()){
+        auto v = q.extractMin();
+        for(auto e : v->adj){
+            auto oldDist = e.dest->dist;
+            if(relax(v, e.dest, e.weight)){
+                if (oldDist == INF){
+                    q.insert(e.dest);
+                }
+                else{
+                    q.decreaseKey(e.dest);
+                }
+            }
+        }
+    }
+}
+
+
+vector<int> Graph::getDijkstraPath(int orig_id, int dest_id)  {
+    vector<int> result;
+    auto v = findVertex(dest_id);
+    if(v->dist == INF || v == nullptr){
+        return result;
+    }
+    for( ; v != nullptr; v = v->path){
+        result.push_back(v->id);
+    }
+    reverse(result.begin(), result.end());
+    return result;
+}
+

@@ -22,6 +22,9 @@ private:
     vector<Driver *> drivers;
     vector<Request *> requests;
     vector<Journey *> journeys;
+    int lastId; //the last id used for passengers and drivers
+    int lastCarId; //the last id used for cars
+
 public:
 
     Base(string fileName);
@@ -37,7 +40,7 @@ public:
 
     void loadJourneys(string fileName);
 
-    const Graph &getGraph() const;
+     Graph &getGraph() ;
 
     void setGraph(const Graph &graph);
 
@@ -59,6 +62,15 @@ public:
 
     void loadGraph(string node_text, string edge_text);
 
+    void sign_up(string type); //Not tested yet
+
+    int sign_in(string type); //Not tested yet, retorna id da pessoa
+
+    Driver *findDriver(int id);
+
+    Passenger *findPassenger(int id);
+
+    vector<Passenger*> findPassengers(vector<int> ids);
 
 
 };
