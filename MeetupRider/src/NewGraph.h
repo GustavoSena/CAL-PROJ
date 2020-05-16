@@ -126,8 +126,12 @@ public:
     Vertex * initSSource(int orig_id);
     bool relax(Vertex *v, Vertex *w, double weight);
     void dijkstraShortestPath(int orig_id);
-    vector<int> getDijkstraPath(int orig_id, int dest_id);
+    vector<int> getPath(int orig_id, int dest_id);
 
+    //A*
+    double heuristic(Vertex * orig, Vertex * dest);
+    bool relaxA(Vertex *v, Vertex *w, Vertex *dest, double weight);
+    void AStar(int orig_id, int dest_id);
 };
 
 #endif //MEETUPRIDER_NEWGRAPH_H
