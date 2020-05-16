@@ -32,7 +32,11 @@ vector<int> getEdgeValues(string text_line);
 
 void mapViewer(string edge_file, string node_file);
 
+void pathViewer(Graph graph, vector<int> path);
 
+void AStarView(Graph b, int orig_id, int dest_id);
+
+void DijkstraView(Graph b, int orig_id, int dest_id);
 
 #endif //MEETUPRIDER_UTILS_H
 

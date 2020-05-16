@@ -300,7 +300,7 @@ void Graph::dijkstraShortestPath(int orig_id){
 }
 
 
-vector<int> Graph::getDijkstraPath(int orig_id, int dest_id)  {
+vector<int> Graph::getPath(int orig_id, int dest_id)  {
     vector<int> result;
     auto v = findVertex(dest_id);
     if(v->dist == INF || v == nullptr){
@@ -313,3 +313,49 @@ vector<int> Graph::getDijkstraPath(int orig_id, int dest_id)  {
     return result;
 }
 
+//A*
+
+double Graph::heuristic(Vertex * orig, Vertex * dest)
+{
+
+    return abs(orig->x - dest->x) + abs(orig->y - dest->y);
+}
+
+
+bool Graph::relaxA(Vertex *v, Vertex *w, Vertex *dest, double weight)
+{
+    if (v->dist + weight < w->dist){
+        w->dist = v->dist + weight + heuristic(w,dest);
+        w->path = v;
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
+
+void Graph::AStar(int orig_id, int dest_id)
+{
+    auto orig = initSSource(orig_id);
+    MutablePriorityQueue<Vertex> q;
+    auto dest = findVertex(dest_id);
+    q.insert(orig);
+    while(!q.empty()){
+        auto v = q.extractMin();
+        if(v->id == dest->id)
+            break;
+        for(auto e : v->adj){
+            auto oldDist = e.dest->dist;
+            if(relaxA(v, e.dest, dest, e.weight)){
+                if (oldDist == INF){
+                    q.insert(e.dest);
+                }
+                else{
+                    q.decreaseKey(e.dest);
+                }
+            }
+        }
+    }
+}

@@ -121,3 +121,53 @@ void mapViewer(string edge_file, string node_file)
 
 }
 
+void pathViewer(Graph graph, vector<int> path)
+{
+    GraphViewer *gv = new GraphViewer(600, 600, false);
+    gv->createWindow(600, 600);
+    gv->defineVertexColor("blue");
+    gv->defineEdgeColor("black");
+
+    for(int i = 0; i < path.size(); i++)
+    {
+        auto v = graph.findVertex(path[i]);
+        gv->addNode(path[i], v->getX(), v->getY());
+    }
+
+    int id = 1;
+
+    for(int i = 0; i < path.size()-1; i++)
+    {
+        gv->addEdge(id, path[i], path[i+1], EdgeType::DIRECTED);
+        id++;
+    }
+
+    getchar();
+    gv->closeWindow();
+
+}
+
+
+void AStarView(Graph b, int orig_id, int dest_id)
+{
+    if(!b.areVertexConnected(orig_id,dest_id))
+        cout << "Nodes not connected\n";
+    else
+    {
+        b.AStar(orig_id, dest_id);
+        vector<int> result = b.getPath(orig_id,dest_id);
+        pathViewer(b, result);
+    }
+}
+
+void DijkstraView(Graph b, int orig_id, int dest_id)
+{
+    if(!b.areVertexConnected(orig_id,dest_id))
+        cout << "Nodes not connected\n";
+    else
+    {
+        b.dijkstraShortestPath(orig_id);
+        vector<int> result = b.getPath(orig_id,dest_id);
+        pathViewer(b, result);
+    }
+}
