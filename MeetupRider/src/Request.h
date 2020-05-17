@@ -14,16 +14,12 @@ public:
 
     Request()=default;
 
-    Request(const Time &minStartTime, const Time &maxStartTime, const Time &minEndTime, const Time &maxEndTime,
-            int destinationId, int startingId, Person *person);
+    Request(const Time &minStartTime,  const Time &minEndTime, const Time &maxEndTime,
+            int destinationId, int startingId);
 
     const Time &getMinStartTime() const;
 
     void setMinStartTime(const Time &minStartTime);
-
-    const Time &getMaxStartTime() const;
-
-    void setMaxStartTime(const Time &maxStartTime);
 
     const Time &getMinEndTime() const;
 
@@ -41,25 +37,50 @@ public:
 
     void setStartingId(const int &id);
 
-    Person *getPerson() const;
-
-
-    void setPerson(Person *person);
 
     void setTimesNull();
 
 
 
-private:
+protected:
     Time minStartTime;
-    Time maxStartTime;
     Time minEndTime;
     Time maxEndTime;
     int destinationId;
     int startingId;
-    Person *person;
+
 
 };
 
+class PassengerRequest : public Request{
+public:
+    PassengerRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime,
+                     int destinationId, int startingId, Passenger *passenger);
+
+    Passenger *getPassenger() const;
+
+    void setPassenger(Passenger *passenger);
+
+private:
+    Passenger * passenger;
+
+
+};
+
+
+class DriverRequest : public Request{
+public:
+    DriverRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime, int destinationId,
+                  int startingId, Driver *driver);
+
+    Driver *getDriver() const;
+
+    void setDriver(Driver *driver);
+
+    int getCapacity();
+
+private:
+    Driver * driver;
+};
 
 #endif //CAL_PROJ_REQUEST_H

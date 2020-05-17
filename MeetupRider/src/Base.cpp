@@ -26,7 +26,7 @@ Base::Base(string fileName) {
                 loadJourneys(temp);
                 break;
             case 3:
-                loadRequests(temp);
+//                loadRequests(temp);
                 break;
             default:
                 break;
@@ -144,6 +144,7 @@ void Base::loadDrivers(string fileName){
     a_file.close();
 }
 
+/*
 void Base::loadRequests(string fileName){
     ifstream a_file;
     a_file.open("..\\resources\\files\\" + fileName);
@@ -188,6 +189,7 @@ void Base::loadRequests(string fileName){
     }
     a_file.close();
 }
+*/
 
 void Base::loadJourneys(string fileName){
     ifstream a_file;
@@ -266,13 +268,6 @@ void Base::setDrivers(vector<Driver*> drivers) {
     Base::drivers = drivers;
 }
 
-const vector<Request*> Base::getRequests() const{
-    return requests;
-}
-
-void Base::setRequests(vector<Request*> requests) {
-    Base::requests = requests;
-}
 
 const vector<Journey*> Base::getJourneys() const{
     return journeys;
@@ -428,23 +423,23 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 }
 
 
-vector<Request *> Base::getPossibleRequests(int idDestino){
-    vector<Request *> result;
+vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
+    vector<PassengerRequest *> result;
     for(auto r: requests_passengers){
-        if(r->getDestinationId() == idDestino){
+        if(r->getDestinationId() == idDestino && graph.areVertexConnected(r->getStartingId(), idDestino)){
             result.push_back(r);
         }
     }
     return result;
 }
 
-Request * Base::getClosestToRequest(vector<Request *> requests, Request *r){
+PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> requests, int dest_id, int person_id){
     double temp = INF;
-    Request * result = NULL;
+    PassengerRequest * result = NULL;
     for(auto request: requests){
-        if(request->getPerson()->getId() != r->getPerson()->getId()){
+        if(request->getPassenger()->getId() != person_id){
             auto v = graph.findVertex(request->getStartingId());
-            auto v2 = graph.findVertex(r->getStartingId());
+            auto v2 = graph.findVertex(dest_id);
             if(temp < v->distance(v2)){
                 temp = v->distance(v2);
                 result = request;
@@ -454,12 +449,23 @@ Request * Base::getClosestToRequest(vector<Request *> requests, Request *r){
     return result;
 }
 
-vector<int> Base::fillVehicle(Request *driverRequest){
-    vector<int> result;
-    vector<Request *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
-    int counter = 0;
-    //while(counter < driverRequest->getPerson())
-    
+vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> *ids){
+    vector<Passenger*> result;
+    ids->push_back(driverRequest->getStartingId());
+    vector<PassengerRequest *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
+    int counter = 1;
+    PassengerRequest * tmp = getClosestToRequest(possibleRequests, driverRequest->getStartingId(), driverRequest->getDriver()->getId());
+    while(counter < driverRequest->getCapacity() && tmp != NULL)
+    {
+        result.push_back(tmp->getPassenger());
+        ids->push_back(tmp->getStartingId());
+        counter++;
+        tmp =  getClosestToRequest(possibleRequests, tmp->getStartingId(), tmp->getPassenger()->getId());
+    }
+
+    ids->push_back(driverRequest->getDestinationId());
+    return result;
+
 }
 
 
@@ -493,4 +499,54 @@ vector<int> Base::calculatePath(vector<int>ids) //os ids já estariam ordenados 
     }
     return result;
 
+}
+
+bool Base::removePassengerRequests(Passenger * p)
+{
+    for(int i = 0; i < requests_passengers.size(); i++)
+    {
+        if(requests_passengers[i]->getPassenger()->getId() == p->getId())
+        {
+            requests_passengers.erase(requests_passengers.begin()+i);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool Base::removeRequests(vector<Passenger*> passengers, DriverRequest * request)
+{
+    for(auto p : passengers)
+    {
+        if(!removePassengerRequests(p))
+            return false;
+    }
+    for(int i = 0; i < requests_drivers.size(); i++)
+    {
+        if(requests_drivers[i]->getDriver()->getId() == request->getDriver()->getId())
+        {
+            requests_drivers.erase(requests_drivers.begin()+i);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool Base::createJourney(DriverRequest * request)
+{
+    Journey j;
+    vector<int>places;
+    vector<int>path;
+    vector<Passenger*> passengers = fillVehicle(request, &places);
+    if(!setup(places)) return false;
+    path = calculatePath(places);
+    j.setDriver(request->getDriver());
+    j.setPassenger(passengers);
+    j.setStartTime(request->getMinStartTime());
+    j.setPath(path);
+    if(!removeRequests(passengers, request)) return false;
+    journeys.push_back(&j);
+    return true;
 }

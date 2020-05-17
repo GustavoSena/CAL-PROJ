@@ -14,13 +14,6 @@ void Request::setMinStartTime(const Time &minStartTime) {
     Request::minStartTime = minStartTime;
 }
 
-const Time &Request::getMaxStartTime() const {
-    return maxStartTime;
-}
-
-void Request::setMaxStartTime(const Time &maxStartTime) {
-    Request::maxStartTime = maxStartTime;
-}
 
 const Time &Request::getMinEndTime() const {
     return minEndTime;
@@ -56,27 +49,48 @@ void Request::setStartingId(const int &id) {
 }
 
 
-Person *Request::getPerson() const {
-    return person;
-}
 
-void Request::setPerson(Person *person) {
-    Request::person = person;
-}
 
-Request::Request(const Time &minStartTime, const Time &maxStartTime, const Time &minEndTime, const Time &maxEndTime,
-                 int destinationId, int startingId, Person *person) : minStartTime(minStartTime),
-                                                                      maxStartTime(maxStartTime),
+Request::Request(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime,
+                 int destinationId, int startingId) : minStartTime(minStartTime),
                                                                       minEndTime(minEndTime), maxEndTime(maxEndTime),
                                                                       destinationId(destinationId),
-                                                                      startingId(startingId), person(person) {}
+                                                                      startingId(startingId) {}
 
 
 void Request::setTimesNull() {
     minStartTime=Time("-1:-1");
-    maxStartTime=Time("-1:-1");
     minEndTime=Time("-1:-1");
     maxEndTime=Time("-1:-1");
 
 }
 
+PassengerRequest::PassengerRequest(const Time &minStartTime, const Time &minEndTime,
+                                   const Time &maxEndTime, int destinationId, int startingId, Passenger *passenger)
+        : Request(minStartTime,  minEndTime, maxEndTime, destinationId, startingId),
+          passenger(passenger) {}
+
+Passenger *PassengerRequest::getPassenger() const {
+    return passenger;
+}
+
+void PassengerRequest::setPassenger(Passenger *passenger) {
+    PassengerRequest::passenger = passenger;
+}
+
+DriverRequest::DriverRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime,
+                             int destinationId, int startingId, Driver *driver) : Request(minStartTime, minEndTime,
+                                                                                          maxEndTime, destinationId,
+                                                                                          startingId), driver(driver) {}
+
+Driver *DriverRequest::getDriver() const {
+    return driver;
+}
+
+void DriverRequest::setDriver(Driver *driver) {
+    DriverRequest::driver = driver;
+}
+
+int DriverRequest::getCapacity(){
+    return driver->getVehicle()->getCapacity();
+}
