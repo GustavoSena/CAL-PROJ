@@ -67,6 +67,15 @@ void Base::loadPassengers(string fileName){
                 p.setAddress(temp);
                 break;
             case 4:
+                parts = decompose(temp,',');
+                for (string i : parts){
+                    aux.push_back(stoi(i));
+                }
+                p.setFreqPlaces(aux);
+                aux={};
+
+                break;
+            case 5:
                 passengers.push_back(new Passenger(p));
                 p= Passenger();
                 break;
@@ -111,10 +120,18 @@ void Base::loadDrivers(string fileName){
                 break;
             case 4:
                 parts = decompose(temp,',');
+                for (string i : parts){
+                    aux.push_back(stoi(i));
+                }
+                d.setFreqPlaces(aux);
+                aux={};
+                break;
+            case 5:
+                parts = decompose(temp,',');
                 v = Vehicle(stoi(parts[0]),stoi(parts[1]),d.getId());
                 d.setVehicle(new Vehicle(v));
                 break;
-            case 5:
+            case 6:
                 drivers.push_back(new Driver(d));
                 d= Driver();
                 break;

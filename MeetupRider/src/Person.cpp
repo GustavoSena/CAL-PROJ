@@ -38,6 +38,14 @@ void Person::setAddress(const string &address) {
     Person::address = address;
 }
 
+void Person::setFreqPlaces(const vector<int> &freqPlaces) {
+    Person::freqPlacesId=freqPlaces;
+
+}
+
+const vector<int> &Person::getFreqPlaces() {
+    return freqPlacesId;
+}
 
 
 Vehicle *Driver::getVehicle() const {

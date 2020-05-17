@@ -43,8 +43,9 @@ public:
 
     string getName();
 
+    void setFreqPlaces(const vector<int> &freqPlaces);
 
-
+    const vector<int> &getFreqPlaces();
 
 };
 
