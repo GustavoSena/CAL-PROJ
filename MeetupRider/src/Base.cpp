@@ -426,3 +426,7 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 
     return aux;
 }
+
+void Base::addRequest(Request* request) {
+    requests.push_back(request);
+}

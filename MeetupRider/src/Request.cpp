@@ -66,4 +66,12 @@ void Request::setStartingId(const int &id) {
     Request::staringId=id;
 }
 
+void Request::setTimesNull() {
+    minStartTime=Time("-1:-1");
+    maxStartTime=Time("-1:-1");
+    minEndTime=Time("-1:-1");
+    maxEndTime=Time("-1:-1");
+
+}
+
 

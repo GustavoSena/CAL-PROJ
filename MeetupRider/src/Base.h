@@ -56,6 +56,8 @@ public:
 
     void setRequests(vector<Request*> requests);
 
+    void addRequest(Request* request);
+
     const vector<Journey*> getJourneys() const;
 
     void setJourneys(vector<Journey*> journeys);

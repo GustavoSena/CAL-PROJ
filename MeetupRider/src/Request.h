@@ -45,6 +45,7 @@ public:
     void setPassenger(Passenger * passenger);
 
 
+    void setTimesNull();
 
 
 private:

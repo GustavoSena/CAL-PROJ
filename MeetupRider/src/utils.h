@@ -20,6 +20,7 @@ void trim(string &str);
 
 vector<string> decompose(string s, char sep);
 
+bool compare_str(string str1, string str2);
 
 vector<string> split(string str, char delimiter, size_t max_splits);
 
