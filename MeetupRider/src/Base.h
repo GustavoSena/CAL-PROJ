@@ -74,6 +74,9 @@ public:
 
     vector<Passenger*> findPassengers(vector<int> ids);
 
+    bool setup(vector<int> ids);
+
+    vector<int> calculatePath(vector<int>ids);
 
 };
 

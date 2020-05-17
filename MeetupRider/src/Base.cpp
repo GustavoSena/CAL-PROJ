@@ -427,6 +427,42 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
     return aux;
 }
 
+
 void Base::addRequest(Request* request) {
     requests.push_back(request);
 }
+
+
+bool Base::setup(vector<int> ids)//ids dos vértices pela qual temos que passar
+{
+    graph.floydWarshallShortestPath();
+    for(int i = 0; i < ids.size()-1; i++)
+    {
+        for(int j = i+1; j < ids.size(); j++)
+        {
+            if(!graph.areVertexConnected(ids[i], ids[j]))
+                return false;
+        }
+    }
+    return true;
+}
+
+vector<int> Base::calculatePath(vector<int>ids) //os ids já estariam ordenados pela ordem que o condutor iria passar
+{
+
+    vector<int>result;
+    vector<int> tmp;
+    for(int i = 0; i < ids.size()-1; i++)
+    {
+        graph.AStar(ids[i], ids[i+1]);
+        tmp = graph.getPath(ids[i], ids[i+1]);
+        for(int j = 0; j < tmp.size(); j++)
+        {
+            result.push_back(tmp[j]);
+        }
+    }
+    return result;
+
+}
+
+
