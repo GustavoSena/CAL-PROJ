@@ -6,6 +6,7 @@
 #define CAL_PROJ_VEHICLE_H
 
 #include "Person.h"
+#include "NewGraph.h"
 
 class Vehicle{
 public:

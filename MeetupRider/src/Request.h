@@ -11,10 +11,11 @@
 
 class Request {
 public:
-    Request(const Time &minStartTime, const Time &maxStartTime, const Time &minEndTime, const Time &maxEndTime,
-            Passenger *passenger, int destinationId, int staringId);
 
     Request()=default;
+
+    Request(const Time &minStartTime, const Time &maxStartTime, const Time &minEndTime, const Time &maxEndTime,
+            int destinationId, int startingId, Person *person);
 
     const Time &getMinStartTime() const;
 
@@ -40,11 +41,9 @@ public:
 
     void setStartingId(const int &id);
 
-    Passenger *getPassenger();
+    Person *getPerson() const;
 
-    void setPassenger(Passenger * passenger);
-
-
+    void setPerson(Person *person);
 
 
 private:
@@ -53,9 +52,8 @@ private:
     Time minEndTime;
     Time maxEndTime;
     int destinationId;
-    int staringId;
-    Passenger *passenger;
-
+    int startingId;
+    Person *person;
 
 };
 

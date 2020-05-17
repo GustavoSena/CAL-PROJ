@@ -426,3 +426,7 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 
     return aux;
 }
+
+vector<Person> Base::fillVehicle(){
+    
+}

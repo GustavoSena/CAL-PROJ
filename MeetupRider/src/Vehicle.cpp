@@ -30,3 +30,4 @@ int Vehicle::getDriverId() const {
 void Vehicle::setDriverId(int driverId) {
     driver_id = driverId;
 }
+

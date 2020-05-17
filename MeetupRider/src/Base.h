@@ -72,6 +72,9 @@ public:
 
     vector<Passenger*> findPassengers(vector<int> ids);
 
+    vector<Person> fillVehicle();
+
+
 
 };
 
