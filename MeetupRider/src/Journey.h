@@ -11,7 +11,7 @@
 
 class Journey {
 public:
-    Journey();
+    Journey() = default;
 
     const Time &getStartTime() const;
 

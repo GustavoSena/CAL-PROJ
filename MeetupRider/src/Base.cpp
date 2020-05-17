@@ -308,7 +308,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
     cout << "Insert address\n";
     getline(cin, address);
     //ver como fazer para adicionar as pessoas conhecidas - mostrar os utilizadores e perguntar quem conhece?
-    vector<Person*> network;
+    vector<int> network;
     lastId++;
     if(type == "passenger")
     {
@@ -375,7 +375,7 @@ int Base::sign_in(string type)
 
     }while(retry);
 
-
+    return -1;
 }
 
 Driver *Base::findDriver(int id) {
