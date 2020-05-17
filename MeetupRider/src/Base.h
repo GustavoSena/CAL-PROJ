@@ -20,7 +20,8 @@ private:
     Graph graph;
     vector<Passenger *> passengers;
     vector<Driver *> drivers;
-    vector<Request *> requests;
+    vector<Request *> requests_drivers;
+    vector<Request *> requests_passengers;
     vector<Journey *> journeys;
     int lastId; //the last id used for passengers and drivers
     int lastCarId; //the last id used for cars
@@ -74,8 +75,12 @@ public:
 
     vector<Passenger*> findPassengers(vector<int> ids);
 
+    vector<Request *> getPossibleRequests(int idDestino);
 
-    vector<Person> fillVehicle();
+    Request * getClosestToRequest(vector<Request *> requests, Request *r);
+
+    vector<int> fillVehicle(Request *driverRequest);
+
 
 
 

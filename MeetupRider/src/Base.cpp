@@ -428,13 +428,38 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 }
 
 
-vector<Person> Base::fillVehicle(){
-    
+vector<Request *> Base::getPossibleRequests(int idDestino){
+    vector<Request *> result;
+    for(auto r: requests_passengers){
+        if(r->getDestinationId() == idDestino){
+            result.push_back(r);
+        }
+    }
+    return result;
 }
 
+Request * Base::getClosestToRequest(vector<Request *> requests, Request *r){
+    double temp = INF;
+    Request * result = NULL;
+    for(auto request: requests){
+        if(request->getPerson()->getId() != r->getPerson()->getId()){
+            auto v = graph.findVertex(request->getStartingId());
+            auto v2 = graph.findVertex(r->getStartingId());
+            if(temp < v->distance(v2)){
+                temp = v->distance(v2);
+                result = request;
+            }
+        }
+    }
+    return result;
+}
 
-void Base::addRequest(Request* request) {
-    requests.push_back(request);
+vector<int> Base::fillVehicle(Request *driverRequest){
+    vector<int> result;
+    vector<Request *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
+    int counter = 0;
+    //while(counter < driverRequest->getPerson())
+    
 }
 
 
