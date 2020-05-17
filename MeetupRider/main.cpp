@@ -51,8 +51,9 @@ int main() {
     testing_algorithms(b.getGraph(), 30 , 50);
     testing_algorithms(b.getGraph(), 10 , 34);
     testing_algorithms(b.getGraph(), 23 , 70);
-    testing_algorithms(b.getGraph(), 5, 20);*/
-    //AStarView(b.getGraph(),10,34);
+    testing_algorithms(b.getGraph(), 5, 20);
+    */
+    AStarView(b.getGraph(),10,34);
     //DijkstraView(b.getGraph(),10,34);
 
 

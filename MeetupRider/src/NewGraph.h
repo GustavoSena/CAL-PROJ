@@ -37,6 +37,8 @@ private:
     int queueIndex = 0;
     bool processing = false;
 
+    double comparing_var = 0;
+
     void addEdge(Vertex * dest);
 public:
     Vertex(int id, int x, int y);

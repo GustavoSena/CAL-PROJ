@@ -83,9 +83,6 @@ void mapViewer(string edge_file, string node_file)
     ifstream n_data(node_file);
     ifstream e_data(edge_file);
 
-
-
-
     GraphViewer *gv = new GraphViewer(600, 600, false);
     gv->createWindow(600, 600);
     gv->defineVertexColor("blue");
@@ -171,3 +168,4 @@ void DijkstraView(Graph b, int orig_id, int dest_id)
         pathViewer(b, result);
     }
 }
+

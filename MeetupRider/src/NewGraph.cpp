@@ -55,7 +55,7 @@ double Vertex::distance(Vertex * v){
 
 bool Vertex::operator<(Vertex & vertex)
 {
-    return this->dist < vertex.dist;
+    return this->comparing_var < vertex.comparing_var;
 }
 
 Edge::Edge(Vertex *orig, Vertex *dest)
@@ -260,9 +260,11 @@ Vertex *Graph::initSSource(int orig_id) {
     for (auto v : vertexSet){
         v->dist = INF;
         v->path = nullptr;
+        v->comparing_var = INF;
     }
     auto s = findVertex(orig_id);
     s->dist = 0;
+    s->comparing_var = 0;
     return s;
 }
 
@@ -270,6 +272,7 @@ Vertex *Graph::initSSource(int orig_id) {
 bool Graph::relax(Vertex *v, Vertex *w, double weight) {
     if (v->dist + weight < w->dist){
         w->dist = v->dist + weight;
+        w->comparing_var = v->dist + weight;
         w->path = v;
         return true;
     }
@@ -325,7 +328,8 @@ double Graph::heuristic(Vertex * orig, Vertex * dest)
 bool Graph::relaxA(Vertex *v, Vertex *w, Vertex *dest, double weight)
 {
     if (v->dist + weight < w->dist){
-        w->dist = v->dist + weight + heuristic(w,dest);
+        w->dist = v->dist + weight;
+        w->comparing_var = v->dist + weight + heuristic(w,dest);
         w->path = v;
         return true;
     }
