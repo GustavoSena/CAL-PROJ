@@ -43,7 +43,11 @@ public:
 
     Person *getPerson() const;
 
+
     void setPerson(Person *person);
+
+    void setTimesNull();
+
 
 
 private:

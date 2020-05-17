@@ -45,15 +45,22 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-/*    testing_algorithms(b.getGraph(), 1 , 7);
+    /*testing_algorithms(b.getGraph(), 1 , 7);
     testing_algorithms(b.getGraph(), 4 , 50);
     testing_algorithms(b.getGraph(), 45 , 67);
     testing_algorithms(b.getGraph(), 30 , 50);
     testing_algorithms(b.getGraph(), 10 , 34);
     testing_algorithms(b.getGraph(), 23 , 70);
+
     testing_algorithms(b.getGraph(), 5, 20);*/
-    //AStarView(b.getGraph(),10,34);
+    //AStarView(b.getGraph(),14,17);
+    //DijkstraView(b.getGraph(),10,23);
+
+    testing_algorithms(b.getGraph(), 5, 20);
+
+    AStarView(b.getGraph(),10,34);
     //DijkstraView(b.getGraph(),10,34);
+
 
 
 

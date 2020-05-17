@@ -16,7 +16,6 @@ vector<string> decompose(string s, char sep) {
     for (unsigned int i = 0; i < s.length(); i++) {
         if (s[i] == sep) {
             trim(usage);
-            //replaceAccent(usage);
             elements.push_back(usage);
             usage = "";
         }
@@ -32,6 +31,17 @@ vector<string> decompose(string s, char sep) {
     }
     return elements;
 }
+
+bool compare_str(string str1, string str2) {
+    trim(str1);
+    trim(str2);
+    transform(str1.begin(), str1.end(), str1.begin(), ::toupper);
+    transform(str2.begin(), str2.end(), str2.begin(), ::toupper);
+    if (str1 == str2) return true;
+    return false;
+}
+
+
 vector<string> split(string str, char delimiter, size_t max_splits)
 {
     str += '\n';
@@ -82,9 +92,6 @@ void mapViewer(string edge_file, string node_file)
 
     ifstream n_data(node_file);
     ifstream e_data(edge_file);
-
-
-
 
     GraphViewer *gv = new GraphViewer(600, 600, false);
     gv->createWindow(600, 600);
@@ -171,3 +178,4 @@ void DijkstraView(Graph b, int orig_id, int dest_id)
         pathViewer(b, result);
     }
 }
+

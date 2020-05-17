@@ -56,6 +56,8 @@ public:
 
     void setRequests(vector<Request*> requests);
 
+    void addRequest(Request* request);
+
     const vector<Journey*> getJourneys() const;
 
     void setJourneys(vector<Journey*> journeys);
@@ -72,9 +74,14 @@ public:
 
     vector<Passenger*> findPassengers(vector<int> ids);
 
+
     vector<Person> fillVehicle();
 
 
+
+    bool setup(vector<int> ids);
+
+    vector<int> calculatePath(vector<int>ids);
 
 };
 

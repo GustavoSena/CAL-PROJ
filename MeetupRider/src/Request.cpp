@@ -55,6 +55,7 @@ void Request::setStartingId(const int &id) {
     Request::startingId=id;
 }
 
+
 Person *Request::getPerson() const {
     return person;
 }
@@ -70,4 +71,12 @@ Request::Request(const Time &minStartTime, const Time &maxStartTime, const Time 
                                                                       destinationId(destinationId),
                                                                       startingId(startingId), person(person) {}
 
+
+void Request::setTimesNull() {
+    minStartTime=Time("-1:-1");
+    maxStartTime=Time("-1:-1");
+    minEndTime=Time("-1:-1");
+    maxEndTime=Time("-1:-1");
+
+}
 
