@@ -70,6 +70,15 @@ PassengerRequest::PassengerRequest(const Time &minStartTime, const Time &minEndT
         : Request(minStartTime,  minEndTime, maxEndTime, destinationId, startingId),
           passenger(passenger) {}
 
+
+PassengerRequest::PassengerRequest(int destinationId, int startingId, Passenger * passenger)
+{
+    this->destinationId = destinationId;
+    this->startingId = startingId;
+    this->passenger = passenger;
+}
+
+
 Passenger *PassengerRequest::getPassenger() const {
     return passenger;
 }
@@ -93,4 +102,11 @@ void DriverRequest::setDriver(Driver *driver) {
 
 int DriverRequest::getCapacity(){
     return driver->getVehicle()->getCapacity();
+}
+
+DriverRequest::DriverRequest(int destinationId, int startingId, Driver * driver)
+{
+    this->destinationId = destinationId;
+    this->startingId = startingId;
+    this->driver = driver;
 }

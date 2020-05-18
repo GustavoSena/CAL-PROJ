@@ -56,6 +56,7 @@ class PassengerRequest : public Request{
 public:
     PassengerRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime,
                      int destinationId, int startingId, Passenger *passenger);
+    PassengerRequest(int destinationId, int startingId, Passenger * passenger);
 
     Passenger *getPassenger() const;
 
@@ -72,6 +73,8 @@ class DriverRequest : public Request{
 public:
     DriverRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime, int destinationId,
                   int startingId, Driver *driver);
+
+    DriverRequest(int destinationId, int startingId, Driver * driver);
 
     Driver *getDriver() const;
 

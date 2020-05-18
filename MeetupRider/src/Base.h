@@ -72,7 +72,7 @@ public:
 
     vector<PassengerRequest *> getPossibleRequests(int idDestino);
 
-    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> requests, int dest_id, int person_id);
+    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id, int person_id);
 
     vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
 
@@ -85,6 +85,14 @@ public:
     bool removeRequests(vector<Passenger*> passengers, DriverRequest * request);
 
     bool createJourney(DriverRequest * request);
+
+    void addDriverRequest(DriverRequest * request);
+
+    void addPassengerRequest(PassengerRequest * request);
+
+    void addPassenger(Passenger * passenger);
+
+    void addDriver(Driver * driver);
 
 };
 

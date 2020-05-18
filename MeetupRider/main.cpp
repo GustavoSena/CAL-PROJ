@@ -45,21 +45,38 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-    /*testing_algorithms(b.getGraph(), 1 , 7);
-    testing_algorithms(b.getGraph(), 4 , 50);
-    testing_algorithms(b.getGraph(), 45 , 67);
-    testing_algorithms(b.getGraph(), 30 , 50);
-    testing_algorithms(b.getGraph(), 10 , 34);
-    testing_algorithms(b.getGraph(), 23 , 70);
+    vector<int> network;
+    Vehicle car(0, 4, 0);
+    Driver d(0, "Joao", network, "rua", &car);
+    Passenger p1(0, "Maria", network, "rua");
+    Passenger p2(0, "Henrique", network, "rua");
+    Passenger p3(0, "Manel", network, "rua");
+    Passenger p4(0, "Julio", network, "rua");
+    b.addDriver(&d);
+    b.addPassenger(&p1);
+    b.addPassenger(&p2);
+    b.addPassenger(&p3);
+    b.addPassenger(&p4);
+    if(b.getGraph().areVertexConnected(4,25))
+        cout << "true"<< endl;
+    else
+        cout << "false" << endl;
+    DriverRequest request(25,4, &d);
+    PassengerRequest r1(25,5,&p1);
+    PassengerRequest r2(25, 6, &p2);
+    PassengerRequest r3(25, 7, &p3);
+    PassengerRequest r4(30, 2, &p4);
+    b.addDriverRequest(&request);
+    b.addPassengerRequest(&r1);
+    b.addPassengerRequest(&r2);
+    b.addPassengerRequest(&r3);
+    b.addPassengerRequest(&r4);
+    if(b.createJourney(&request))
+        cout<< "True"<< endl;
+    else
+        cout << "False"<<endl;
 
-    testing_algorithms(b.getGraph(), 5, 20);*/
-    //AStarView(b.getGraph(),14,17);
-    //DijkstraView(b.getGraph(),10,23);
 
-    testing_algorithms(b.getGraph(), 5, 20);
-
-    AStarView(b.getGraph(),10,34);
-    //DijkstraView(b.getGraph(),10,34);
 
 
 

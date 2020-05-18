@@ -433,19 +433,21 @@ vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
     return result;
 }
 
-PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> requests, int dest_id, int person_id){
+PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id, int person_id){
     double temp = INF;
     PassengerRequest * result = NULL;
-    for(auto request: requests){
-        if(request->getPassenger()->getId() != person_id){
-            auto v = graph.findVertex(request->getStartingId());
-            auto v2 = graph.findVertex(dest_id);
-            if(temp < v->distance(v2)){
-                temp = v->distance(v2);
-                result = request;
-            }
+    int pos = requests.size();
+    for(int i = 0; i < requests.size(); i++)
+    {
+        auto v = graph.findVertex(requests[i]->getStartingId());
+        auto v2 = graph.findVertex(dest_id);
+        if (temp > v->distance(v2)){
+            temp = v->distance(v2);
+            result = requests[i];
+            pos = i;
         }
     }
+    requests.erase(requests.begin() + pos);
     return result;
 }
 
@@ -453,9 +455,9 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
     vector<Passenger*> result;
     ids->push_back(driverRequest->getStartingId());
     vector<PassengerRequest *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
-    int counter = 1;
+    int counter = 2;
     PassengerRequest * tmp = getClosestToRequest(possibleRequests, driverRequest->getStartingId(), driverRequest->getDriver()->getId());
-    while(counter < driverRequest->getCapacity() && tmp != NULL)
+    while(counter < driverRequest->getCapacity() && possibleRequests.size() >0)
     {
         result.push_back(tmp->getPassenger());
         ids->push_back(tmp->getStartingId());
@@ -463,6 +465,8 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
         tmp =  getClosestToRequest(possibleRequests, tmp->getStartingId(), tmp->getPassenger()->getId());
     }
 
+    result.push_back(tmp->getPassenger());
+    ids->push_back(tmp->getStartingId());
     ids->push_back(driverRequest->getDestinationId());
     return result;
 
@@ -492,7 +496,11 @@ vector<int> Base::calculatePath(vector<int>ids) //os ids já estariam ordenados 
     {
         graph.AStar(ids[i], ids[i+1]);
         tmp = graph.getPath(ids[i], ids[i+1]);
-        for(int j = 0; j < tmp.size(); j++)
+        int j;
+        if(i==0)
+            j = 0;
+        else j = 1;
+        for(j; j < tmp.size(); j++)
         {
             result.push_back(tmp[j]);
         }
@@ -549,4 +557,33 @@ bool Base::createJourney(DriverRequest * request)
     if(!removeRequests(passengers, request)) return false;
     journeys.push_back(&j);
     return true;
+
+}
+
+
+void Base::addDriverRequest(DriverRequest * request)
+{
+    requests_drivers.push_back(request);
+}
+
+void Base::addPassengerRequest(PassengerRequest * request)
+{
+    requests_passengers.push_back(request);
+}
+
+void Base::addPassenger(Passenger * passenger)
+{
+    lastId++;
+    passenger->setId(lastId);
+    passengers.push_back(passenger);
+}
+
+void Base::addDriver(Driver * driver)
+{
+    lastId++;
+    driver->setId(lastId);
+    lastCarId++;
+    driver->getVehicle()->setDriverId(lastId);
+    driver->getVehicle()->setId(lastCarId);
+    drivers.push_back(driver);
 }
