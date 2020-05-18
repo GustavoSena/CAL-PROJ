@@ -26,7 +26,7 @@ Base::Base(string fileName) {
                 loadJourneys(temp);
                 break;
             case 3:
-//                loadRequests(temp);
+                loadRequests(temp);
                 break;
             default:
                 break;
@@ -78,6 +78,7 @@ void Base::loadPassengers(string fileName){
             case 5:
                 passengers.push_back(new Passenger(p));
                 p= Passenger();
+                counter=-1;
                 break;
             default:
                 break;
@@ -134,6 +135,7 @@ void Base::loadDrivers(string fileName){
             case 6:
                 drivers.push_back(new Driver(d));
                 d= Driver();
+                counter=-1;
                 break;
             default:
                 break;
@@ -144,42 +146,71 @@ void Base::loadDrivers(string fileName){
     a_file.close();
 }
 
-/*
+
 void Base::loadRequests(string fileName){
     ifstream a_file;
     a_file.open("..\\resources\\files\\" + fileName);
     int counter =0;
     string temp;
-    Request r;
     vector<int> aux = {};
     vector<string> parts;
     vector<Time> times;
+    Passenger *p;
+    PassengerRequest pr;
+    DriverRequest dr;
+    bool pass=false;
     while(getline(a_file, temp)) {
-        switch(counter){
+        switch(counter) {
             case 0:
-                r.setPassenger(findPassenger(stoi(temp)));
+                p = findPassenger(stoi(temp));
+
+                if (p == nullptr){
+                    pass = false;
+
+                    dr.setDriver(findDriver(stoi(temp)));
+                }
+                else{
+                    pass=true;
+                    pr.setPassenger(p);
+                }
+
                 break;
             case 1:
-                r.setStartingId(stoi(temp));
+                if(pass)
+                    pr.setStartingId(stoi(temp));
+                else
+                    dr.setStartingId(stoi(temp));
                 break;
             case 2:
-                r.setDestinationId(stoi(temp));
+                if(pass)
+                    pr.setDestinationId(stoi(temp));
+                else
+                    dr.setDestinationId(stoi(temp));
                 break;
             case 3:
-                r.setMinStartTime(Time(temp));
+                if (pass)
+                    pr.setMinStartTime(Time(temp));
+                else
+                    dr.setMinStartTime(Time(temp));
                 break;
             case 4:
-                r.setMaxStartTime(Time(temp));
+                if(pass)
+                    pr.setMinEndTime(Time(temp));
+                else
+                    pr.setMinEndTime(Time(temp));
                 break;
             case 5:
-                r.setMinEndTime(Time(temp));
+                if(pass)
+                    pr.setMinEndTime(Time(temp));
+                else
+                    pr.setMinEndTime(Time(temp));
                 break;
             case 6:
-                r.setMinEndTime(Time(temp));
-                break;
-            case 7:
-                requests.push_back(new Request(r));
-                r=Request();
+                if(pass)
+                    requests_passengers.push_back(new PassengerRequest(pr));
+                else
+                    requests_drivers.push_back(new DriverRequest(dr));
+                counter=-1;
                 break;
             default:
                 break;
@@ -189,7 +220,7 @@ void Base::loadRequests(string fileName){
     }
     a_file.close();
 }
-*/
+
 
 void Base::loadJourneys(string fileName){
     ifstream a_file;
@@ -234,6 +265,7 @@ void Base::loadJourneys(string fileName){
             case 5:
                 journeys.push_back(new Journey(j));
                 j= Journey();
+                counter=-1;
                 break;
             default:
                 break;
@@ -558,6 +590,7 @@ bool Base::createJourney(DriverRequest * request)
     journeys.push_back(&j);
     return true;
 
+
 }
 
 
@@ -587,3 +620,7 @@ void Base::addDriver(Driver * driver)
     driver->getVehicle()->setId(lastCarId);
     drivers.push_back(driver);
 }
+
+
+
+

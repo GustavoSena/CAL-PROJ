@@ -55,7 +55,7 @@ void next_menu(Base base, string type)
         {
             retry = false;
             int id =base.sign_in(type);
-            //request_menu(base, id);
+            request_menu(base, id);
 
         }
         else if(answer == "U" || answer == "u")
@@ -79,7 +79,6 @@ void next_menu(Base base, string type)
     }while(retry);
 }
 
-/*
 
 void request_menu(Base base, int id){
     system("cls");
@@ -98,7 +97,10 @@ void request_menu(Base base, int id){
     }while(true);
 
     Request aux;
-    aux.setPassenger(base.findPassenger(id));
+
+
+
+
     string temp;
     cout<<"Time restriction? (y/n) (anything else to cancel)\n";
     getline(cin,temp);
@@ -111,11 +113,6 @@ void request_menu(Base base, int id){
         if(compare_str(temp, "0"))
             return;
         aux.setMinStartTime(Time(temp));
-        cout<< "Maximum starting time (hh::mm) (0 to cancel)\n";
-        getline(cin,temp);
-        if(compare_str(temp, "0"))
-            return;
-        aux.setMaxStartTime(Time(temp));
         cout<< "Minimum ending time (hh::mm) (0 to cancel)\n";
         getline(cin,temp);
         if(compare_str(temp, "0"))
@@ -154,12 +151,24 @@ void request_menu(Base base, int id){
     aux.setStartingId(point1);
     aux.setDestinationId(point2);
 
-    base.addRequest(new Request(aux));
-
+    DriverRequest *aux1= static_cast<DriverRequest *>(new Request(aux));
+    PassengerRequest *aux2=static_cast<PassengerRequest*>(new Request(aux));
+    Passenger *p=base.findPassenger(id);
+    if(p== nullptr) {
+        Driver *d = base.findDriver(id);
+        aux1->setDriver(d);
+    }
+    else{
+        aux2->setPassenger(p);
+    }
+    if(typeid(aux)==typeid(PassengerRequest))
+        base.addPassengerRequest(aux2);
+    else
+        base.addDriverRequest(aux1);
 
 }
 
-*/
+
 
 
 

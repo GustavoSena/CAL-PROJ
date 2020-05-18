@@ -58,6 +58,7 @@ public:
                      int destinationId, int startingId, Passenger *passenger);
     PassengerRequest(int destinationId, int startingId, Passenger * passenger);
 
+    PassengerRequest() =default;
     Passenger *getPassenger() const;
 
     void setPassenger(Passenger *passenger);
@@ -74,7 +75,10 @@ public:
     DriverRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime, int destinationId,
                   int startingId, Driver *driver);
 
+
     DriverRequest(int destinationId, int startingId, Driver * driver);
+
+    DriverRequest() = default;
 
     Driver *getDriver() const;
 

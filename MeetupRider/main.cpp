@@ -77,11 +77,4 @@ int main() {
         cout << "False"<<endl;
 
 
-
-
-
-
-
-
-
 }
