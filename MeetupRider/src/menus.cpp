@@ -55,7 +55,7 @@ void next_menu(Base base, string type)
         {
             retry = false;
             int id =base.sign_in(type);
-            //request_menu(base, id);
+            request_menu(base, id);
 
         }
         else if(answer == "U" || answer == "u")
