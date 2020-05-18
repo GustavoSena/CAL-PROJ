@@ -26,7 +26,7 @@ Base::Base(string fileName) {
                 loadJourneys(temp);
                 break;
             case 3:
-                loadRequests(temp);
+//                loadRequests(temp);
                 break;
             default:
                 break;
@@ -146,45 +146,70 @@ void Base::loadDrivers(string fileName){
     a_file.close();
 }
 
+
 void Base::loadRequests(string fileName){
     ifstream a_file;
     a_file.open("..\\resources\\files\\" + fileName);
     int counter =0;
     string temp;
-    Request r;
     vector<int> aux = {};
     vector<string> parts;
     vector<Time> times;
-    Person *p;
+    Passenger *p;
+    PassengerRequest pr;
+    DriverRequest dr;
+    bool pass=false;
     while(getline(a_file, temp)) {
-        switch(counter){
+        switch(counter) {
             case 0:
-                p=findPassenger(stoi(temp));
-                if(p==nullptr)
-                    p=findDriver(stoi(temp));
-                r.setPerson(p);
+                p = findPassenger(stoi(temp));
+
+                if (p == nullptr){
+                    pass = false;
+
+                    dr.setDriver(findDriver(stoi(temp)));
+                }
+                else{
+                    pass=true;
+                    pr.setPassenger(p);
+                }
+
                 break;
             case 1:
-                r.setStartingId(stoi(temp));
+                if(pass)
+                    pr.setStartingId(stoi(temp));
+                else
+                    dr.setStartingId(stoi(temp));
                 break;
             case 2:
-                r.setDestinationId(stoi(temp));
+                if(pass)
+                    pr.setDestinationId(stoi(temp));
+                else
+                    dr.setDestinationId(stoi(temp));
                 break;
             case 3:
-                r.setMinStartTime(Time(temp));
+                if (pass)
+                    pr.setMinStartTime(Time(temp));
+                else
+                    dr.setMinStartTime(Time(temp));
                 break;
             case 4:
-                r.setMaxStartTime(Time(temp));
+                if(pass)
+                    pr.setMinEndTime(Time(temp));
+                else
+                    pr.setMinEndTime(Time(temp));
                 break;
             case 5:
-                r.setMinEndTime(Time(temp));
+                if(pass)
+                    pr.setMinEndTime(Time(temp));
+                else
+                    pr.setMinEndTime(Time(temp));
                 break;
             case 6:
-                r.setMinEndTime(Time(temp));
-                break;
-            case 7:
-                requests.push_back(new Request(r));
-                r=Request();
+                if(pass)
+                    requests_passengers.push_back(new PassengerRequest(pr));
+                else
+                    requests_drivers.push_back(new DriverRequest(dr));
                 counter=-1;
                 break;
             default:
@@ -195,6 +220,7 @@ void Base::loadRequests(string fileName){
     }
     a_file.close();
 }
+
 
 void Base::loadJourneys(string fileName){
     ifstream a_file;
@@ -274,13 +300,6 @@ void Base::setDrivers(vector<Driver*> drivers) {
     Base::drivers = drivers;
 }
 
-const vector<Request*> Base::getRequests() const{
-    return requests;
-}
-
-void Base::setRequests(vector<Request*> requests) {
-    Base::requests = requests;
-}
 
 const vector<Journey*> Base::getJourneys() const{
     return journeys;
@@ -436,13 +455,49 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 }
 
 
-vector<Person> Base::fillVehicle(){
-    
+vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
+    vector<PassengerRequest *> result;
+    for(auto r: requests_passengers){
+        if(r->getDestinationId() == idDestino && graph.areVertexConnected(r->getStartingId(), idDestino)){
+            result.push_back(r);
+        }
+    }
+    return result;
 }
 
+PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> requests, int dest_id, int person_id){
+    double temp = INF;
+    PassengerRequest * result = NULL;
+    for(auto request: requests){
+        if(request->getPassenger()->getId() != person_id){
+            auto v = graph.findVertex(request->getStartingId());
+            auto v2 = graph.findVertex(dest_id);
+            if(temp < v->distance(v2)){
+                temp = v->distance(v2);
+                result = request;
+            }
+        }
+    }
+    return result;
+}
 
-void Base::addRequest(Request* request) {
-    requests.push_back(request);
+vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> *ids){
+    vector<Passenger*> result;
+    ids->push_back(driverRequest->getStartingId());
+    vector<PassengerRequest *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
+    int counter = 1;
+    PassengerRequest * tmp = getClosestToRequest(possibleRequests, driverRequest->getStartingId(), driverRequest->getDriver()->getId());
+    while(counter < driverRequest->getCapacity() && tmp != NULL)
+    {
+        result.push_back(tmp->getPassenger());
+        ids->push_back(tmp->getStartingId());
+        counter++;
+        tmp =  getClosestToRequest(possibleRequests, tmp->getStartingId(), tmp->getPassenger()->getId());
+    }
+
+    ids->push_back(driverRequest->getDestinationId());
+    return result;
+
 }
 
 
@@ -475,5 +530,65 @@ vector<int> Base::calculatePath(vector<int>ids) //os ids já estariam ordenados 
         }
     }
     return result;
+
+}
+
+bool Base::removePassengerRequests(Passenger * p)
+{
+    for(int i = 0; i < requests_passengers.size(); i++)
+    {
+        if(requests_passengers[i]->getPassenger()->getId() == p->getId())
+        {
+            requests_passengers.erase(requests_passengers.begin()+i);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool Base::removeRequests(vector<Passenger*> passengers, DriverRequest * request)
+{
+    for(auto p : passengers)
+    {
+        if(!removePassengerRequests(p))
+            return false;
+    }
+    for(int i = 0; i < requests_drivers.size(); i++)
+    {
+        if(requests_drivers[i]->getDriver()->getId() == request->getDriver()->getId())
+        {
+            requests_drivers.erase(requests_drivers.begin()+i);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool Base::createJourney(DriverRequest * request)
+{
+    Journey j;
+    vector<int>places;
+    vector<int>path;
+    vector<Passenger*> passengers = fillVehicle(request, &places);
+    if(!setup(places)) return false;
+    path = calculatePath(places);
+    j.setDriver(request->getDriver());
+    j.setPassenger(passengers);
+    j.setStartTime(request->getMinStartTime());
+    j.setPath(path);
+    if(!removeRequests(passengers, request)) return false;
+    journeys.push_back(&j);
+    return true;
+}
+
+void Base::addPassengerRequest(PassengerRequest *pr) {
+    requests_passengers.push_back(pr);
+
+}
+
+void Base::addDriverRequest(DriverRequest *dr) {
+    requests_drivers.push_back(dr);
 
 }

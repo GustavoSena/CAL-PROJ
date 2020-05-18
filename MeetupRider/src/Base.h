@@ -20,7 +20,8 @@ private:
     Graph graph;
     vector<Passenger *> passengers;
     vector<Driver *> drivers;
-    vector<Request *> requests;
+    vector<DriverRequest *> requests_drivers;
+    vector<PassengerRequest *> requests_passengers;
     vector<Journey *> journeys;
     int lastId; //the last id used for passengers and drivers
     int lastCarId; //the last id used for cars
@@ -52,11 +53,6 @@ public:
 
     void setDrivers( vector<Driver*>  drivers);
 
-    const vector<Request*> getRequests() const;
-
-    void setRequests(vector<Request*> requests);
-
-    void addRequest(Request* request);
 
     const vector<Journey*> getJourneys() const;
 
@@ -74,14 +70,25 @@ public:
 
     vector<Passenger*> findPassengers(vector<int> ids);
 
+    vector<PassengerRequest *> getPossibleRequests(int idDestino);
 
-    vector<Person> fillVehicle();
+    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> requests, int dest_id, int person_id);
 
-
+    vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
 
     bool setup(vector<int> ids);
 
     vector<int> calculatePath(vector<int>ids);
+
+    bool removePassengerRequests(Passenger * p);
+
+    bool removeRequests(vector<Passenger*> passengers, DriverRequest * request);
+
+    bool createJourney(DriverRequest * request);
+
+    void addPassengerRequest(PassengerRequest * pr);
+
+    void addDriverRequest(DriverRequest *dr);
 
 };
 
