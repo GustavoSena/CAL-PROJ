@@ -78,6 +78,7 @@ void Base::loadPassengers(string fileName){
             case 5:
                 passengers.push_back(new Passenger(p));
                 p= Passenger();
+                counter=-1;
                 break;
             default:
                 break;
@@ -134,6 +135,7 @@ void Base::loadDrivers(string fileName){
             case 6:
                 drivers.push_back(new Driver(d));
                 d= Driver();
+                counter=-1;
                 break;
             default:
                 break;
@@ -153,10 +155,14 @@ void Base::loadRequests(string fileName){
     vector<int> aux = {};
     vector<string> parts;
     vector<Time> times;
+    Person *p;
     while(getline(a_file, temp)) {
         switch(counter){
             case 0:
-                r.setPassenger(findPassenger(stoi(temp)));
+                p=findPassenger(stoi(temp));
+                if(p==nullptr)
+                    p=findDriver(stoi(temp));
+                r.setPerson(p);
                 break;
             case 1:
                 r.setStartingId(stoi(temp));
@@ -179,6 +185,7 @@ void Base::loadRequests(string fileName){
             case 7:
                 requests.push_back(new Request(r));
                 r=Request();
+                counter=-1;
                 break;
             default:
                 break;
@@ -232,6 +239,7 @@ void Base::loadJourneys(string fileName){
             case 5:
                 journeys.push_back(new Journey(j));
                 j= Journey();
+                counter=-1;
                 break;
             default:
                 break;

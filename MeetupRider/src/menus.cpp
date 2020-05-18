@@ -97,7 +97,10 @@ void request_menu(Base base, int id){
     }while(true);
 
     Request aux;
-    aux.setPassenger(base.findPassenger(id));
+    Person *p=base.findPassenger(id);
+    if(p== nullptr)
+        p=base.findDriver(id);
+    aux.setPerson(p);
     string temp;
     cout<<"Time restriction? (y/n) (anything else to cancel)\n";
     getline(cin,temp);
