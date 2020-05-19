@@ -15,6 +15,7 @@
 
 using namespace std;
 
+
 class Base {
 private:
     Graph graph;
@@ -25,6 +26,7 @@ private:
     vector<Journey *> journeys;
     int lastId; //the last id used for passengers and drivers
     int lastCarId; //the last id used for cars
+    int maxSpeed; //50 km/h
 
 public:
 
@@ -95,6 +97,8 @@ public:
     void addPassenger(Passenger * passenger);
 
     void addDriver(Driver * driver);
+
+    Time predictTime(int id1, int id2);
 
 
 

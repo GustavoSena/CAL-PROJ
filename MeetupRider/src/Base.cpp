@@ -10,6 +10,7 @@ Base::Base(){
 
 Base::Base(string fileName) {
 
+    maxSpeed = 50;
     ifstream a_file;
     a_file.open(fileName);
     int counter =0;
@@ -478,14 +479,6 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
     int pos = requests.size();
     for(int i = 0; i < requests.size(); i++)
     {
-/*        auto v = graph.findVertex(requests[i]->getStartingId());
-        auto v2 = graph.findVertex(dest_id);
-        if (temp > v->distance(v2)){
-            temp = v->distance(v2);
-            result = requests[i];
-            pos = i;
-        }*/
-
         if(temp>getDistance(dest_id, requests[i]->getStartingId()))
         {
             temp = getDistance(dest_id, requests[i]->getStartingId());
@@ -634,6 +627,13 @@ void Base::addDriver(Driver * driver)
     drivers.push_back(driver);
 }
 
+Time Base::predictTime(int id1, int id2)
+{
+    double distance = getDistance(id1, id2);
+    double time = (distance*0.001)/maxSpeed;
+
+
+}
 
 
 

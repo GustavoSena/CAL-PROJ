@@ -36,3 +36,7 @@ Time::Time(string time) {
     setMinute(stoi(parts[1]));
     setSecond(stoi(parts[2]));
 }
+
+Time::Time(double hour){
+    
+}

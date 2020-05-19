@@ -14,6 +14,7 @@ class Time {
 public:
     Time() =default;
     Time(string time);
+    Time(double hour);
     Time(int hour, int minute, int second);
 
     int getHour() const;
