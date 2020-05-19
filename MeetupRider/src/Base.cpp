@@ -327,6 +327,9 @@ void Base::loadGraph(string node_text, string edge_text) {
         getline(n_data, text_line);
         vector<int> node_values = getNodeValues(text_line);
         this->graph.addVertex(node_values[0], node_values[1], node_values[2]);
+
+
+
     }
 
     getline(e_data, text_line);

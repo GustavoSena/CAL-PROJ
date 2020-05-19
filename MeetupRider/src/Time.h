@@ -36,7 +36,11 @@ public:
 
     friend Time operator+(Time t1, Time t2);
 
+    friend Time operator-(Time t1, Time t2);
+
     Time operator+=(Time t1);
+
+    Time operator-=(Time t1);
 
     bool operator<(Time t);
 

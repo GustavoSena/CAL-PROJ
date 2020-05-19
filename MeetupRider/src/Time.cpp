@@ -7,6 +7,23 @@
 
 Time::Time(int hour, int minute, int second) : hour(hour), minute(minute), second(second) {}
 
+Time::Time(string time) {
+    vector<string>parts = decompose(time,':');
+    setHour(stoi(parts[0]));
+    setMinute(stoi(parts[1]));
+    setSecond(stoi(parts[2]));
+}
+
+
+Time::Time(double hour){
+    second=hour*3600;
+    minute = second/60;
+    second=second%60;
+    this->hour = minute/60;
+    minute=minute%60;
+}
+
+
 int Time::getHour() const {
     return hour;
 }
@@ -30,19 +47,6 @@ int Time::getSecond() const {
 void Time::setSecond(int second) {
     Time::second = second;
 }
-
-Time::Time(string time) {
-    vector<string>parts = decompose(time,':');
-    setHour(stoi(parts[0]));
-    setMinute(stoi(parts[1]));
-    setSecond(stoi(parts[2]));
-}
-
-
-Time::Time(double hour){
-    
-}
-
 
 Time Time::operator+=(Time t1) {
     *this=*this+t1;
@@ -89,6 +93,29 @@ ostream &operator<<(ostream &out, Time& t){
     out<<setfill('0')<<setw(2)<<t.getSecond();
     setfill(' ');
     return out;
+}
+
+Time operator-(Time t1, Time t2) {
+
+    int sec =t1.getSecond() - t2.getSecond();
+    int min = t1.getMinute() - t2.getMinute();
+    int hour=t1.getHour() - t2.getHour();
+    if(sec<0){
+        sec+=60;
+        min--;
+    }
+    if(min<0){
+        min+=60;
+        hour--;
+    }
+    if(hour<0)
+        hour+=24;
+    return Time(hour,min,sec);
+}
+
+Time Time::operator-=(Time t1) {
+    *this=*this-t1;
+    return *this;
 }
 
 
