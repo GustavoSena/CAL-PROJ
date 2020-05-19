@@ -631,9 +631,12 @@ Time Base::predictTime(int id1, int id2)
 {
     double distance = getDistance(id1, id2);
     double time = (distance*0.001)/maxSpeed;
-
+    return Time(time);
 
 }
 
+bool Base::checkTimeRestrictions(vector<int> possible_path, DriverRequest * drequest, vector<PassengerRequest*> prequests)
+{
 
+}
 

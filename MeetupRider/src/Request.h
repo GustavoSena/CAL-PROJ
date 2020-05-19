@@ -37,13 +37,15 @@ public:
 
     void setStartingId(const int &id);
 
-
     void setTimesNull();
+
+    void calculateMaxStartTime(Time time);
 
 
 
 protected:
     Time minStartTime;
+    Time maxStartTime;
     Time minEndTime;
     Time maxEndTime;
     int destinationId;
