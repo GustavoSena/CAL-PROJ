@@ -118,6 +118,7 @@ Vertex* Graph::findVertex(int id){
 bool Graph::addVertex(int id, int x, int y) {
     if (findVertex(id) != nullptr)
         return false;
+
     vertexSet.push_back(new Vertex(id,x,y));
     return true;
 }

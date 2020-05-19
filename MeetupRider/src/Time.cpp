@@ -95,4 +95,27 @@ ostream &operator<<(ostream &out, Time& t){
     return out;
 }
 
+Time operator-(Time t1, Time t2) {
+
+    int sec =t1.getSecond() - t2.getSecond();
+    int min = t1.getMinute() - t2.getMinute();
+    int hour=t1.getHour() - t2.getHour();
+    if(sec<0){
+        sec+=60;
+        min--;
+    }
+    if(min<0){
+        min+=60;
+        hour--;
+    }
+    if(hour<0)
+        hour+=24;
+    return Time(hour,min,sec);
+}
+
+Time Time::operator-=(Time t1) {
+    *this=*this-t1;
+    return *this;
+}
+
 
