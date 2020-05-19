@@ -35,6 +35,10 @@ void Vertex::setY(int y) {
     Vertex::y = y;
 }
 
+double Vertex::getDist(){
+    return dist;
+}
+
 const vector<Edge> & Vertex::getAdj() const {
     return adj;
 }

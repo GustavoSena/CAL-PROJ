@@ -72,6 +72,8 @@ public:
 
     vector<PassengerRequest *> getPossibleRequests(int idDestino);
 
+    double getDistance(int id1, int id2);
+
     PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id, int person_id);
 
     vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
