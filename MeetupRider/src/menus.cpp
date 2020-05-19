@@ -50,7 +50,7 @@ void next_menu(Base base, string type)
         cout << "Sign [U]p" << endl;
         cout << "Go [B]ack" << endl;
         cout << "[C]lose" << endl;
-        cin >> answer;
+        getline(cin,answer);
         if(answer == "I" || answer == "i")
         {
             retry = false;
@@ -108,21 +108,18 @@ void request_menu(Base base, int id){
         aux.setTimesNull();
     }
     else if (compare_str(temp, "y")){
-        cout<< "Minimum starting time (hh::mm) (0 to cancel)\n";
-        getline(cin,temp);
-        if(compare_str(temp, "0"))
+        Time t=readTime("Minimum starting");
+        if(t==NULL)
             return;
-        aux.setMinStartTime(Time(temp));
-        cout<< "Minimum ending time (hh::mm) (0 to cancel)\n";
-        getline(cin,temp);
-        if(compare_str(temp, "0"))
+        aux.setMinStartTime(t);
+        t=readTime("Minimum ending");
+        if(t==NULL)
             return;
-        aux.setMinEndTime(Time(temp));
-        cout<< "Maximum ending time (hh::mm) (0 to cancel)\n";
-        getline(cin,temp);
-        if(compare_str(temp, "0"))
+        aux.setMinEndTime(t);
+        t=readTime("Maximum ending");
+        if(t==NULL)
             return;
-        aux.setMaxEndTime(Time(temp));
+        aux.setMaxEndTime(t);
 
     }
     else
@@ -136,12 +133,24 @@ void request_menu(Base base, int id){
         getline(cin, temp);
         if(compare_str(temp,"-1"))
             return;
-        point1=stoi(temp);
+        try {
+            point1 = stoi(temp);
+
+        }catch(exception err){
+            cout<<"Error with input please try again\n";
+            continue;
+        }
         cout<<"Ending point (id) (-1 to cancel)\n";
         getline(cin,temp);
         if(compare_str(temp,"-1"))
             return;
-        point2=stoi(temp);
+        try {
+            point2 = stoi(temp);
+
+        }catch(exception err){
+            cout<<"Error with input please try again\n";
+            continue;
+        }
         if(!base.getGraph().areVertexConnected(point1,point2)){
             cout<<"Cannot connect locations! Please input new ones or cancel!\n";
             continue;
@@ -169,6 +178,27 @@ void request_menu(Base base, int id){
 }
 
 
+Time readTime(string timeType){
+    do {
+        string temp;
+        Time t;
+        cout << timeType << " time (hh:mm:ss) (0 to cancel)\n";
+        getline(cin,temp);
+        if(compare_str(temp,"0"))
+            return NULL;
+        vector<string> parts = decompose(temp,':');
+        try{
+            t.setHour(stoi(parts[0]));
+            t.setMinute(stoi(parts[1]));
+            t.setSecond(stoi(parts[2]));
+        }catch(exception err){
+            cout<<"Error with input! Please try again\n";
+            continue;
+        }
+        return t;
 
+    }while(true);
+
+}
 
 

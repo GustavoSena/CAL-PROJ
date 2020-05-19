@@ -45,7 +45,7 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-    vector<int> network;
+    /*vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
     Passenger p1(0, "Maria", network, "rua");
@@ -74,7 +74,11 @@ int main() {
     if(b.createJourney(&request))
         cout<< "True"<< endl;
     else
-        cout << "False"<<endl;
+        cout << "False"<<endl;*/
+
+
+
+
 
 
 }

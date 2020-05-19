@@ -31,7 +31,6 @@ void Request::setMaxEndTime(const Time &maxEndTime) {
     Request::maxEndTime = maxEndTime;
 }
 
-
 const int &Request::getDestinationId() const {
     return destinationId;
 }
