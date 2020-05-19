@@ -11,6 +11,11 @@
 using namespace std;
 
 class Time {
+private:
+    int hour;
+    int minute;
+    int second;
+
 public:
     Time() =default;
     Time(string time);
@@ -29,10 +34,15 @@ public:
 
     void setSecond(int second);
 
-private:
-    int hour;
-    int minute;
-    int second;
+    friend Time operator+(Time t1, Time t2);
+
+    Time operator+=(Time t1);
+
+    bool operator<(Time t);
+
+    bool operator==(Time t);
+
+    friend ostream &operator<<(ostream &out,Time& t);
 
 };
 
