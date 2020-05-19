@@ -55,6 +55,8 @@ public:
 
     void setY(int y);
 
+    double getDist();
+
     const vector<Edge> &getAdj() const;
 
     void setAdj(const vector<Edge> &adj);

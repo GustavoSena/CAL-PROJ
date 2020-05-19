@@ -465,16 +465,30 @@ vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
     return result;
 }
 
+double Base::getDistance(int id1, int id2)
+{
+    graph.AStar(id1, id2);
+    auto v = graph.findVertex(id2);
+    return v->getDist();
+}
+
 PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id, int person_id){
     double temp = INF;
     PassengerRequest * result = NULL;
     int pos = requests.size();
     for(int i = 0; i < requests.size(); i++)
     {
-        auto v = graph.findVertex(requests[i]->getStartingId());
+/*        auto v = graph.findVertex(requests[i]->getStartingId());
         auto v2 = graph.findVertex(dest_id);
         if (temp > v->distance(v2)){
             temp = v->distance(v2);
+            result = requests[i];
+            pos = i;
+        }*/
+
+        if(temp>getDistance(dest_id, requests[i]->getStartingId()))
+        {
+            temp = getDistance(dest_id, requests[i]->getStartingId());
             result = requests[i];
             pos = i;
         }
@@ -592,7 +606,6 @@ bool Base::createJourney(DriverRequest * request)
 
 
 }
-
 
 void Base::addDriverRequest(DriverRequest * request)
 {
