@@ -107,7 +107,7 @@ void mapViewer(string edge_file, string node_file)
         getline(n_data, text_line);
         vector<int> nvalues = getNodeValues(text_line);
         gv->addNode(nvalues[0], nvalues[1], nvalues[2]);
-
+        gv->setVertexLabel(nvalues[0],to_string(nvalues[0]));
     }
 
 
