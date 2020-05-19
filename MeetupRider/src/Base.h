@@ -100,6 +100,9 @@ public:
 
     Time predictTime(int id1, int id2);
 
+    bool checkTimeRestrictions(vector<int> possible_path, DriverRequest * drequest, vector<PassengerRequest*> prequests);
+
+
 
 
 };

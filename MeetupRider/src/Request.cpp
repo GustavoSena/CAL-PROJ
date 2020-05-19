@@ -65,6 +65,12 @@ void Request::setTimesNull() {
 
 }
 
+
+void Request::calculateMaxStartTime(Time time){
+
+    maxStartTime = maxEndTime - time;
+}
+
 PassengerRequest::PassengerRequest(const Time &minStartTime, const Time &minEndTime,
                                    const Time &maxEndTime, int destinationId, int startingId, Passenger *passenger)
         : Request(minStartTime,  minEndTime, maxEndTime, destinationId, startingId),
