@@ -93,8 +93,8 @@ void mapViewer(string edge_file, string node_file)
     ifstream n_data(node_file);
     ifstream e_data(edge_file);
 
-    GraphViewer *gv = new GraphViewer(600, 600, false);
-    gv->createWindow(600, 600);
+    GraphViewer *gv = new GraphViewer(700, 700, false);
+    gv->createWindow(700, 700);
     gv->defineVertexColor("blue");
     gv->defineEdgeColor("black");
 
@@ -179,3 +179,12 @@ void DijkstraView(Graph b, int orig_id, int dest_id)
     }
 }
 
+vector<int> subVector(vector<int> init, int pos)
+{
+    vector<int> result;
+    for(int i = pos; i < init.size(); i++)
+    {
+        result.push_back(init[i]);
+    }
+    return result;
+}

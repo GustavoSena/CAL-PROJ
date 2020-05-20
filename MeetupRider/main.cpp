@@ -61,11 +61,13 @@ int main() {
         cout << "true"<< endl;
     else
         cout << "false" << endl;
-    DriverRequest request(25,4, &d);
-    PassengerRequest r1(25,5,&p1);
-    PassengerRequest r2(25, 6, &p2);
-    PassengerRequest r3(25, 7, &p3);
-    PassengerRequest r4(30, 2, &p4);
+    Time t1(16, 0, 0);
+    Time t2(18,0,0);
+    DriverRequest request(t1, t2, t2,25,4, &d);
+    PassengerRequest r1(t1,t2, t2, 25,5,&p1);
+    PassengerRequest r2(t1, t2, t2,25, 6, &p2);
+    PassengerRequest r3(t1, t2, t2,25, 7, &p3);
+    PassengerRequest r4(t1, t2, t2, 30, 2, &p4);
     b.addDriverRequest(&request);
     b.addPassengerRequest(&r1);
     b.addPassengerRequest(&r2);
@@ -76,5 +78,5 @@ int main() {
     else
         cout << "False"<<endl;
 
-
+    //mapViewer(edge_text, node_text);
 }
