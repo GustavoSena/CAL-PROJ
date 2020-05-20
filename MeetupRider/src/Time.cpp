@@ -65,6 +65,18 @@ bool Time::operator<(Time t) {
     return second<t.getSecond();
 }
 
+bool Time::operator<=(const Time t) const{
+    if(hour<=t.getHour())
+        return true;
+    if(hour>=t.getHour())
+        return false;
+    if(minute<=t.getMinute())
+        return true;
+    if(minute>=t.getMinute())
+        return false;
+    return second<=t.getSecond();
+}
+
 bool Time::operator==(Time t) {
     return (hour==t.getHour())&&(minute==t.getMinute())&&(second==t.getSecond());
 }

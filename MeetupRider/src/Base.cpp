@@ -455,6 +455,8 @@ vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
     return result;
 }
 
+
+
 double Base::getDistance(int id1, int id2)
 {
     graph.AStar(id1, id2);
@@ -462,7 +464,7 @@ double Base::getDistance(int id1, int id2)
     return v->getDist();
 }
 
-PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id, int person_id){
+PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id){
     double temp = INF;
     PassengerRequest * result = NULL;
     int pos = requests.size();
@@ -481,20 +483,24 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
 
 vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> *ids){
     vector<Passenger*> result;
+    vector<Request *> aux;
+    aux.push_back(driverRequest);
     ids->push_back(driverRequest->getStartingId());
     vector<PassengerRequest *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
-    int counter = 2;
-    PassengerRequest * tmp = getClosestToRequest(possibleRequests, driverRequest->getStartingId(), driverRequest->getDriver()->getId());
+    int counter = 1;
+    PassengerRequest * tmp;
     while(counter < driverRequest->getCapacity() && possibleRequests.size() >0)
     {
-        result.push_back(tmp->getPassenger());
-        ids->push_back(tmp->getStartingId());
-        counter++;
-        tmp =  getClosestToRequest(possibleRequests, tmp->getStartingId(), tmp->getPassenger()->getId());
+        tmp = getClosestToRequest(possibleRequests, aux[aux.size()-1]->getStartingId());
+        if(checkTimeRestrictions(*ids, aux, tmp))
+        {
+            result.push_back(tmp->getPassenger());
+            ids->push_back(tmp->getStartingId());
+            counter++;
+            aux.push_back(tmp);
+        }
     }
 
-    result.push_back(tmp->getPassenger());
-    ids->push_back(tmp->getStartingId());
     ids->push_back(driverRequest->getDestinationId());
     return result;
 
@@ -515,14 +521,17 @@ bool Base::setup(vector<int> ids)//ids dos vértices pela qual temos que passar
     return true;
 }
 
-vector<int> Base::calculatePath(vector<int>ids) //os ids já estariam ordenados pela ordem que o condutor iria passar
+vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já estariam ordenados pela ordem que o condutor iria passar
 {
 
+    distance = 0;
     vector<int>result;
     vector<int> tmp;
     for(int i = 0; i < ids.size()-1; i++)
     {
         graph.AStar(ids[i], ids[i+1]);
+        auto v = graph.findVertex(ids[i+1]);
+        distance += v->getDist();
         tmp = graph.getPath(ids[i], ids[i+1]);
         int j;
         if(i==0)
@@ -575,9 +584,10 @@ bool Base::createJourney(DriverRequest * request)
     Journey j;
     vector<int>places;
     vector<int>path;
+    double distance;
     vector<Passenger*> passengers = fillVehicle(request, &places);
     if(!setup(places)) return false;
-    path = calculatePath(places);
+    path = calculatePath(places, distance);
     j.setDriver(request->getDriver());
     j.setPassenger(passengers);
     j.setStartTime(request->getMinStartTime());
@@ -616,16 +626,34 @@ void Base::addDriver(Driver * driver)
     drivers.push_back(driver);
 }
 
-Time Base::predictTime(int id1, int id2)
+Time Base::predictTime(double distance)
 {
-    double distance = getDistance(id1, id2);
+
     double time = (distance*0.001)/maxSpeed;
     return Time(time);
 
 }
 
-bool Base::checkTimeRestrictions(vector<int> possible_path, DriverRequest * drequest, vector<PassengerRequest*> prequests)
+bool Base::conditionTime(Request *r, Time t)
 {
+    //return (r->getMinStartTime() <= r->getMaxEndTime() - t) && (r->getMinEndTime() <= r->getMinStartTime() + t);
+    return r->getMinStartTime() <= r->getMaxEndTime() - t;
+}
+
+bool Base::checkTimeRestrictions(vector<int> possible_path, vector<Request*> requests, PassengerRequest * possible_request)
+{
+    possible_path.push_back(possible_request->getStartingId());
+    possible_path.push_back(requests[0]->getDestinationId());
+    requests.push_back(possible_request);
+    double distance = 0;
+    for(int i = 0; i < requests.size(); i++)
+    {
+        calculatePath(subVector(possible_path, i), distance);
+        if(!conditionTime(requests[i], predictTime(distance)))
+            return false;*
+
+    }
+    return true;
 
 }
 

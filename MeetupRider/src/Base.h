@@ -109,13 +109,13 @@ public:
 
     double getDistance(int id1, int id2);
 
-    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id, int person_id);
+    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id);
 
     vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
 
     bool setup(vector<int> ids);
 
-    vector<int> calculatePath(vector<int>ids);
+    vector<int> calculatePath(vector<int>ids, double &distance);
 
     bool removePassengerRequests(Passenger * p);
 
@@ -131,9 +131,11 @@ public:
 
     void addDriver(Driver * driver);
 
-    Time predictTime(int id1, int id2);
+    Time predictTime(double distance);
 
-    bool checkTimeRestrictions(vector<int> possible_path, DriverRequest * drequest, vector<PassengerRequest*> prequests);
+    bool conditionTime(Request *r, Time t);
+
+    bool checkTimeRestrictions(vector<int> possible_path, vector<Request*> requests, PassengerRequest * possible_request);
 
 
 
