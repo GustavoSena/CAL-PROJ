@@ -6,12 +6,15 @@
 #define MEETUPRIDER_BASE_H
 
 #include <vector>
+#include <iostream>
 #include <fstream>
 #include "NewGraph.h"
 #include "Person.h"
 #include "Request.h"
 #include "Journey.h"
 #include "utils.h"
+#include "Time.h"
+
 
 using namespace std;
 
@@ -27,6 +30,10 @@ private:
     int lastId; //the last id used for passengers and drivers
     int lastCarId; //the last id used for cars
     int maxSpeed; //50 km/h
+    string requestFile;
+    string journeyFile;
+    string driverFile;
+    string passengerFile;
 
 public:
 
@@ -43,7 +50,33 @@ public:
 
     void loadJourneys(string fileName);
 
-     Graph &getGraph() ;
+    void writePassengers();
+
+    void writeDrivers();
+
+    void writeRequests();
+
+    void writeJourneys();
+
+    void updateFiles();
+
+    void setPassengerFile(string fileName);
+
+    void setJourneyFile(string fileName);
+
+    void setRequestFile(string fileName);
+
+    void setDriverFile(string fileName);
+
+    string getPassengerFile();
+
+    string getDriverFile();
+
+    string getRequestFile();
+
+    string getJourneyFile();
+
+    Graph &getGraph() ;
 
     void setGraph(const Graph &graph);
 

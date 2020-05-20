@@ -18,20 +18,23 @@ Base::Base(string fileName) {
     while(getline(a_file, temp)) {
         switch(counter){
             case 0:
+                setPassengerFile(temp);
                 loadPassengers(temp);
                 break;
             case 1:
+                setDriverFile(temp);
                 loadDrivers(temp);
                 break;
             case 2:
+                setJourneyFile(temp);
                 loadJourneys(temp);
                 break;
             case 3:
+                setRequestFile(temp);
                 loadRequests(temp);
                 break;
             default:
                 break;
-
         }
         counter++;
     }
@@ -58,9 +61,8 @@ void Base::loadPassengers(string fileName){
                 break;
             case 2:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     aux.push_back(stoi(i));
-                }
                 p.setNetwork(aux);
                 aux={};
                 break;
@@ -69,12 +71,10 @@ void Base::loadPassengers(string fileName){
                 break;
             case 4:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     aux.push_back(stoi(i));
-                }
                 p.setFreqPlaces(aux);
                 aux={};
-
                 break;
             case 5:
                 passengers.push_back(new Passenger(p));
@@ -83,13 +83,10 @@ void Base::loadPassengers(string fileName){
                 break;
             default:
                 break;
-
         }
         counter++;
     }
     a_file.close();
-
-
 }
 
 void Base::loadDrivers(string fileName){
@@ -111,9 +108,8 @@ void Base::loadDrivers(string fileName){
                 break;
             case 2:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     aux.push_back(stoi(i));
-                }
                 d.setNetwork(aux);
                 aux={};
                 break;
@@ -122,9 +118,8 @@ void Base::loadDrivers(string fileName){
                 break;
             case 4:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     aux.push_back(stoi(i));
-                }
                 d.setFreqPlaces(aux);
                 aux={};
                 break;
@@ -140,7 +135,6 @@ void Base::loadDrivers(string fileName){
                 break;
             default:
                 break;
-
         }
         counter++;
     }
@@ -164,17 +158,14 @@ void Base::loadRequests(string fileName){
         switch(counter) {
             case 0:
                 p = findPassenger(stoi(temp));
-
                 if (p == nullptr){
                     pass = false;
-
                     dr.setDriver(findDriver(stoi(temp)));
                 }
                 else{
                     pass=true;
                     pr.setPassenger(p);
                 }
-
                 break;
             case 1:
                 if(pass)
@@ -215,7 +206,6 @@ void Base::loadRequests(string fileName){
                 break;
             default:
                 break;
-
         }
         counter++;
     }
@@ -239,17 +229,15 @@ void Base::loadJourneys(string fileName){
                 break;
             case 1:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     aux.push_back(stoi(i));
-                }
                 j.setPassenger(findPassengers(aux));
                 aux={};
                 break;
             case 2:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     aux.push_back(stoi(i));
-                }
                 j.setPath(aux);
                 aux={};
                 break;
@@ -258,9 +246,8 @@ void Base::loadJourneys(string fileName){
                 break;
             case 4:
                 parts = decompose(temp,',');
-                for (string i : parts){
+                for (string i : parts)
                     times.push_back(Time(temp));
-                }
                 j.setArrivalTimes(times);
                 break;
             case 5:
@@ -270,7 +257,6 @@ void Base::loadJourneys(string fileName){
                 break;
             default:
                 break;
-
         }
         counter++;
     }
@@ -328,8 +314,6 @@ void Base::loadGraph(string node_text, string edge_text) {
         vector<int> node_values = getNodeValues(text_line);
         this->graph.addVertex(node_values[0], node_values[1], node_values[2]);
 
-
-
     }
 
     getline(e_data, text_line);
@@ -341,8 +325,6 @@ void Base::loadGraph(string node_text, string edge_text) {
         vector<int> edge_values = getEdgeValues(text_line);
         this->graph.addEdge(edge_values[0], edge_values[1]);
     }
-
-
 
 }
 
@@ -365,13 +347,21 @@ void Base::sign_up(string type) //type = passenger || type = driver
     }
     else
     {
-        int capacity;
-        cout << "Insert vehicle capacity\n";
-        cin >> capacity;
-        lastCarId++;
-        Vehicle v(lastCarId, capacity, lastId);
-        Driver d(lastId, name, network, address, &v);
-        drivers.push_back(&d);
+        do {
+            int cap=0;
+            try {
+                string capacity;
+                cout << "Insert vehicle capacity\n";
+                getline(cin, capacity);
+                cap=stoi(capacity);
+            }catch(exception err){
+                cout<<"Invalid capacity! Try again.\n";
+                continue;
+            }
+            Vehicle v(lastCarId, cap, lastId);
+            Driver d(lastId, name, network, address, &v);
+            drivers.push_back(&d);
+        }while(true);
     }
 
 
@@ -379,51 +369,50 @@ void Base::sign_up(string type) //type = passenger || type = driver
 
 int Base::sign_in(string type)
 {
-    bool retry = true;
-    int answer;
+    string answer;
+    system("cls");
     do{
-
-        system("cls");
         cout << "Choose your account:" << endl;
         int tmp_id = 1;
         if(type == "passenger")
         {
             for(auto p : passengers)
-            {
-                cout << tmp_id << ". " <<p->getName()<< endl;
-                tmp_id++;
-            }
-            cin>>answer;
-            if (answer >= 1 && answer <= passengers.size())
-            {
-                retry = false;
-                return passengers[answer-1]->getId();
-            } else{
-                cout << "Invalid answer! Try again"<< endl;
-        }
+                cout << tmp_id++ << ". " <<p->getName()<< endl;
 
+            cout<< "type 0 to cancel"<<endl;
+            getline(cin,answer);
+            if(compare_str(answer,"0"))
+                return -1;
+            try{
+                int id=stoi(answer);
+                if (id >= 1 && id <= passengers.size())
+                    return passengers[id-1]->getId();
+
+            }catch(exception err){
+            }
+            system("cls");
+            cout << "Invalid answer! Try again" << endl;
 
         } else{
             for(auto d: drivers)
-            {
-                cout << tmp_id << ". " <<d->getName()<< endl;
-                tmp_id++;
+                cout << tmp_id++ << ". " <<d->getName()<< endl;
+            cout<< "type 0 to cancel"<<endl;
+            getline(cin,answer);
+            if(compare_str(answer,"0"))
+                return -1;
+            try{
+                int id=stoi(answer);
+                if( id>= 1 && id <= drivers.size())
+                    return drivers[id-1]->getId();
+
+            }catch(exception err){
             }
-            cin>>answer;
-            if(answer >= 1 && answer <= drivers.size())
-            {
-                retry = false;
-                return drivers[answer-1]->getId();
-            }
-            else
-            {
-                cout << "Invalid answer! Try again"<< endl;
-            }
+            system("cls");
+            cout << "Invalid answer! Try again" << endl;
         }
 
-    }while(retry);
+    }while(true);
 
-    return -1;
 }
 
 Driver *Base::findDriver(int id) {
@@ -431,7 +420,6 @@ Driver *Base::findDriver(int id) {
         if(i->getId()==id){
             return i;
         }
-
     }
     return nullptr;
 }
@@ -441,7 +429,6 @@ Passenger *Base::findPassenger(int id) {
         if(i->getId()==id){
             return i;
         }
-
     }
     return nullptr;
 }
@@ -454,7 +441,6 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
             aux.push_back(p);
         }
     }
-
     return aux;
 }
 
@@ -642,4 +628,166 @@ bool Base::checkTimeRestrictions(vector<int> possible_path, DriverRequest * dreq
 {
 
 }
+
+void Base::writePassengers() {
+    ofstream newfile;
+    newfile.open("newPassengerFile.txt");
+    for (auto p : passengers) {
+        newfile << p->getId() << endl;
+        newfile << p->getName() << endl;
+        for (int i : p->getNetwork()) {
+            newfile << i;
+            if(i!=*p->getNetwork().end())
+                newfile<<", ";
+        }
+
+        newfile << endl <<p->getAddress() << endl;
+        for (int i : p->getFreqPlaces()) {
+            newfile << i;
+            if(i!=*p->getFreqPlaces().end())
+                newfile<<", ";
+        }
+        newfile <<endl << "::::::::::";
+        if(p!=*passengers.end())
+           newfile << endl;
+    }
+    const char* fileName = passengerFile.c_str();
+    newfile.close();
+    remove(fileName);
+    int i=rename("newPassengerFile.txt", fileName);
+}
+
+void Base::writeDrivers() {
+    ofstream newfile;
+    newfile.open("newDriverFile.txt");
+    for (auto d : drivers) {
+        newfile <<d->getId() << endl;
+        newfile << d->getName() << endl;
+        for (int i : d->getNetwork()) {
+            newfile << i;
+            if(i!=*d->getNetwork().end())
+                newfile<<", \n";
+        }
+        newfile << endl <<d->getAddress() << endl;
+        for (int i : d->getFreqPlaces()) {
+            newfile << i;
+            if(i!=*d->getFreqPlaces().end())
+                newfile<<", \n";
+        }
+        newfile <<endl<< d->getVehicle()<<endl;
+        newfile  << "::::::::::";
+        if(d!=*drivers.end())
+            newfile << endl;
+    }
+    const char* fileName = driverFile.c_str();
+    newfile.close();
+    remove(fileName);
+    int i=rename("newDriverFile.txt", fileName);
+}
+
+void Base::writeRequests() {
+    ofstream newfile;
+    newfile.open("newRequestFile.txt");
+    for (auto r : requests_passengers) {
+        newfile<<r->getPassenger()->getId()<<endl;
+        newfile<<r->getStartingId()<<endl;
+        newfile<<r->getDestinationId()<<endl;
+        newfile<<r->getMinStartTime()<<endl;
+        newfile<<r->getMinEndTime()<<endl;
+        newfile<<r->getMaxEndTime()<<endl;
+        newfile<< "::::::::::"<<endl;
+    }
+    for (auto r : requests_drivers) {
+        newfile<<r->getDriver()->getId()<<endl;
+        newfile<<r->getStartingId()<<endl;
+        newfile<<r->getDestinationId()<<endl;
+        newfile<<r->getMinStartTime()<<endl;
+        newfile<<r->getMinEndTime()<<endl;
+        newfile<<r->getMaxEndTime()<<endl;
+        newfile<< "::::::::::";
+        if(r!=*requests_drivers.end())
+            newfile<<endl;
+    }
+    const char* fileName = requestFile.c_str();
+    newfile.close();
+    remove(fileName);
+    int i=rename("newRequestFile.txt", fileName);
+}
+
+void Base::writeJourneys() {
+    ofstream newfile;
+    newfile.open("newJourneyFile.txt");
+    for (auto j : journeys) {
+        newfile<<j->getDriver()->getId()<<endl;
+        for (Passenger *p : j->getPassenger()) {
+            newfile << p->getId();
+            if(p!=*j->getPassenger().end())
+                newfile<<", ";
+        }
+        newfile<<endl;
+        for (int i: j->getPath()) {
+            newfile << i;
+            if(i!=*j->getPath().end())
+                newfile<<", ";
+        }
+        newfile<<endl<<j->getStartTime()<<endl;
+        for (Time t: j->getArrivalTimes()) {
+            newfile << t;
+            if(!(t==*j->getArrivalTimes().end()))
+                newfile<<", ";
+        }
+        newfile<<endl<< "::::::::::";
+        if(j!=*journeys.end())
+            newfile<<endl;
+    }
+
+    const char* fileName = journeyFile.c_str();
+    newfile.close();
+    remove(fileName);
+    int i=rename("newJourneyFile.txt", fileName);
+}
+
+void Base::setPassengerFile(string fileName) {
+    passengerFile=fileName;
+}
+
+void Base::setJourneyFile(string fileName) {
+    journeyFile=fileName;
+}
+
+void Base::setRequestFile(string fileName) {
+    requestFile=fileName;
+}
+
+void Base::setDriverFile(string fileName) {
+    driverFile=fileName;
+}
+
+string Base::getPassengerFile() {
+    return passengerFile;
+}
+
+string Base::getDriverFile() {
+    return driverFile;
+}
+
+string Base::getRequestFile(){
+    return requestFile;
+}
+
+string Base::getJourneyFile(){
+    return journeyFile;
+}
+
+void Base::updateFiles() {
+    writeDrivers();
+    writeJourneys();
+    writePassengers();
+    writeRequests();
+}
+
+
+
+
+
 

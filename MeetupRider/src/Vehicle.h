@@ -26,6 +26,8 @@ public:
 
     void setDriverId(int driverId);
 
+    friend ostream &operator<<(ostream &out, const Vehicle &v);
+
 private:
 
     int id;

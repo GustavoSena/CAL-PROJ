@@ -77,6 +77,7 @@ int main() {
         cout << "False"<<endl;*/
 
 
+    b.updateFiles();
 
 
 
