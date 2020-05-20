@@ -650,7 +650,7 @@ bool Base::checkTimeRestrictions(vector<int> possible_path, vector<Request*> req
     {
         calculatePath(subVector(possible_path, i), distance);
         if(!conditionTime(requests[i], predictTime(distance)))
-            return false;*
+            return false;
 
     }
     return true;
