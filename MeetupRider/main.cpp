@@ -78,6 +78,19 @@ int main() {
     else
         cout << "False"<<endl;*/
 
+    Time t1("3:5:15");
+    Time t2("9:56:57");
+    Time t3("22:9:0");
+    Time t4("6:18:2");
+
+    cout<< t3-t1<<endl;
+    cout<< t3-t3<<endl;
+    cout<< t4+t2<<endl;
+    cout<< (t2==t2)<<endl;
+    t2+=t1;
+    cout<<t2<<endl;
+    t3-=t4;
+    cout<<t3<<endl;
 
     b.updateFiles();
 
