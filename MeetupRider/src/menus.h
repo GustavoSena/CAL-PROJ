@@ -19,5 +19,5 @@ void next_menu(Base base, string type);
 void request_menu(Base base,int id);
 
 
-Time readTime(string timeType);
+Time *readTime(string timeType);
 #endif //MEETUPRIDER_MENUS_H

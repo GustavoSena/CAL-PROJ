@@ -56,7 +56,6 @@ void next_menu(Base base, string type)
             retry = false;
             int id =base.sign_in(type);
             request_menu(base, id);
-
         }
         else if(compare_str(answer,"u"))
         {
@@ -97,29 +96,27 @@ void request_menu(Base base, int id){
     }while(true);
 
     Request aux;
-
-
-
-
+    
     string temp;
-    cout<<"Time restriction? (y/n) (anything else to cancel)\n";
+    cout<<"Time restriction? (y/n) (anything else to cancel): ";
     getline(cin,temp);
+    cout<<endl;
     if (compare_str(temp, "n")){
         aux.setTimesNull();
     }
     else if (compare_str(temp, "y")){
-        Time t=readTime("Minimum starting");
+        Time *t=readTime("Minimum starting");
         if(t==NULL)
             return;
-        aux.setMinStartTime(t);
+        aux.setMinStartTime(*t);
         t=readTime("Minimum ending");
         if(t==NULL)
             return;
-        aux.setMinEndTime(t);
+        aux.setMinEndTime(*t);
         t=readTime("Maximum ending");
         if(t==NULL)
             return;
-        aux.setMaxEndTime(t);
+        aux.setMaxEndTime(*t);
 
     }
     else
@@ -128,7 +125,19 @@ void request_menu(Base base, int id){
     int point1;
     int point2;
     while(true) {
-
+        cout<< "View map? (y/n): ";
+        getline(cin, temp);
+        cout<<endl;
+        if (compare_str(temp, "y")){
+            //map function
+        }
+        else if(compare_str(temp, "n")){
+            //nothing
+        }
+        else{
+            cout<<"Invalid input please try again\n";
+            continue;
+        }
         cout << "Starting point (id) (-1 to cancel)\n";
         getline(cin, temp);
         if(compare_str(temp,"-1"))
@@ -178,7 +187,7 @@ void request_menu(Base base, int id){
 }
 
 
-Time readTime(string timeType){
+Time* readTime(string timeType){
     do {
         string temp;
         Time t;
@@ -195,7 +204,7 @@ Time readTime(string timeType){
             cout<<"Error with input! Please try again\n";
             continue;
         }
-        return t;
+        return new Time(t);
 
     }while(true);
 
