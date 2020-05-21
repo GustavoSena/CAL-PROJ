@@ -15,18 +15,18 @@ void main_menu(Base base)
             cout << "Welcome to Meetup Rider!" << endl;
             cout << "Are you a [P]assenger or a [D]river?" << endl;
             cout << "[C]lose"<< endl;
-            cin >> answer;
-            if(answer == "P" || answer == "p")
+            getline(cin,answer);
+            if(compare_str(answer,"p"))
             {
                 retry = false;
                 next_menu(base, "passenger");
             }
-            else if(answer == "D" || answer == "d")
+            else if(compare_str(answer,"d"))
             {
                 retry = false;
                 next_menu(base, "driver");
             }
-            else if(answer == "C" || answer == "c")
+            else if(compare_str(answer,"c"))
             {
                 exit(0);
             }
@@ -51,23 +51,23 @@ void next_menu(Base base, string type)
         cout << "Go [B]ack" << endl;
         cout << "[C]lose" << endl;
         getline(cin,answer);
-        if(answer == "I" || answer == "i")
+        if(compare_str(answer,"i"))
         {
             retry = false;
             int id =base.sign_in(type);
             request_menu(base, id);
 
         }
-        else if(answer == "U" || answer == "u")
+        else if(compare_str(answer,"u"))
         {
             retry = false;
             base.sign_up(type);
         }
-        else if(answer == "B" || answer == "b")
+        else if(compare_str(answer,"b"))
         {
             return;
         }
-        else if(answer == "C" || answer == "c")
+        else if(compare_str(answer,"c"))
         {
             exit(0);
         }

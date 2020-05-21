@@ -48,7 +48,7 @@ public:
 
     bool operator==(Time t);
 
-    friend ostream &operator<<(ostream &out,Time& t);
+    friend ostream &operator<<(ostream &out,const Time& t);
 
 };
 

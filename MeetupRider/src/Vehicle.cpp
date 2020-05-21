@@ -31,3 +31,13 @@ void Vehicle::setDriverId(int driverId) {
     driver_id = driverId;
 }
 
+ostream &operator<<(ostream &out, const Vehicle &v) {
+    out<<v.getId()<<", "<<v.getCapacity();
+    return out;
+}
+
+
+
+
+
+

@@ -99,7 +99,7 @@ Time operator+(Time t1, Time t2) {
     return Time(hour,min,sec);
 }
 
-ostream &operator<<(ostream &out, Time& t){
+ostream &operator<<(ostream &out, const Time& t){
     out<<setfill('0')<<setw(2)<<t.getHour()<<":";
     out<<setfill('0')<<setw(2)<<t.getMinute()<<":";
     out<<setfill('0')<<setw(2)<<t.getSecond();

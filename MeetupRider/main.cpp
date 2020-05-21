@@ -79,8 +79,11 @@ int main() {
         cout << "False"<<endl;*/
 
 
+    b.updateFiles();
+
     //mapViewer(edge_text, node_text);
 }
+
 
 
 
