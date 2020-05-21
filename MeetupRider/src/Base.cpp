@@ -461,8 +461,14 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 
 vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
     vector<PassengerRequest *> result;
-    for(auto r: requests_passengers){
+/*    for(auto r: requests_passengers){
         if(r->getDestinationId() == idDestino && graph.areVertexConnected(r->getStartingId(), idDestino)){
+            result.push_back(r);
+        }
+    }*/
+    for(auto r : requests_passengers) {
+        if(graph.areVertexConnected(r->getStartingId(), idDestino) && graph.areVertexConnected(r->getDestinationId(), idDestino)){
+
             result.push_back(r);
         }
     }
@@ -495,6 +501,43 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
     return result;
 }
 
+
+PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver){
+
+    double temp = INF;
+    PassengerRequest * result = NULL;
+    int pos = requests.size();
+    for(int i = 0; i < requests.size(); i++)
+    {
+        double orig_dist = getDistance(driver->getStartingId(), requests[i]->getStartingId());
+        double dest_dist = getDistance(requests[i]->getDestinationId(), driver->getDestinationId());
+        double median = (orig_dist+dest_dist)/2;
+        if(temp>median)
+        {
+            temp = (orig_dist+dest_dist)/2;
+            result = requests[i];
+            pos = i;
+        }
+    }
+    requests.erase(requests.begin() + pos);
+    return result;
+}
+
+
+vector<int> Base::recalculatePath(vector<Request*> requests)
+{
+    vector<int> result;
+    vector<int> starting_ids;
+    vector<int> destination_ids;
+    result.push_back(requests[0]->getStartingId());
+    for(int i = 1; i < requests.size(); i++)
+    {
+        starting_ids.push_back(requests[i]->getStartingId());
+        destination_ids.push_back(requests[i]->getDestinationId());
+    }
+
+}
+
 vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> *ids){
     vector<Passenger*> result;
     vector<Request *> aux;
@@ -523,7 +566,6 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
 
 bool Base::setup(vector<int> ids)//ids dos vértices pela qual temos que passar
 {
-    graph.floydWarshallShortestPath();
     for(int i = 0; i < ids.size()-1; i++)
     {
         for(int j = i+1; j < ids.size(); j++)

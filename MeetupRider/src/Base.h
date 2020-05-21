@@ -78,6 +78,10 @@ public:
 
     PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id);
 
+    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver);
+
+    vector<int> recalculatePath(vector<Request*> requests);
+
     vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
 
     bool setup(vector<int> ids);
