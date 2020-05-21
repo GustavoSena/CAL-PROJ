@@ -445,15 +445,12 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 }
 
 
-vector<PassengerRequest *> Base::getPossibleRequests(int idDestino){
+vector<PassengerRequest *> Base::getPossibleRequests(DriverRequest * request){
     vector<PassengerRequest *> result;
-/*    for(auto r: requests_passengers){
-        if(r->getDestinationId() == idDestino && graph.areVertexConnected(r->getStartingId(), idDestino)){
-            result.push_back(r);
-        }
-    }*/
+
     for(auto r : requests_passengers) {
-        if(graph.areVertexConnected(r->getStartingId(), idDestino) && graph.areVertexConnected(r->getDestinationId(), idDestino)){
+        if(graph.areVertexConnected(r->getStartingId(), request->getDestinationId()) && graph.areVertexConnected(r->getDestinationId(), request->getDestinationId())
+        && graph.areVertexConnected(request->getStartingId(), r->getStartingId())){
 
             result.push_back(r);
         }
@@ -509,6 +506,45 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
     return result;
 }
 
+int Base::getClosestId(vector<int> &ids, int comparing_id, bool dest)//Dest true if comparing id is the dest
+{
+    int cmp = INF;
+    int id;
+    int pos;
+    int tmp;
+    for(int i = 0; i < ids.size(); i++)
+    {
+        if(dest)
+            tmp = getDistance(ids[i], comparing_id);
+        else
+            tmp = getDistance(comparing_id, ids[i]);
+        if(cmp>tmp)
+        {
+            cmp = tmp;
+            id = ids[i];
+            pos = i;
+        }
+    }
+    ids.erase(ids.begin() + pos);
+    return id;
+
+}
+vector<int> Base::orderingIds(vector<int> start, int comparing_id, bool dest) //Dest true if comparing id is the dest
+{
+    vector<int> result;
+    int tmp = comparing_id;
+    while(start.size() > 0)
+    {
+        tmp = getClosestId(start, tmp, dest);
+        result.push_back(tmp);
+    }
+
+    if(dest)
+    {
+        reverse(result.begin(), result.end());
+    }
+    return result;
+}
 
 vector<int> Base::recalculatePath(vector<Request*> requests)
 {
@@ -521,6 +557,19 @@ vector<int> Base::recalculatePath(vector<Request*> requests)
         starting_ids.push_back(requests[i]->getStartingId());
         destination_ids.push_back(requests[i]->getDestinationId());
     }
+    starting_ids = orderingIds(starting_ids,requests[0]->getStartingId(), false);
+    destination_ids = orderingIds(destination_ids, requests[0]->getDestinationId(), true);
+    for(int i = 0; i < starting_ids.size(); i++)
+    {
+        result.push_back(starting_ids[i]);
+    }
+    for(int i = 0; i < destination_ids.size(); i++)
+    {
+        result.push_back(destination_ids[i]);
+    }
+    result.push_back(requests[0]->getDestinationId());
+    result.erase(unique(result.begin(), result.end()), result.end());
+    return result;
 
 }
 
@@ -528,23 +577,21 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
     vector<Passenger*> result;
     vector<Request *> aux;
     aux.push_back(driverRequest);
-    ids->push_back(driverRequest->getStartingId());
-    vector<PassengerRequest *> possibleRequests = getPossibleRequests(driverRequest->getDestinationId());
+    vector<PassengerRequest *> possibleRequests = getPossibleRequests(driverRequest);
     int counter = 1;
     PassengerRequest * tmp;
     while(counter < driverRequest->getCapacity() && possibleRequests.size() >0)
     {
-        tmp = getClosestToRequest(possibleRequests, aux[aux.size()-1]->getStartingId());
-        if(checkTimeRestrictions(*ids, aux, tmp))
+        tmp = getClosestToRequest(possibleRequests, driverRequest);
+        if(checkTimeRestrictions(aux, tmp))
         {
             result.push_back(tmp->getPassenger());
-            ids->push_back(tmp->getStartingId());
             counter++;
             aux.push_back(tmp);
         }
     }
 
-    ids->push_back(driverRequest->getDestinationId());
+    *ids = recalculatePath(aux);
     return result;
 
 }
@@ -682,15 +729,34 @@ bool Base::conditionTime(Request *r, Time t)
     return r->getMinStartTime() <= r->getMaxEndTime() - t;
 }
 
-bool Base::checkTimeRestrictions(vector<int> possible_path, vector<Request*> requests, PassengerRequest * possible_request)
+vector<int> Base::getRequestPath(vector<int> ids, Request * request)
 {
-    possible_path.push_back(possible_request->getStartingId());
-    possible_path.push_back(requests[0]->getDestinationId());
+    vector<int> result;
+    int pos_inicial = -1;
+    for(int i = 0; i < ids.size(); i++)
+    {
+        if(ids[i] == request->getStartingId() || pos_inicial>0)
+        {
+            result.push_back(ids[i]);
+            if(pos_inicial == -1)
+                pos_inicial = i;
+            if(ids[i] == request->getDestinationId())
+                break;
+        }
+    }
+    return result;
+}
+
+bool Base::checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request)
+{
+
+    requests.push_back(possible_request);
+    vector<int> possible_path = recalculatePath(requests);
     requests.push_back(possible_request);
     double distance = 0;
     for(int i = 0; i < requests.size(); i++)
     {
-        calculatePath(subVector(possible_path, i), distance);
+        calculatePath(getRequestPath(possible_path, requests[i]), distance);
         if(!conditionTime(requests[i], predictTime(distance)))
             return false;
 

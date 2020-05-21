@@ -105,13 +105,17 @@ public:
 
     vector<Passenger*> findPassengers(vector<int> ids);
 
-    vector<PassengerRequest *> getPossibleRequests(int idDestino);
+    vector<PassengerRequest *> getPossibleRequests(DriverRequest * request);
 
     double getDistance(int id1, int id2);
 
     PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id);
 
     PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver);
+
+    int getClosestId(vector<int> &ids, int comparing_id, bool dest);
+
+    vector<int> orderingIds(vector<int> start, int comparing_id, bool dest);
 
     vector<int> recalculatePath(vector<Request*> requests);
 
@@ -139,7 +143,9 @@ public:
 
     bool conditionTime(Request *r, Time t);
 
-    bool checkTimeRestrictions(vector<int> possible_path, vector<Request*> requests, PassengerRequest * possible_request);
+    vector<int> getRequestPath(vector<int> ids, Request * request);
+
+    bool checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request);
 
 
 
