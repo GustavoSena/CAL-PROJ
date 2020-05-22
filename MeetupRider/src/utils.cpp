@@ -87,6 +87,57 @@ vector<int> getEdgeValues(string text_line)
     return result;
 }
 
+void maps(int location, string &edge_file, string &node_file){
+    stringstream mEdge, mNode;
+    switch(location){
+        case 0:
+            mEdge << "..\\resources\\maps\\Braga\\edges_braga.txt";
+            mNode << "..\\resources\\maps\\Braga\\nodes_x_y_braga.txt";
+
+        case 1:
+            mEdge << "..\\resources\\maps\\Porto\\edges_porto.txt";
+            mNode << "..\\resources\\maps\\Porto\\nodes_x_y_porto.tx";
+
+        case 2:
+            mEdge << "..\\resources\\maps\\Maia\\edges_maia.txt";
+            mNode << "..\\resources\\maps\\Maia\\nodes_x_y_maia.txt";
+
+        case 3:
+            mEdge << "..\\resources\\maps\\Ermesinde\\edges_ermesinde.txt";
+            mNode << "..\\resources\\maps\\Ermesinde\\nodes_x_y_ermesinde.txt";
+
+        case 4:
+            mEdge << "..\\resources\\maps\\Gondomar\\edges_gondomar.txt";
+            mNode << "..\\resources\\maps\\Gondomar\\nodes_x_y_gondomar.txt";
+
+        case 5:
+            mEdge << "..\\resources\\maps\\Fafe\\edges_fafe.txt";
+            mNode << "..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt";
+
+        case 6:
+            mEdge << "..\\resources\\maps\\Aveiro\\edges_aveiro.txt";
+            mNode << "..\\resources\\maps\\Aveiro\\nodes_x_y_aveiro.txt";
+
+        case 7:
+            mEdge << "..\\resources\\maps\\Viseu\\edges_viseu.txt";
+            mNode << "..\\resources\\maps\\Viseu\\nodes_x_y_viseu.txt";
+
+        case 8:
+            mEdge << "..\\resources\\maps\\Coimbra\\edges_coimbra.txt";
+            mNode << "..\\resources\\maps\\Coimbra\\nodes_x_y_coimbra.txt";
+
+        case 9:
+            mEdge << "..\\resources\\maps\\Lisboa\\edges_lisboa.txt";
+            mNode << "..\\resources\\maps\\Lisboa\\nodes_x_y_lisboa.txt";
+
+        default:
+            mEdge << "..\\resources\\maps\\Portugal\\edges_portugal.txt";
+            mNode << "..\\resources\\maps\\Portugal\\nodes_x_y_portugal.txt";
+    }
+    edge_file = mEdge.str();
+    node_file = mNode.str();
+}
+
 void mapViewer(string edge_file, string node_file)
 {
 
@@ -97,7 +148,6 @@ void mapViewer(string edge_file, string node_file)
     gv->createWindow(700, 700);
     gv->defineVertexColor("blue");
     gv->defineEdgeColor("black");
-
 
     string text_line;
     getline(n_data,text_line);
