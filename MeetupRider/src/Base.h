@@ -27,8 +27,8 @@ private:
     vector<DriverRequest *> requests_drivers;
     vector<PassengerRequest *> requests_passengers;
     vector<Journey *> journeys;
-    int lastId; //the last id used for passengers and drivers
-    int lastCarId; //the last id used for cars
+    int lastId = 0; //the last id used for passengers and drivers
+    int lastCarId = 0; //the last id used for cars
     int maxSpeed; //50 km/h
     string requestFile;
     string journeyFile;
@@ -111,7 +111,7 @@ public:
 
     PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id);
 
-    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver);
+    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver, vector<Passenger*> current_passengers);
 
     int getClosestId(vector<int> &ids, int comparing_id, bool dest);
 
@@ -146,6 +146,11 @@ public:
     vector<int> getRequestPath(vector<int> ids, Request * request);
 
     bool checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request);
+
+    int getNumberPeopleKnown(Driver *driver, vector<Passenger*> passengers, Passenger* possible_passenger);
+
+    void updatePeopleKnown(Driver *driver, vector<Passenger*> passengers);
+
 
 
 

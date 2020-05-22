@@ -73,12 +73,15 @@ int main() {
     b.addPassengerRequest(&r2);
     b.addPassengerRequest(&r3);
     b.addPassengerRequest(&r4);
+    d.addNetwork(4);
+    p3.addNetwork(5);
     if(b.createJourney(&request))
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
 
-    Time t1("3:5:15");
+
+/*    Time t1("3:5:15");
     Time t2("9:56:57");
     Time t3("22:9:0");
     Time t4("6:18:2");
@@ -90,7 +93,7 @@ int main() {
     t2+=t1;
     cout<<t2<<endl;
     t3-=t4;
-    cout<<t3<<endl;
+    cout<<t3<<endl;*/
 
     //b.updateFiles();
 

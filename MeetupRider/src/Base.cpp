@@ -6,6 +6,7 @@
 
 Base::Base(){
 
+
 }
 
 Base::Base(string fileName) {
@@ -485,21 +486,25 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
 }
 
 
-PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver){
+PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver, vector<Passenger*> current_passengers){
 
     double temp = INF;
     PassengerRequest * result = NULL;
     int pos = requests.size();
+    int temp_people = 0;
+    Driver * d = driver->getDriver();
     for(int i = 0; i < requests.size(); i++)
     {
         double orig_dist = getDistance(driver->getStartingId(), requests[i]->getStartingId());
         double dest_dist = getDistance(requests[i]->getDestinationId(), driver->getDestinationId());
         double median = (orig_dist+dest_dist)/2;
-        if(temp>median)
+        int people_known = getNumberPeopleKnown(d, current_passengers, requests[i]->getPassenger());
+        if(temp>median || (people_known>temp_people && (median + 300) < temp))
         {
-            temp = (orig_dist+dest_dist)/2;
+            temp = median;
             result = requests[i];
             pos = i;
+            temp_people = people_known;
         }
     }
     requests.erase(requests.begin() + pos);
@@ -508,10 +513,10 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
 
 int Base::getClosestId(vector<int> &ids, int comparing_id, bool dest)//Dest true if comparing id is the dest
 {
-    int cmp = INF;
+    double cmp = INF;
     int id;
     int pos;
-    int tmp;
+    double tmp;
     for(int i = 0; i < ids.size(); i++)
     {
         if(dest)
@@ -582,7 +587,7 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
     PassengerRequest * tmp;
     while(counter < driverRequest->getCapacity() && possibleRequests.size() >0)
     {
-        tmp = getClosestToRequest(possibleRequests, driverRequest);
+        tmp = getClosestToRequest(possibleRequests, driverRequest, result);
         if(checkTimeRestrictions(aux, tmp))
         {
             result.push_back(tmp->getPassenger());
@@ -682,6 +687,7 @@ bool Base::createJourney(DriverRequest * request)
     j.setStartTime(request->getMinStartTime());
     j.setPath(path);
     if(!removeRequests(passengers, request)) return false;
+    updatePeopleKnown(request->getDriver(), passengers);
     journeys.push_back(&j);
     return true;
 
@@ -763,6 +769,34 @@ bool Base::checkTimeRestrictions(vector<Request*> requests, PassengerRequest * p
     }
     return true;
 
+}
+
+
+int Base::getNumberPeopleKnown(Driver *driver, vector<Passenger*> passengers, Passenger* possible_passenger )
+{
+    int result = 0;
+    if(in(driver->getNetwork(), possible_passenger->getId()))
+        result++;
+    for(int i = 0; i < passengers.size(); i++)
+    {
+        if(in(passengers[i]->getNetwork(), possible_passenger->getId()))
+            result++;
+    }
+    return result;
+}
+
+void Base::updatePeopleKnown(Driver *driver, vector<Passenger*> passengers)
+{
+    vector<Person*> people;
+    people.push_back(driver);
+    for(auto p : passengers)
+    {
+        people.push_back(p);
+    }
+    for(auto p : people)
+    {
+        p->addNetwork(people);
+    }
 }
 
 void Base::writePassengers() {

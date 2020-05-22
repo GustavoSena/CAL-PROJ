@@ -41,7 +41,7 @@ void DijkstraView(Graph b, int orig_id, int dest_id);
 
 vector<int> subVector(vector<int> init, int pos);
 
-
+bool in(vector<int> vec, int n);
 #endif //MEETUPRIDER_UTILS_H
 
 

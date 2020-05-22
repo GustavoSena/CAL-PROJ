@@ -190,3 +190,12 @@ vector<int> subVector(vector<int> init, int pos)
 }
 
 
+bool in(vector<int> vec, int n)
+{
+    for(int i = 0; i < vec.size(); i++)
+    {
+        if(vec[i] == n)
+            return true;
+    }
+    return false;
+}

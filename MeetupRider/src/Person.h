@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include "Vehicle.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -46,6 +47,10 @@ public:
     void setFreqPlaces(const vector<int> &freqPlaces);
 
     const vector<int> &getFreqPlaces();
+
+    void addNetwork(int personId);
+
+    void addNetwork(vector<Person*> people);
 
 };
 

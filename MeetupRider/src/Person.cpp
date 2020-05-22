@@ -47,6 +47,21 @@ const vector<int> &Person::getFreqPlaces() {
     return freqPlacesId;
 }
 
+void Person::addNetwork(int personId)
+{
+    if(!in(network, personId))
+        network.push_back(personId);
+}
+
+void Person::addNetwork(vector<Person*> people)
+{
+    for(auto p : people)
+    {
+        if (p->getId() == id)
+            continue;
+        addNetwork(p->getId());
+    }
+}
 
 Vehicle *Driver::getVehicle() const {
     return vehicle;
