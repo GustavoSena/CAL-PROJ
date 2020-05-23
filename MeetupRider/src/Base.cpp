@@ -6,6 +6,7 @@
 
 Base::Base(){
 
+    this->algorithm = "astar";
 
 }
 
@@ -39,6 +40,7 @@ Base::Base(string fileName) {
         }
         counter++;
     }
+    this->algorithm = "astar";
     a_file.close();
 }
 
@@ -463,9 +465,22 @@ vector<PassengerRequest *> Base::getPossibleRequests(DriverRequest * request){
 
 double Base::getDistance(int id1, int id2)
 {
-    graph.AStar(id1, id2);
-    auto v = graph.findVertex(id2);
-    return v->getDist();
+    if(algorithm != "floydwarshall")
+    {
+        if(algorithm == "astar")
+            graph.AStar(id1, id2);
+        else if(algorithm == "dijkstra")
+            graph.dijkstraShortestPath(id1);
+        auto v = graph.findVertex(id2);
+        return v->getDist();
+    }
+    else
+    {
+        int i1 = graph.findVertexIdx(id1);
+        int i2 = graph.findVertexIdx(id2);
+        return graph.getW()[i1][i2];
+    }
+
 }
 
 PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id){
@@ -615,7 +630,7 @@ bool Base::setup(vector<int> ids)//ids dos vértices pela qual temos que passar
     return true;
 }
 
-vector<int> Base::calculatePath(vector<int>ids, double &distance, string algorithm) //os ids já estariam ordenados pela ordem que o condutor iria passar
+vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já estariam ordenados pela ordem que o condutor iria passar
 {
 
     distance = 0;
@@ -623,20 +638,31 @@ vector<int> Base::calculatePath(vector<int>ids, double &distance, string algorit
     vector<int> tmp;
     for(int i = 0; i < ids.size()-1; i++)
     {
-        if(algorithm == "astar")
+        if(algorithm != "floydwarshall")
         {
-            graph.AStar(ids[i], ids[i+1]);
+            if(algorithm == "astar")
+            {
+                graph.AStar(ids[i], ids[i+1]);
+
+            }
+            else if(algorithm == "dijkstra")
+            {
+                graph.dijkstraShortestPath(ids[i]);
+
+            }
+
+            auto v = graph.findVertex(ids[i+1]);
+            distance += v->getDist();
+            tmp = graph.getPath(ids[i], ids[i+1]);
+        }
+        else{
+            int id1 = graph.findVertexIdx(ids[i]);
+            int id2 = graph.findVertexIdx(ids[i+1]);
+            distance += graph.getW()[id1][id2];
+            tmp = graph.getFloydWarshallPath(ids[i], ids[i+1]);
 
         }
-        else if(algorithm == "dijkstra")
-        {
-            graph.dijkstraShortestPath(ids[i]);
 
-        }
-
-        auto v = graph.findVertex(ids[i+1]);
-        distance += v->getDist();
-        tmp = graph.getPath(ids[i], ids[i+1]);
 
         int j;
         if(i==0)
@@ -967,8 +993,15 @@ void Base::updateFiles() {
     writeRequests();
 }
 
+void Base::setAlgorithm(string alg)
+{
+    this->algorithm = alg;
+}
 
-
-
+void Base::loadFloydWarshall()
+{
+    graph.floydWarshallShortestPath();
+    //escrever nas matrizes
+}
 
 
