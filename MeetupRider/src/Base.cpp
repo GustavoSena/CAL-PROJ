@@ -675,20 +675,20 @@ bool Base::removeRequests(vector<Passenger*> passengers, DriverRequest * request
 
 bool Base::createJourney(DriverRequest * request)
 {
-    Journey j;
+    Journey* j = new Journey();
     vector<int>places;
     vector<int>path;
     double distance;
     vector<Passenger*> passengers = fillVehicle(request, &places);
     if(!setup(places)) return false;
     path = calculatePath(places, distance);
-    j.setDriver(request->getDriver());
-    j.setPassenger(passengers);
-    j.setStartTime(request->getMinStartTime());
-    j.setPath(path);
+    j->setDriver(request->getDriver());
+    j->setPassenger(passengers);
+    j->setStartTime(request->getMinStartTime());
+    j->setPath(path);
     if(!removeRequests(passengers, request)) return false;
     updatePeopleKnown(request->getDriver(), passengers);
-    journeys.push_back(&j);
+    journeys.push_back(j);
     return true;
 
 

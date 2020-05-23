@@ -8,10 +8,13 @@
 
 #include "NewGraph.h"
 #include "graphviewer.h"
+#include "utils.h"
 
 
 
 
-void mapViewer(Graph *g, bool city_map);
+void mapViewer(Graph *g, bool city_map, vector<int> path, bool show_path);
+
+
 
 #endif //MEETUPRIDER_GRAPHDRAWING_H

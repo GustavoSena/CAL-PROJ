@@ -42,12 +42,12 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 
 int main() {
 
-    string node_text = "..\\resources\\maps\\Maia\\nodes_x_y_maia.txt";
-    string edge_text = "..\\resources\\maps\\Maia\\edges_maia.txt";
+    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
+    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
 
-   /* vector<int> network;
+    vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
     Passenger p1(0, "Maria", network, "rua");
@@ -81,7 +81,10 @@ int main() {
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-*/
+
+    vector<int> path = b.getJourneys()[0]->getPath();
+    mapViewer(&b.getGraph(), false, path, true);
+
 
 /*    Time t1("3:5:15");
     Time t2("9:56:57");
@@ -99,7 +102,6 @@ int main() {
 
     //b.updateFiles();
 
-    mapViewer(&b.getGraph(), true);
 }
 
 
