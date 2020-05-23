@@ -12,14 +12,15 @@
 using namespace std;
 
 
-void main_menu(Base base);
+int main_menu(Base base);
 
-void next_menu(Base base, string type);
+int next_menu(Base base, string type);
 
-void request_menu(Base base,int id);
+void request_menu(Base *base,int id);
 
 void chooseCity(Base *base);
 
-
+void chooseAlgorithm(Base * base,int id);
+void optionMenu(Base *base,int id);
 Time *readTime(string timeType);
 #endif //MEETUPRIDER_MENUS_H

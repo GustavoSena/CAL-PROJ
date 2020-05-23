@@ -6,4 +6,4 @@ link_libraries(ws2_32 wsock32)
 
 
 file(GLOB_RECURSE SRC "src/*.cpp" "src/*.h")
-add_executable(MeetupRider main.cpp ${SRC} src/menus.cpp src/menus.h)
+add_executable(MeetupRider main.cpp ${SRC} src/menus.cpp src/menus.h src/graphDrawing.cpp src/graphDrawing.h src/FloydWarshall.cpp src/FloydWarshall.h)

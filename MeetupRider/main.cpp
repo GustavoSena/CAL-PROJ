@@ -7,6 +7,7 @@
 #include <vector>
 #include "src/Base.h"
 #include "src/menus.h"
+#include "src/graphDrawing.h"
 
 
 using namespace std;
@@ -44,7 +45,11 @@ int main() {
     string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
+    int id=main_menu(b);
     chooseCity(&b);
+    chooseAlgorithm(&b,id);
+
+
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -80,6 +85,9 @@ int main() {
     else
         cout << "False"<<endl;
 
+    vector<int> path = b.getJourneys()[0]->getPath();
+    mapViewer(&b.getGraph(), false, path, true);
+
 
 /*    Time t1("3:5:15");
     Time t2("9:56:57");
@@ -97,7 +105,6 @@ int main() {
 
     b.updateFiles();
 
-    //mapViewer(edge_text, node_text);
 }
 
 

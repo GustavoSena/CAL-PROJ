@@ -320,7 +320,7 @@ void Base::loadGraph(string node_text, string edge_text) {
     getline(e_data, text_line);
     int n_edges = stoi(text_line);
 
-    for(int i = 0; i < n_nodes; i++)
+    for(int i = 0; i < n_edges; i++)
     {
         getline(e_data, text_line);
         vector<int> edge_values = getEdgeValues(text_line);
@@ -616,7 +616,7 @@ bool Base::setup(vector<int> ids)//ids dos vértices pela qual temos que passar
     return true;
 }
 
-vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já estariam ordenados pela ordem que o condutor iria passar
+vector<int> Base::calculatePath(vector<int>ids, double &distance, string algorithm) //os ids já estariam ordenados pela ordem que o condutor iria passar
 {
 
     distance = 0;
@@ -624,10 +624,21 @@ vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já e
     vector<int> tmp;
     for(int i = 0; i < ids.size()-1; i++)
     {
-        graph.AStar(ids[i], ids[i+1]);
+        if(algorithm == "astar")
+        {
+            graph.AStar(ids[i], ids[i+1]);
+
+        }
+        else if(algorithm == "dijkstra")
+        {
+            graph.dijkstraShortestPath(ids[i]);
+
+        }
+
         auto v = graph.findVertex(ids[i+1]);
         distance += v->getDist();
         tmp = graph.getPath(ids[i], ids[i+1]);
+
         int j;
         if(i==0)
             j = 0;
@@ -676,20 +687,20 @@ bool Base::removeRequests(vector<Passenger*> passengers, DriverRequest * request
 
 bool Base::createJourney(DriverRequest * request)
 {
-    Journey j;
+    Journey* j = new Journey();
     vector<int>places;
     vector<int>path;
     double distance;
     vector<Passenger*> passengers = fillVehicle(request, &places);
     if(!setup(places)) return false;
-    path = calculatePath(places, distance);
-    j.setDriver(request->getDriver());
-    j.setPassenger(passengers);
-    j.setStartTime(request->getMinStartTime());
-    j.setPath(path);
+    path = calculatePath(places, distance,algorithm);
+    j->setDriver(request->getDriver());
+    j->setPassenger(passengers);
+    j->setStartTime(request->getMinStartTime());
+    j->setPath(path);
     if(!removeRequests(passengers, request)) return false;
     updatePeopleKnown(request->getDriver(), passengers);
-    journeys.push_back(&j);
+    journeys.push_back(j);
     return true;
 
 
@@ -802,7 +813,7 @@ void Base::updatePeopleKnown(Driver *driver, vector<Passenger*> passengers)
 
 void Base::writePassengers() {
     ofstream newfile;
-    newfile.open("newPassengerFile.txt");
+    newfile.open("..\\resources\\files\\newPassengerFile.txt");
     for (auto p : passengers) {
         newfile << p->getId() << endl;
         newfile << p->getName() << endl;
@@ -822,15 +833,15 @@ void Base::writePassengers() {
         if(p!=*passengers.end())
            newfile << endl;
     }
-    const char* fileName = passengerFile.c_str();
+    const char* fileName = ("..\\resources\\files\\"+passengerFile).c_str();
     newfile.close();
     remove(fileName);
-    int i=rename("newPassengerFile.txt", fileName);
+    int i=rename("..\\resources\\files\\newPassengerFile.txt", fileName);
 }
 
 void Base::writeDrivers() {
     ofstream newfile;
-    newfile.open("newDriverFile.txt");
+    newfile.open("..\\resources\\files\\newDriverFile.txt");
     for (auto d : drivers) {
         newfile <<d->getId() << endl;
         newfile << d->getName() << endl;
@@ -850,15 +861,15 @@ void Base::writeDrivers() {
         if(d!=*drivers.end())
             newfile << endl;
     }
-    const char* fileName = driverFile.c_str();
+    const char* fileName = ("..\\resources\\files\\"+driverFile).c_str();
     newfile.close();
     remove(fileName);
-    int i=rename("newDriverFile.txt", fileName);
+    int i=rename("..\\resources\\files\\newDriverFile.txt", fileName);
 }
 
 void Base::writeRequests() {
     ofstream newfile;
-    newfile.open("newRequestFile.txt");
+    newfile.open("..\\resources\\files\\newRequestFile.txt");
     for (auto r : requests_passengers) {
         newfile<<r->getPassenger()->getId()<<endl;
         newfile<<r->getStartingId()<<endl;
@@ -879,15 +890,15 @@ void Base::writeRequests() {
         if(r!=*requests_drivers.end())
             newfile<<endl;
     }
-    const char* fileName = requestFile.c_str();
+    const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
     newfile.close();
     remove(fileName);
-    int i=rename("newRequestFile.txt", fileName);
+    int i=rename("..\\resources\\files\\newRequestFile.txt", fileName);
 }
 
 void Base::writeJourneys() {
     ofstream newfile;
-    newfile.open("newJourneyFile.txt");
+    newfile.open("..\\resources\\files\\newJourneyFile.txt");
     for (auto j : journeys) {
         newfile<<j->getDriver()->getId()<<endl;
         for (Passenger *p : j->getPassenger()) {
@@ -912,10 +923,10 @@ void Base::writeJourneys() {
             newfile<<endl;
     }
 
-    const char* fileName = journeyFile.c_str();
+    const char* fileName = ("..\\resources\\files\\"+journeyFile).c_str();
     newfile.close();
     remove(fileName);
-    int i=rename("newJourneyFile.txt", fileName);
+    int i=rename("..\\resources\\files\\newJourneyFile.txt", fileName);
 }
 
 void Base::setPassengerFile(string fileName) {
@@ -955,6 +966,26 @@ void Base::updateFiles() {
     writeJourneys();
     writePassengers();
     writeRequests();
+}
+
+string Base::getAlgorithm() {
+    return algorithm;
+}
+
+void Base::setAlgorithm(string alg) {
+    algorithm=alg;
+
+}
+
+void Base::run_algorithm() {
+    int count=0;
+    for (DriverRequest*d : requests_drivers){
+        if(createJourney(d))
+            cout<<++count<<"- journey successeful\n";
+        else
+            cout<<++count<<"- nop possible to make journey\n";
+    }
+
 }
 
 

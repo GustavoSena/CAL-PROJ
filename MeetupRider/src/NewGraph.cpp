@@ -166,7 +166,7 @@ void deleteMatrix(T **m, int n)
     }
 }
 
-//Falta testar
+
 void Graph::floydWarshallShortestPath(){
     int n = vertexSet.size();
     deleteMatrix(W, n);

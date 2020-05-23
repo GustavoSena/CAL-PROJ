@@ -64,15 +64,15 @@ vector<string> split(string str, char delimiter, size_t max_splits)
     return result;
 }
 
-vector<int> getNodeValues(string text_line) //Atm only for grid graphs
+vector<int> getNodeValues(string text_line)
 {
     vector<string> tmp = split(text_line, ',', 3);
     vector<int> result;
     int size1 = tmp[0].size() - 1;
     result.push_back(stoi(tmp[0].substr(1, size1)));
-    result.push_back(stoi(tmp[1]));
+    result.push_back((int)stof(tmp[1]));
     int size2 = tmp[2].size() - 1;
-    result.push_back(stoi(tmp[2].substr(0,size2 )));
+    result.push_back((int)stof(tmp[2].substr(0,size2 )));
     return result;
 
 }
@@ -144,8 +144,8 @@ void mapViewer(string edge_file, string node_file)
     ifstream n_data(node_file);
     ifstream e_data(edge_file);
 
-    GraphViewer *gv = new GraphViewer(700, 700, false);
-    gv->createWindow(700, 700);
+    GraphViewer *gv = new GraphViewer(10000, 10000, false);
+    gv->createWindow(1200, 1200);
     gv->defineVertexColor("blue");
     gv->defineEdgeColor("black");
 

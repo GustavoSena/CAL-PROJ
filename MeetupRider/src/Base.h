@@ -34,6 +34,9 @@ private:
     string journeyFile;
     string driverFile;
     string passengerFile;
+    string algorithm;
+
+
 
 public:
 
@@ -68,6 +71,8 @@ public:
 
     void setDriverFile(string fileName);
 
+    void setAlgorithm(string alg);
+
     string getPassengerFile();
 
     string getDriverFile();
@@ -75,6 +80,8 @@ public:
     string getRequestFile();
 
     string getJourneyFile();
+
+    string getAlgorithm();
 
     Graph &getGraph() ;
 
@@ -123,7 +130,10 @@ public:
 
     bool setup(vector<int> ids);
 
-    vector<int> calculatePath(vector<int>ids, double &distance);
+    vector<int> calculatePath(vector<int>ids, double &distance, string algorithm);
+
+
+    void run_algorithm();
 
     bool removePassengerRequests(Passenger * p);
 
