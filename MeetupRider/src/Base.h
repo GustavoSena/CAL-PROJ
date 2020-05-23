@@ -123,7 +123,7 @@ public:
 
     bool setup(vector<int> ids);
 
-    vector<int> calculatePath(vector<int>ids, double &distance);
+    vector<int> calculatePath(vector<int>ids, double &distance, string algorithm);
 
     bool removePassengerRequests(Passenger * p);
 

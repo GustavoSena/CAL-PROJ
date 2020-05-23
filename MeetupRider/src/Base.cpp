@@ -615,7 +615,7 @@ bool Base::setup(vector<int> ids)//ids dos vértices pela qual temos que passar
     return true;
 }
 
-vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já estariam ordenados pela ordem que o condutor iria passar
+vector<int> Base::calculatePath(vector<int>ids, double &distance, string algorithm) //os ids já estariam ordenados pela ordem que o condutor iria passar
 {
 
     distance = 0;
@@ -623,10 +623,21 @@ vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já e
     vector<int> tmp;
     for(int i = 0; i < ids.size()-1; i++)
     {
-        graph.AStar(ids[i], ids[i+1]);
+        if(algorithm == "astar")
+        {
+            graph.AStar(ids[i], ids[i+1]);
+
+        }
+        else if(algorithm == "dijkstra")
+        {
+            graph.dijkstraShortestPath(ids[i]);
+
+        }
+
         auto v = graph.findVertex(ids[i+1]);
         distance += v->getDist();
         tmp = graph.getPath(ids[i], ids[i+1]);
+
         int j;
         if(i==0)
             j = 0;
