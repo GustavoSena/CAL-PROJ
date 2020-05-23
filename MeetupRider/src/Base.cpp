@@ -320,7 +320,7 @@ void Base::loadGraph(string node_text, string edge_text) {
     getline(e_data, text_line);
     int n_edges = stoi(text_line);
 
-    for(int i = 0; i < n_nodes; i++)
+    for(int i = 0; i < n_edges; i++)
     {
         getline(e_data, text_line);
         vector<int> edge_values = getEdgeValues(text_line);

@@ -7,6 +7,7 @@
 #include <vector>
 #include "src/Base.h"
 #include "src/menus.h"
+#include "src/graphDrawing.h"
 
 
 using namespace std;
@@ -41,11 +42,12 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 
 int main() {
 
-    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
-    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
+    string node_text = "..\\resources\\maps\\Maia\\nodes_x_y_maia.txt";
+    string edge_text = "..\\resources\\maps\\Maia\\edges_maia.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-    vector<int> network;
+
+   /* vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
     Passenger p1(0, "Maria", network, "rua");
@@ -79,7 +81,7 @@ int main() {
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-
+*/
 
 /*    Time t1("3:5:15");
     Time t2("9:56:57");
@@ -97,7 +99,7 @@ int main() {
 
     //b.updateFiles();
 
-    //mapViewer(edge_text, node_text);
+    mapViewer(&b.getGraph(), true);
 }
 
 
