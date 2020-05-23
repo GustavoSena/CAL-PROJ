@@ -14,6 +14,7 @@
 #include "Journey.h"
 #include "utils.h"
 #include "Time.h"
+#include "FloydWarshall.h"
 
 
 using namespace std;
@@ -35,7 +36,6 @@ private:
     string driverFile;
     string passengerFile;
     string algorithm;
-
 
 
 public:
@@ -130,7 +130,7 @@ public:
 
     bool setup(vector<int> ids);
 
-    vector<int> calculatePath(vector<int>ids, double &distance, string algorithm);
+    vector<int> calculatePath(vector<int>ids, double &distance);
 
 
     void run_algorithm();
@@ -161,6 +161,8 @@ public:
 
     void updatePeopleKnown(Driver *driver, vector<Passenger*> passengers);
 
+
+    void loadFloydWarshall();
 
 
 

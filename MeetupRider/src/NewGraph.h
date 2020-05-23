@@ -123,6 +123,8 @@ public:
     int findVertexIdx(const int id) const;
     void floydWarshallShortestPath();
     vector<int> getFloydWarshallPath(const int orig, const int dest) const;
+    double ** getW();
+
 
     bool areVertexConnected(int id1, int id2);
 

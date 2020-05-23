@@ -80,13 +80,11 @@ int main() {
     b.addPassengerRequest(&r4);
     d.addNetwork(4);
     p3.addNetwork(5);
+    b.setAlgorithm("dijkstra");
     if(b.createJourney(&request))
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-
-    vector<int> path = b.getJourneys()[0]->getPath();
-    mapViewer(&b.getGraph(), false, path, true);
 
 
 /*    Time t1("3:5:15");

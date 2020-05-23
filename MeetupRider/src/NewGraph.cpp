@@ -225,6 +225,12 @@ vector<int> Graph::getFloydWarshallPath(const int orig, const int dest) const {
 
 }
 
+double ** Graph::getW()
+{
+    return W;
+}
+
+
 //Connectivity - https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices-in-a-given-graph/
 bool Graph::areVertexConnected(int id1, int id2)
 {

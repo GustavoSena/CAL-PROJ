@@ -19,6 +19,7 @@ int main_menu(Base base)
             system("cls");
             if(id>-1)
                 return id;
+            continue;
 
         }
         else if(compare_str(answer,"d"))
@@ -28,6 +29,7 @@ int main_menu(Base base)
             system("cls");
             if(id>-1)
                 return id;
+            continue;
         }
         else if(compare_str(answer,"c"))
         {
