@@ -45,7 +45,6 @@ public:
 
 protected:
     Time minStartTime;
-    Time maxStartTime;
     Time minEndTime;
     Time maxEndTime;
     int destinationId;

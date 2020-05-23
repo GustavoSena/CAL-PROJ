@@ -362,6 +362,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
             Vehicle v(lastCarId, cap, lastId);
             Driver d(lastId, name, network, address, &v);
             drivers.push_back(&d);
+            break;
         }while(true);
     }
 

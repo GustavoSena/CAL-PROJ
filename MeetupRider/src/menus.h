@@ -18,6 +18,8 @@ void next_menu(Base base, string type);
 
 void request_menu(Base base,int id);
 
+void chooseCity(Base *base);
+
 
 Time *readTime(string timeType);
 #endif //MEETUPRIDER_MENUS_H

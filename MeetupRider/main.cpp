@@ -44,7 +44,7 @@ int main() {
     string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
-    b.loadGraph(node_text, edge_text);
+    chooseCity(&b);
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -95,7 +95,7 @@ int main() {
     t3-=t4;
     cout<<t3<<endl;*/
 
-    //b.updateFiles();
+    b.updateFiles();
 
     //mapViewer(edge_text, node_text);
 }

@@ -186,6 +186,51 @@ void request_menu(Base base, int id){
 
 }
 
+void chooseCity(Base *base){
+    do {
+        cout<<"Which city are you in?\n";
+        cout<<"1-Porto\n";
+        cout<<"2-Fafe\n";
+        cout<<"3-Maia\n";
+        cout<<"4-8x8 grid\n";
+        cout<<"5-Exit program\n";
+        string temp;
+        getline(cin, temp);
+
+
+
+        if (compare_str(temp, "5"))
+            exit(0);
+
+        if (compare_str(temp, "1")) {
+            base->loadGraph("..\\resources\\maps\\Porto\\nodes.txt", "..\\resources\\maps\\Porto\\edges.txt");
+            return;
+        }
+        else if (compare_str(temp, "2")) {
+            base->loadGraph("..\\resources\\maps\\Fafe\\nodes.txt", "..\\resources\\maps\\Fafe\\edges.txt");
+            return;
+        }else if (compare_str(temp, "3")) {
+            base->loadGraph("..\\resources\\maps\\Maia\\nodes.txt", "..\\resources\\maps\\Maia\\edges.txt");
+            return;
+        }else if (compare_str(temp, "4")) {
+            base->loadGraph("..\\resources\\maps\\8x8)\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
+            return;
+        }
+        else{
+            system("cls");
+            cout<<"Invalid input! Plz try again\n";
+        }
+    }while(true);
+
+
+}
+
+
+
+
+
+
+
 
 Time* readTime(string timeType){
     do {
