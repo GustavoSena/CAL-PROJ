@@ -839,7 +839,7 @@ void Base::updatePeopleKnown(Driver *driver, vector<Passenger*> passengers)
 
 void Base::writePassengers() {
     ofstream newfile;
-    newfile.open("..\\resources\\files\\newPassengerFile.txt");
+    newfile.open("..\\resources\\files\\"+passengerFile);
     for (auto p : passengers) {
         newfile << p->getId() << endl;
         newfile << p->getName() << endl;
@@ -859,15 +859,15 @@ void Base::writePassengers() {
         if(p!=*passengers.end())
            newfile << endl;
     }
-    const char* fileName = ("..\\resources\\files\\"+passengerFile).c_str();
+    //const char* fileName = ("..\\resources\\files\\"+passengerFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("..\\resources\\files\\newPassengerFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newPassengerFile.txt", fileName);
 }
 
 void Base::writeDrivers() {
     ofstream newfile;
-    newfile.open("..\\resources\\files\\newDriverFile.txt");
+    newfile.open("..\\resources\\files\\"+driverFile);
     for (auto d : drivers) {
         newfile <<d->getId() << endl;
         newfile << d->getName() << endl;
@@ -887,15 +887,15 @@ void Base::writeDrivers() {
         if(d!=*drivers.end())
             newfile << endl;
     }
-    const char* fileName = ("..\\resources\\files\\"+driverFile).c_str();
+    //const char* fileName = ("..\\resources\\files\\"+driverFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("..\\resources\\files\\newDriverFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newDriverFile.txt", fileName);
 }
 
 void Base::writeRequests() {
     ofstream newfile;
-    newfile.open("..\\resources\\files\\newRequestFile.txt");
+    newfile.open("..\\resources\\files\\"+requestFile);
     for (auto r : requests_passengers) {
         newfile<<r->getPassenger()->getId()<<endl;
         newfile<<r->getStartingId()<<endl;
@@ -916,15 +916,15 @@ void Base::writeRequests() {
         if(r!=*requests_drivers.end())
             newfile<<endl;
     }
-    const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
+    //const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("..\\resources\\files\\newRequestFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newRequestFile.txt", fileName);
 }
 
 void Base::writeJourneys() {
     ofstream newfile;
-    newfile.open("..\\resources\\files\\newJourneyFile.txt");
+    newfile.open("..\\resources\\files\\"+journeyFile);
     for (auto j : journeys) {
         newfile<<j->getDriver()->getId()<<endl;
         for (Passenger *p : j->getPassenger()) {
@@ -949,10 +949,10 @@ void Base::writeJourneys() {
             newfile<<endl;
     }
 
-    const char* fileName = ("..\\resources\\files\\"+journeyFile).c_str();
+    //const char* fileName = ("..\\resources\\files\\"+journeyFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("..\\resources\\files\\newJourneyFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newJourneyFile.txt", fileName);
 }
 
 void Base::setPassengerFile(string fileName) {

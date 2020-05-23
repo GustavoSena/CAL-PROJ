@@ -6,34 +6,34 @@
 #include "FloydWarshall.h"
 #include "utils.h"
 
-
+int row=0;
+int col=0;
 using namespace std;
-void writeMatrix(double **matrix, string text_file){
+void writeMatrix(double **matrix){
 
     ofstream newfile;
-    newfile.open("..\\resources\\FloydWarshall\\newFloydWarshall.txt");
+    newfile.open("..\\resources\\FloydWarshall\\FloydWarshall.txt");
 
     int i=0;
-    while(matrix[i]!= nullptr){
+    while(i<row){
         int j=0;
-        while(matrix[i][j+1]!=NULL){
+        while(j+1<col){
             newfile<<matrix[i][j]<<" , ";
+            cout<<matrix[i][j]<<" , ";
+
             j++;
         }
         newfile<<matrix[i][j]<<endl;
+        cout<<matrix[i][j]<<endl;
         i++;
     }
-
-    const char* fileName = "..\\resources\\FloydWarshall\\FloydWarshall.txt";
     newfile.close();
-    remove(fileName);
-    rename("..\\resources\\FloydWarshall\\newFloydWarshall.txt", fileName);
 
 }
 
 
 
-double ** readMatrix(string text_file){
+double ** readMatrix(){
 
     ifstream a_file;
     a_file.open("..\\resources\\FloydWarshall\\FloydWarshall.txt");
@@ -41,22 +41,30 @@ double ** readMatrix(string text_file){
     int counter=0;
     int counter2=0;
     vector<vector<double>> aux;
-    double **matrix;
     while(getline(a_file,temp)){
+        counter2=0;
         vector<string> parts=decompose(temp,',');
         vector<double>aux2;
         for (string temp2:parts){
+            cout<<stod(temp2)<<", ";
             aux2.push_back(stod(temp2));
-            matrix[counter][counter2]=stod(temp2);
             counter2++;
         }
+        cout<<endl;
         aux.push_back(aux2);
         counter++;
+
     }
 
-    //apagar vetores se arrays funcionarem
-
-
+    double **matrix = new double*[counter];
+    for (int i=0;i<counter;i++){
+        matrix[i]= new double[counter2];
+        for (int j=0; j<counter2;j++) {
+            matrix[i][j] = aux[i][j];
+        }
+    }
+    col=counter2;
+    row=counter;
     a_file.close();
     return matrix;
 }

@@ -42,12 +42,17 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 
 int main() {
 
-    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
+    /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    Base b("..\\resources\\files\\Base.txt");
-    int id=main_menu(b);
-    chooseCity(&b);
+    Base b("..\\resources\\files\\Base.txt");*/
+
+    double **matrix=readMatrix();
+    cout<<"read\n";
+    writeMatrix(matrix);
+    //int id=main_menu(b);
+   /* chooseCity(&b);
     chooseAlgorithm(&b,id);
+
 
 
     vector<int> network;
@@ -85,7 +90,7 @@ int main() {
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-
+*/
 
 /*    Time t1("3:5:15");
     Time t2("9:56:57");
@@ -101,7 +106,7 @@ int main() {
     t3-=t4;
     cout<<t3<<endl;*/
 
-    b.updateFiles();
+    //b.updateFiles();
 
 }
 

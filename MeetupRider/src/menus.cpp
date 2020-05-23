@@ -9,6 +9,7 @@ int main_menu(Base base)
 
     string answer;
     do{
+        system("cls");
         cout << "Welcome to Meetup Rider!" << endl;
         cout << "Are you a [P]assenger or a [D]river?" << endl;
         cout << "[C]lose"<< endl;
@@ -16,20 +17,16 @@ int main_menu(Base base)
         if(compare_str(answer,"p"))
         {
             int id =next_menu(base, "passenger");
-            system("cls");
             if(id>-1)
                 return id;
-            continue;
 
         }
         else if(compare_str(answer,"d"))
         {
 
             int id=next_menu(base, "driver");
-            system("cls");
             if(id>-1)
                 return id;
-            continue;
         }
         else if(compare_str(answer,"c"))
         {
@@ -37,7 +34,6 @@ int main_menu(Base base)
         }
         else
         {
-            system("cls");
             cout << "Invalid answer. Try again!\n";
         }
 

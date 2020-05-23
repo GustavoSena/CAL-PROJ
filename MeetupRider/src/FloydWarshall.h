@@ -7,9 +7,9 @@
 
 #include "NewGraph.h"
 #include <iostream>
-void writeMatrix(double **matrix, string text_file);
+void writeMatrix(double **matrix);
 
-double ** readMatrix(string text_file);
+double ** readMatrix();
 
 
 #endif //MEETUPRIDER_FLOYDWARSHALL_H
