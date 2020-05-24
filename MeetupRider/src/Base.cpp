@@ -199,12 +199,6 @@ void Base::loadRequests(string fileName){
                 break;
             case 5:
                 if(pass)
-                    pr.setMinEndTime(Time(temp));
-                else
-                    pr.setMinEndTime(Time(temp));
-                break;
-            case 6:
-                if(pass)
                     requests_passengers.push_back(new PassengerRequest(pr));
                 else
                     requests_drivers.push_back(new DriverRequest(dr));
@@ -250,13 +244,13 @@ void Base::loadJourneys(string fileName){
             case 3:
                 j.setStartTime(Time(temp));
                 break;
-            case 4:
+            /*case 4:
                 parts = decompose(temp,',');
                 for (string i : parts)
                     times.push_back(Time(temp));
                 j.setArrivalTimes(times);
-                break;
-            case 5:
+                break;*/
+            case 4:
                 journeys.push_back(new Journey(j));
                 j= Journey();
                 counter=-1;
@@ -903,7 +897,6 @@ void Base::writeRequests() {
         newfile<<r->getStartingId()<<endl;
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
-        newfile<<r->getMinEndTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
         newfile<< "::::::::::"<<endl;
     }
@@ -912,7 +905,6 @@ void Base::writeRequests() {
         newfile<<r->getStartingId()<<endl;
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
-        newfile<<r->getMinEndTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
         newfile<< "::::::::::";
         if(r!=*requests_drivers.end())
@@ -941,11 +933,11 @@ void Base::writeJourneys() {
                 newfile<<", ";
         }
         newfile<<endl<<j->getStartTime()<<endl;
-        for (Time t: j->getArrivalTimes()) {
+        /*for (Time t: j->getArrivalTimes()) {
             newfile << t;
             if(!(t==*j->getArrivalTimes().end()))
                 newfile<<", ";
-        }
+        }*/
         newfile<<endl<< "::::::::::";
         if(j!=*journeys.end())
             newfile<<endl;
@@ -1021,6 +1013,14 @@ void Base::loadFloydWarshall()
 {
     graph.floydWarshallShortestPath();
     //escrever nas matrizes
+}
+
+string Base::getMap() {
+    return map;
+}
+
+void Base::setMap(string m) {
+    map=m;
 }
 
 

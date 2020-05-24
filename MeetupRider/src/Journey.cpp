@@ -14,13 +14,13 @@ void Journey::setStartTime(const Time &startTime) {
     Journey::startTime = startTime;
 }
 
-const vector<Time> &Journey::getArrivalTimes() const {
+/*const vector<Time> &Journey::getArrivalTimes() const {
     return arrivalTimes;
-}
+}*/
 
-void Journey::setArrivalTimes(const vector<Time> &arrivalTimes) {
+/*void Journey::setArrivalTimes(const vector<Time> &arrivalTimes) {
     Journey::arrivalTimes = arrivalTimes;
-}
+}*/
 
 const vector<Passenger*> Journey::getPassenger() const{
     return passenger;
@@ -42,8 +42,7 @@ void Journey::setPath(const vector<int> &path) {
     Journey::path=path;
 
 }
-
-const vector<int> &Journey::getPath() {
+vector<int> Journey::getPath() {
     return path;
 }
 
@@ -56,13 +55,13 @@ string Journey::show(){
     for(Passenger *p:passenger)
         ss<<"    "<<p->getName()<<endl;
     ss<<"Starting time: "<<startTime<<endl;
-    ss<<"Arrival times: ";
+    /*ss<<"Arrival times: ";
     for(Time t: arrivalTimes) {
         ss << t;
         if(!(t==*arrivalTimes.end()))
             ss<<"->";
     }
-    ss<<endl;
+    ss<<endl;*/
 
     ss<<"Path: ";
     for(int i:path){

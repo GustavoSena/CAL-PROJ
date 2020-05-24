@@ -36,7 +36,7 @@ private:
     string driverFile;
     string passengerFile;
     string algorithm;
-
+    string map;
 
 public:
 
@@ -73,6 +73,8 @@ public:
 
     void setAlgorithm(string alg);
 
+    void setMap(string m);
+
     string getPassengerFile();
 
     string getDriverFile();
@@ -82,6 +84,8 @@ public:
     string getJourneyFile();
 
     string getAlgorithm();
+
+    string getMap();
 
     Graph &getGraph() ;
 

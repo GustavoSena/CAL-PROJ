@@ -46,11 +46,9 @@ double ** readMatrix(){
         vector<string> parts=decompose(temp,',');
         vector<double>aux2;
         for (string temp2:parts){
-            cout<<stod(temp2)<<", ";
             aux2.push_back(stod(temp2));
             counter2++;
         }
-        cout<<endl;
         aux.push_back(aux2);
         counter++;
 

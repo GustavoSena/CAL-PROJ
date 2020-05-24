@@ -17,9 +17,9 @@ public:
 
     void setStartTime(const Time &startTime);
 
-    const vector<Time> &getArrivalTimes() const;
+    //const vector<Time> &getArrivalTimes() const;
 
-    void setArrivalTimes(const vector<Time> &arrivalTimes);
+    //void setArrivalTimes(const vector<Time> &arrivalTimes);
 
     const vector<Passenger*>  getPassenger() const;
 
@@ -33,14 +33,14 @@ public:
 
     string showSimp();
 
-    void setPath(const vector<int> &path);
+    void setPath( vector<int> path);
 
-    const vector<int> &getPath();
+    vector<int> getPath();
 
 private:
     Time startTime;
     vector<int> path;
-    vector<Time> arrivalTimes;
+    //vector<Time> arrivalTimes;
     vector<Passenger*> passenger;
     Driver *driver;
 

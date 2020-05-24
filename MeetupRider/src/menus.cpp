@@ -117,10 +117,6 @@ void request_menu(Base *base, int id){
         if(t==nullptr)
             return;
         aux.setMinStartTime(*t);
-        t=readTime("Minimum ending");
-        if(t==nullptr)
-            return;
-        aux.setMinEndTime(*t);
         t=readTime("Maximum ending");
         if(t==nullptr)
             return;
@@ -137,8 +133,7 @@ void request_menu(Base *base, int id){
         getline(cin, temp);
         cout<<endl;
         if (compare_str(temp, "y")){
-            cout<<"Falta fazer call da map function\n";
-            system("cls");
+            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),vector<int>{},false);
         }
         else if(compare_str(temp, "n")){
             //nothing
@@ -213,16 +208,20 @@ void chooseCity(Base *base){
 
         if (compare_str(temp, "1")) {
             base->loadGraph("..\\resources\\maps\\Porto\\nodes_x_y_porto.txt", "..\\resources\\maps\\Porto\\edges_porto.txt");
+            base->setMap("Porto");
             return;
         }
         else if (compare_str(temp, "2")) {
             base->loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
+            base->setMap("Fafe");
             return;
         }else if (compare_str(temp, "3")) {
             base->loadGraph("..\\resources\\maps\\Maia\\nodes_x_y_maia.txt", "..\\resources\\maps\\Maia\\edges_maia.txt");
+            base->setMap("Maia");
             return;
         }else if (compare_str(temp, "4")) {
             base->loadGraph("..\\resources\\maps\\8x8\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
+            base->setMap("8x8");
             return;
         }
         else{
@@ -293,8 +292,7 @@ void optionMenu(Base *base,int id){
             base->run_algorithm();
             return;
         }else if (compare_str(temp, "3")) {
-            cout<<"Falta fazer call da map function\n";
-            system("cls");
+            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),vector<int>{},false);
         }
         else if (compare_str(temp, "4")) {
             viewJourneys(base);
@@ -333,22 +331,22 @@ void viewJourneys(Base *base){
         cout<<"See path in map? (y to confirm, anything else to cancel): ";
         getline(cin, temp);
         if(compare_str(temp,"y"))
-            //show path function
-            return;
-
+            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),j[x-1]->getPath(),true);
 
         return;
+
+
 
 
     }catch(exception err){
         cout<<"Error with input: 1 to try again, anything else to cancel: ";
         getline(cin,temp);
-        if(compare_str(temp,("1"))) {
+        if(compare_str(temp,("1")))
             viewJourneys(base);
-            return;
-        }
-        else
+
+
         return;
+
     }
 
 
@@ -370,7 +368,6 @@ void floydwarshallMenu(Base*base,int id){
 
         if (compare_str(temp, "1")){
             //do pre processing
-
         }
         else if(compare_str(temp, "2")){
             optionMenu(base, id);
@@ -397,9 +394,9 @@ Time* readTime(string timeType){
     do {
         string temp;
         Time t;
-        cout << timeType << " time (hh:mm:ss) (0 to cancel)\n";
+        cout << timeType << " time (hh:mm:ss) (-1 to cancel)\n";
         getline(cin,temp);
-        if(compare_str(temp,"0"))
+        if(compare_str(temp,"-1"))
             return nullptr;
         vector<string> parts = decompose(temp,':');
         try{
