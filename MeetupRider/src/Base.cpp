@@ -971,13 +971,20 @@ void Base::setAlgorithm(string alg) {
 }
 
 void Base::run_algorithm() {
-    int count=0;
-    for (DriverRequest*d : requests_drivers){
-        if(createJourney(d))
-            cout<<++count<<"- journey successeful\n";
+    int count = 0;
+    vector<DriverRequest*> vd = requests_drivers;
+    for (DriverRequest *d : vd){
+        if (createJourney(d))
+            cout<<++count<<" -journey successful"<<endl;
         else
-            cout<<++count<<"- nop possible to make journey\n";
+            cout<<++count<<" -journey unsuccessful"<<endl;
+
     }
+
+
+
+
+
 
 }
 

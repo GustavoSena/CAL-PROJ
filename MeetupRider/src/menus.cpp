@@ -240,9 +240,10 @@ void chooseCity(Base *base){
 void chooseAlgorithm(Base * base,int id){
     do {
         cout<<"Choose algorithm?\n";
-        cout<<"1-FloydWarshall\n";
-        cout<<"2-Astar\n";
-        cout<<"3-Dijkstra\n";
+        cout<<"1-Astar\n";
+        cout<<"2-Dijkstra\n";
+        if(compare_str(base->getMap(),"8x8"))
+            cout<<"3-FloydWarshall\n";
         cout<<"4-Exit program\n";
         string temp;
         getline(cin, temp);
@@ -251,16 +252,18 @@ void chooseAlgorithm(Base * base,int id){
             base->updateFiles();
             exit(0);
         }
-        if (compare_str(temp, "1")) {
+        if ((compare_str(base->getMap(),"8x8")) && compare_str(temp, "3")) {
+
+
             base->setAlgorithm("floydwarshall");
             floydwarshallMenu(base,id);
             return;
         }
-        else if (compare_str(temp, "2")) {
+        else if (compare_str(temp, "1")) {
             base->setAlgorithm("astar");
             optionMenu(base,id);
             return;
-        }else if (compare_str(temp, "3")) {
+        }else if (compare_str(temp, "2")) {
             base->setAlgorithm("dijkstra");
             optionMenu(base,id);
             return;
@@ -328,7 +331,7 @@ void viewJourneys(Base *base){
         x=stoi(temp);
         if(x==0)
             return;
-        j[x-1]->show();
+        cout<<j[x-1]->show()<<endl;
         cout<<"See path in map? (y to confirm, anything else to cancel): ";
         getline(cin, temp);
         if(compare_str(temp,"y"))
