@@ -48,8 +48,8 @@ Request::Request( Time minStartTime,  Time maxEndTime,
 
 
 void Request::setTimesNull() {
-    minStartTime=Time("-1:-1");
-    maxEndTime=Time("-1:-1");
+    minStartTime=Time("-1:-1:-1");
+    maxEndTime=Time("-1:-1:-1");
 
 }
 

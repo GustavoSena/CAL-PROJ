@@ -246,6 +246,8 @@ bool Graph::areVertexConnected(int id1, int id2)
     }
     auto orig = findVertex(id1);
     auto dest = findVertex(id2);
+    if(orig==NULL || dest==NULL)
+        return false;
     queue<Vertex *> q;
     q.push(orig);
 

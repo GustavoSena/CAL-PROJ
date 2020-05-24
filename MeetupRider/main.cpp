@@ -53,12 +53,12 @@ int main() {
 
 
 
-    /**double **matrix=readMatrix();
+    /*double **matrix=readMatrix();
     cout<<"read\n";
     writeMatrix(matrix);*/
-    //int id=main_menu(b);
-/*    chooseCity(&b);
-    chooseAlgorithm(&b,id);*/
+    int id=main_menu(b);
+    chooseCity(&b);
+    chooseAlgorithm(&b,id);
 
 
     /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
@@ -71,7 +71,7 @@ int main() {
 
 
 
-
+/*
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -106,7 +106,7 @@ int main() {
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-
+*/
 
 
 /*    Time t1("3:5:15");
@@ -123,7 +123,7 @@ int main() {
     t3-=t4;
     cout<<t3<<endl;*/
 
-    //b.updateFiles();
+    b.updateFiles();
 
 }
 
