@@ -102,31 +102,22 @@ void request_menu(Base *base, int id){
     Request aux;
     
     string temp;
-    cout<<"Time restriction? (y/n) (anything else to cancel): ";
-    getline(cin,temp);
-    cout<<endl;
-
-        if (compare_str(temp, "n")) {
-            aux.setTimesNull();
-        } else if (compare_str(temp, "y")) {
-            while(true) {
-                Time *t = readTime("Minimum starting");
-                if (t == nullptr)
-                    return;
-                aux.setMinStartTime(*t);
-                t = readTime("Maximum ending");
-                if (t == nullptr)
-                    return;
-                aux.setMaxEndTime(*t);
-
-                if(aux.getMinStartTime()<aux.getMaxEndTime())
-                    break;
-                cout<<"Invalid times please try again\n";
-            }
-
-
-        } else
+    while(true) {
+        Time *t = readTime("Minimum starting");
+        if (t == nullptr)
             return;
+        aux.setMinStartTime(*t);
+        t = readTime("Maximum ending");
+        if (t == nullptr)
+            return;
+        aux.setMaxEndTime(*t);
+
+        if(aux.getMinStartTime()<aux.getMaxEndTime())
+            break;
+        cout<<"Invalid times please try again\n";
+    }
+
+
 
     int point1;
     int point2;
@@ -358,7 +349,7 @@ void viewJourneys(Base *base){
 void floydwarshallMenu(Base*base,int id){
 
     while(true) {
-        cout << "1-Watch pre-processing live\n";
+        cout << "1-Use pre-processed values\n";
         cout << "2-Run FloydWarshall\n";
         cout << "3-Exit program\n";
 
@@ -367,11 +358,13 @@ void floydwarshallMenu(Base*base,int id){
         getline(cin, temp);
 
         if (compare_str(temp, "1")){
-            //do pre processing
+            base->getGraph().readFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
+            optionMenu(base, id);
         }
         else if(compare_str(temp, "2")){
+            base->getGraph().floydWarshallShortestPath();
+            base->getGraph().writeFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
             optionMenu(base, id);
-            return;
         }
         else if(compare_str(temp, "3")){
             base->updateFiles();

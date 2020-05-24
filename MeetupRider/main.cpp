@@ -47,11 +47,12 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-    b.getGraph().floydWarshallShortestPath();
-    b.getGraph().writeFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
+    //b.loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
+    //b.getGraph().floydWarshallShortestPath();
+    //b.getGraph().writeFiles("..\\resources\\FloydWarshall\\fafepath.txt", "..\\resources\\FloydWarshall\\fafedist.txt");
 
 
-    /*vector<int> network;
+    vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
     Passenger p1(0, "Maria", network, "rua");
@@ -80,7 +81,7 @@ int main() {
     b.addPassengerRequest(&r3);
     b.addPassengerRequest(&r4);
     d.addNetwork(4);
-    p3.addNetwork(5);*/
+    p3.addNetwork(5);
 
     /*double **matrix=readMatrix();
     cout<<"read\n";

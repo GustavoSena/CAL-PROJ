@@ -10,9 +10,3 @@ Goncalo Batalhao
 Rua da Travagem 512
 2, 9
 ::::::::::
-6
-Joao
-4, 7, 8, 10
-rua
-3, 4
-::::::::::

@@ -327,7 +327,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
     if(type == "passenger")
     {
         Passenger p(lastId, name, network, address);
-        passengers.push_back(&p);
+        passengers.push_back(new Passenger(p));
     }
     else
     {
@@ -344,7 +344,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
             }
             Vehicle v(lastCarId, cap, lastId);
             Driver d(lastId, name, network, address, new Vehicle(v));
-            drivers.push_back(&d);
+            drivers.push_back(new Driver(d));
             break;
         }while(true);
     }
@@ -869,17 +869,15 @@ void Base::writeRequests() {
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
-        newfile<< "::::::::::"<<endl;
+        newfile<< "::::::::::";
     }
     for (auto r : requests_drivers) {
-        newfile<<r->getDriver()->getId()<<endl;
+        newfile<<endl<<r->getDriver()->getId()<<endl;
         newfile<<r->getStartingId()<<endl;
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
         newfile<< "::::::::::";
-        if(r!=*requests_drivers.end())
-            newfile<<endl;
     }
     //const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
     newfile.close();

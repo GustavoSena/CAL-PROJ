@@ -13,18 +13,3 @@ Pedro Seixas
 1, 2, 4
 Rua da Alegria 32
 ::::::::::
-7
-Maria
-6, 8, 10
-rua
-::::::::::
-8
-Henrique
-6, 7, 10
-rua
-::::::::::
-9
-Manel
-5
-rua
-::::::::::
