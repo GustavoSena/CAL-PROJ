@@ -316,7 +316,6 @@ void Base::sign_up(string type) //type = passenger || type = driver
 {
     string name, address;
 
-    system("cls");
     cout << "Insert name\n";
     getline(cin, name);
     cout << "Insert address\n";
@@ -355,7 +354,6 @@ void Base::sign_up(string type) //type = passenger || type = driver
 int Base::sign_in(string type)
 {
     string answer;
-    system("cls");
     do{
         cout << "Choose your account:" << endl;
         int tmp_id = 1;
@@ -375,7 +373,6 @@ int Base::sign_in(string type)
 
             }catch(exception err){
             }
-            system("cls");
             cout << "Invalid answer! Try again" << endl;
 
         } else{
@@ -392,7 +389,6 @@ int Base::sign_in(string type)
 
             }catch(exception err){
             }
-            system("cls");
             cout << "Invalid answer! Try again" << endl;
         }
 

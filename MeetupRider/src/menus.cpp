@@ -9,7 +9,6 @@ int main_menu(Base base)
 
     string answer;
     do{
-        system("cls");
         cout << "Welcome to Meetup Rider!" << endl;
         cout << "   -           __\n"
                 " --          ~( @\\   \\\n"
@@ -65,7 +64,6 @@ int next_menu(Base base, string type)
         else if(compare_str(answer,"u"))
         {
             base.sign_up(type);
-            system("cls");
             cout<<"Successful sign up! You can now sign in:\n";
         }
         else if(compare_str(answer,"b"))
@@ -78,7 +76,6 @@ int next_menu(Base base, string type)
         }
         else
         {
-            system("cls");
             cout << "Invalid answer. Try again!\n";
         }
 
@@ -88,7 +85,6 @@ int next_menu(Base base, string type)
 
 
 void request_menu(Base *base, int id){
-    system("cls");
     do {
 
         cout << "\n\n\nMake request? (y/n)\n";
@@ -99,7 +95,6 @@ void request_menu(Base *base, int id){
             return;
         if (compare_str(input, "y"))
             break;
-        system("cls");
         cout<<"Invalid input!\n";
     }while(true);
 
@@ -231,7 +226,6 @@ void chooseCity(Base *base){
             return;
         }
         else{
-            system("cls");
             cout<<"Invalid input! Plz try again\n";
         }
     }while(true);
@@ -269,7 +263,6 @@ void chooseAlgorithm(Base * base,int id){
             return;
         }
         else{
-            system("cls");
             cout<<"Invalid input! Plz try again\n";
         }
     }while(true);
@@ -305,7 +298,6 @@ void optionMenu(Base *base,int id){
             viewJourneys(base);
         }
         else{
-            system("cls");
             cout<<"Invalid input! Plz try again\n";
         }
     }while(true);
