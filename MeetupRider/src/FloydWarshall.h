@@ -7,9 +7,13 @@
 
 #include "NewGraph.h"
 #include <iostream>
-void writeMatrix(double **matrix);
+void writeDistanceMatrix(double **matrix, string text_file, int size);
 
-double ** readMatrix();
+double ** readDistanceMatrix(string text_file);
+
+void writePathMatrix(int **matrix, string text_file, int size);
+
+int ** readPathMatrix(string text_file);
 
 
 #endif //MEETUPRIDER_FLOYDWARSHALL_H
