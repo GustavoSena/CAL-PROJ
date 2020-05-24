@@ -582,12 +582,14 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
     while(counter < driverRequest->getCapacity() && possibleRequests.size() >0)
     {
         tmp = getClosestToRequest(possibleRequests, driverRequest, result);
+
         if(checkTimeRestrictions(aux, tmp))
         {
             result.push_back(tmp->getPassenger());
             counter++;
             aux.push_back(tmp);
         }
+    
     }
 
     *ids = recalculatePath(aux);

@@ -47,8 +47,7 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-    b.getGraph().floydWarshallShortestPath();
-    b.getGraph().writeFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
+
 
 
 
@@ -56,9 +55,9 @@ int main() {
     /*double **matrix=readMatrix();
     cout<<"read\n";
     writeMatrix(matrix);*/
-    int id=main_menu(b);
+/*    int id=main_menu(b);
     chooseCity(&b);
-    chooseAlgorithm(&b,id);
+    chooseAlgorithm(&b,id);*/
 
 
     /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
@@ -71,7 +70,7 @@ int main() {
 
 
 
-/*
+
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -90,6 +89,8 @@ int main() {
         cout << "false" << endl;
     Time t1(16, 0, 0);
     Time t2(18,0,0);
+    Time t3(-1,0,0);
+    Time t4(-1, 0, 0);
     DriverRequest request(t1, t2,25,4, &d);
     PassengerRequest r1(t1, t2, 25,5,&p1);
     PassengerRequest r2(t1,  t2,25, 6, &p2);
@@ -106,7 +107,7 @@ int main() {
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-*/
+
 
 
 /*    Time t1("3:5:15");
@@ -123,7 +124,7 @@ int main() {
     t3-=t4;
     cout<<t3<<endl;*/
 
-    b.updateFiles();
+    //b.updateFiles();
 
 }
 
