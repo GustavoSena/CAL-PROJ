@@ -327,7 +327,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
     if(type == "passenger")
     {
         Passenger p(lastId, name, network, address);
-        passengers.push_back(&p);
+        passengers.push_back(new Passenger(p));
     }
     else
     {
