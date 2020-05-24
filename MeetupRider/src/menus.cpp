@@ -372,6 +372,7 @@ void floydwarshallMenu(Base*base,int id){
         }
         else if(compare_str(temp, "2")){
             optionMenu(base, id);
+            return;
         }
         else if(compare_str(temp, "3")){
             exit(0);

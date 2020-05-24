@@ -38,14 +38,6 @@ void Person::setAddress(const string &address) {
     Person::address = address;
 }
 
-void Person::setFreqPlaces(const vector<int> &freqPlaces) {
-    Person::freqPlacesId=freqPlaces;
-
-}
-
-const vector<int> &Person::getFreqPlaces() {
-    return freqPlacesId;
-}
 
 void Person::addNetwork(int personId)
 {
@@ -75,9 +67,4 @@ Driver::Driver(int id, const string &name, const vector<int> &network, const str
 
     this->vehicle = vehicle;
 
-}
-
-Driver::Driver(int id, const string &name, const vector<int> &network, const string &address,
-               const vector<int> &freqPlacesId, Vehicle *vehicle): Person(id, name, network, address, freqPlacesId) {
-    this->vehicle = vehicle;
 }

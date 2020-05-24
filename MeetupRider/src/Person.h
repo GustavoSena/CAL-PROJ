@@ -19,12 +19,10 @@ protected:
     string name;
     vector<int> network;
     string address;
-    vector<int> freqPlacesId;
 
 
 public:
     Person(int id, const string &name, const vector<int> &network, const string &address) : id(id), name(name), network(network), address(address){}
-    Person(int id, const string &name, const vector<int> &network, const string &address,const vector<int> &freqPlacesId) : id(id), name(name), network(network), address(address),freqPlacesId(freqPlacesId){}
     Person() = default;
 
 
@@ -44,9 +42,6 @@ public:
 
     string getName();
 
-    void setFreqPlaces(const vector<int> &freqPlaces);
-
-    const vector<int> &getFreqPlaces();
 
     void addNetwork(int personId);
 
@@ -60,7 +55,6 @@ class Passenger : public Person {
 public:
 
     Passenger(int id, const string &name, const vector<int> &network, const string &address) : Person(id, name, network, address) {}
-    Passenger(int id, const string &name, const vector<int> &network, const string &address,const vector<int> &freqPlacesId) : Person(id, name, network, address,freqPlacesId) {}
     Passenger() = default;
 
 
@@ -76,7 +70,6 @@ private:
 public:
 
     Driver(int id, const string &name, const vector<int> &network, const string &address, Vehicle *vehicle);
-    Driver(int id, const string &name, const vector<int> &network, const string &address, const vector<int> &freqPlacesId, Vehicle *vehicle);
     Driver() = default;
 
     Vehicle *getVehicle() const;
