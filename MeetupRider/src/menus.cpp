@@ -108,15 +108,15 @@ void request_menu(Base *base, int id){
     }
     else if (compare_str(temp, "y")){
         Time *t=readTime("Minimum starting");
-        if(t==NULL)
+        if(t==nullptr)
             return;
         aux.setMinStartTime(*t);
         t=readTime("Minimum ending");
-        if(t==NULL)
+        if(t==nullptr)
             return;
         aux.setMinEndTime(*t);
         t=readTime("Maximum ending");
-        if(t==NULL)
+        if(t==nullptr)
             return;
         aux.setMaxEndTime(*t);
 
@@ -290,8 +290,7 @@ void optionMenu(Base *base,int id){
             system("cls");
         }
         else if (compare_str(temp, "4")) {
-            cout<<"Falta fazer a funcao para apresentar as journeys\n";
-            system("cls");
+            viewJourneys(base);
         }
         else{
             system("cls");
@@ -300,6 +299,76 @@ void optionMenu(Base *base,int id){
     }while(true);
 }
 
+
+
+
+
+void viewJourneys(Base *base){
+
+    vector<Journey*> j= base->getJourneys();
+
+    for (int i=0; i<j.size();i++){
+        cout<<i+1<<" -"<<j[i]->showSimp()<<endl;
+    }
+    cout<<"See detailed? (input id to see detailed and 0 to go back): ";
+
+    string temp;
+    getline(cin, temp);
+
+    int x=0;
+
+    try{
+        trim(temp);
+        x=stoi(temp);
+        if(x==0)
+            return;
+        j[x-1]->show();
+        cout<<"See path in map? (y to confirm, anything else to cancel): ";
+        getline(cin, temp);
+        if(compare_str(temp,"y"))
+            //show path function
+            return;
+
+
+        return;
+
+
+    }catch(exception err){
+        cout<<"Error with input: 1 to try again, anything else to cancel: ";
+        getline(cin,temp);
+        if(compare_str(temp,("1"))) {
+            viewJourneys(base);
+            return;
+        }
+        else
+        return;
+    }
+
+
+}
+
+
+
+
+void floydwarshallMenu(Base*base){
+
+    while(true){
+        cout<<"1-Do pre processing\n";
+        cout<<"2-Run FloydWarshall\n";
+        cout<<"3-Exit\n";
+
+        cout<<"Input: ";
+        string temp;
+        getline(cin,temp);
+
+
+
+
+
+    }
+
+
+}
 
 
 
@@ -313,7 +382,7 @@ Time* readTime(string timeType){
         cout << timeType << " time (hh:mm:ss) (0 to cancel)\n";
         getline(cin,temp);
         if(compare_str(temp,"0"))
-            return NULL;
+            return nullptr;
         vector<string> parts = decompose(temp,':');
         try{
             t.setHour(stoi(parts[0]));

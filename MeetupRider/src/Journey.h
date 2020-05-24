@@ -29,6 +29,10 @@ public:
 
     void setDriver(Driver *driver);
 
+    string show();
+
+    string showSimp();
+
     void setPath(const vector<int> &path);
 
     const vector<int> &getPath();

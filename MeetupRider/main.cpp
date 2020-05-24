@@ -46,9 +46,13 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");*/
 
-    double **matrix=readMatrix();
+    /*double **matrix=readMatrix();
     cout<<"read\n";
-    writeMatrix(matrix);
+    writeMatrix(matrix);*/
+
+
+
+
     //int id=main_menu(b);
    /* chooseCity(&b);
     chooseAlgorithm(&b,id);

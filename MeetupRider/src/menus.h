@@ -23,4 +23,6 @@ void chooseCity(Base *base);
 void chooseAlgorithm(Base * base,int id);
 void optionMenu(Base *base,int id);
 Time *readTime(string timeType);
+
+void viewJourneys(Base *base);
 #endif //MEETUPRIDER_MENUS_H
