@@ -4,67 +4,35 @@
 
 #include "menus.h"
 
-void main_menu(Base base)
+int main_menu(Base base)
 {
-    while(true)
-    {
-        bool retry = true;
-        string answer;
-        do{
-            system("cls");
-            cout << "Welcome to Meetup Rider!" << endl;
-            cout << "Are you a [P]assenger or a [D]river?" << endl;
-            cout << "[C]lose"<< endl;
-            getline(cin,answer);
-            if(compare_str(answer,"p"))
-            {
-                retry = false;
-                next_menu(base, "passenger");
-            }
-            else if(compare_str(answer,"d"))
-            {
-                retry = false;
-                next_menu(base, "driver");
-            }
-            else if(compare_str(answer,"c"))
-            {
-                exit(0);
-            }
-            else
-            {
-                cout << "Invalid answer. Try again!\n";
-            }
 
-        }while(retry);
-    }
-
-}
-
-void next_menu(Base base, string type)
-{
-    bool retry = true;
     string answer;
     do{
         system("cls");
-        cout << "Sign [I]n"<< endl;
-        cout << "Sign [U]p" << endl;
-        cout << "Go [B]ack" << endl;
-        cout << "[C]lose" << endl;
+        cout << "Welcome to Meetup Rider!" << endl;
+        cout << "   -           __\n"
+                " --          ~( @\\   \\\n"
+                "---   _________]_[__/_>________\n"
+                "     /  ____ \\ <>     |  ____  \\\n"
+                "    =\\_/ __ \\_\\_______|_/ __ \\__D\n"
+                "________(__)_____________(__)____" << endl;
+        cout << "Are you a [P]assenger or a [D]river?" << endl;
+        cout << "[C]lose"<< endl;
         getline(cin,answer);
-        if(compare_str(answer,"i"))
+        if(compare_str(answer,"p"))
         {
-            retry = false;
-            int id =base.sign_in(type);
-            request_menu(base, id);
+            int id =next_menu(base, "passenger");
+            if(id>-1)
+                return id;
+
         }
-        else if(compare_str(answer,"u"))
+        else if(compare_str(answer,"d"))
         {
-            retry = false;
-            base.sign_up(type);
-        }
-        else if(compare_str(answer,"b"))
-        {
-            return;
+
+            int id=next_menu(base, "driver");
+            if(id>-1)
+                return id;
         }
         else if(compare_str(answer,"c"))
         {
@@ -75,11 +43,51 @@ void next_menu(Base base, string type)
             cout << "Invalid answer. Try again!\n";
         }
 
-    }while(retry);
+    }while(true);
+
+
+}
+
+int next_menu(Base base, string type)
+{
+    string answer;
+    do{
+
+        cout << "Sign [I]n"<< endl;
+        cout << "Sign [U]p" << endl;
+        cout << "Go [B]ack" << endl;
+        cout << "[C]lose" << endl;
+        getline(cin,answer);
+        if(compare_str(answer,"i"))
+        {
+            return base.sign_in(type);
+        }
+        else if(compare_str(answer,"u"))
+        {
+            base.sign_up(type);
+            system("cls");
+            cout<<"Successful sign up! You can now sign in:\n";
+        }
+        else if(compare_str(answer,"b"))
+        {
+            return-1;
+        }
+        else if(compare_str(answer,"c"))
+        {
+            exit(0);
+        }
+        else
+        {
+            system("cls");
+            cout << "Invalid answer. Try again!\n";
+        }
+
+    }while(true);
 }
 
 
-void request_menu(Base base, int id){
+
+void request_menu(Base *base, int id){
     system("cls");
     do {
 
@@ -129,7 +137,8 @@ void request_menu(Base base, int id){
         getline(cin, temp);
         cout<<endl;
         if (compare_str(temp, "y")){
-            //map function
+            cout<<"Falta fazer call da map function\n";
+            system("cls");
         }
         else if(compare_str(temp, "n")){
             //nothing
@@ -160,7 +169,7 @@ void request_menu(Base base, int id){
             cout<<"Error with input please try again\n";
             continue;
         }
-        if(!base.getGraph().areVertexConnected(point1,point2)){
+        if(!base->getGraph().areVertexConnected(point1,point2)){
             cout<<"Cannot connect locations! Please input new ones or cancel!\n";
             continue;
         }
@@ -171,20 +180,136 @@ void request_menu(Base base, int id){
 
     DriverRequest *aux1= static_cast<DriverRequest *>(new Request(aux));
     PassengerRequest *aux2=static_cast<PassengerRequest*>(new Request(aux));
-    Passenger *p=base.findPassenger(id);
+    Passenger *p=base->findPassenger(id);
     if(p== nullptr) {
-        Driver *d = base.findDriver(id);
+        Driver *d = base->findDriver(id);
         aux1->setDriver(d);
     }
     else{
         aux2->setPassenger(p);
     }
     if(typeid(aux)==typeid(PassengerRequest))
-        base.addPassengerRequest(aux2);
+        base->addPassengerRequest(aux2);
     else
-        base.addDriverRequest(aux1);
+        base->addDriverRequest(aux1);
 
 }
+
+void chooseCity(Base *base){
+    do {
+        cout<<"Which city are you in?\n";
+        cout<<"1-Porto\n";
+        cout<<"2-Fafe\n";
+        cout<<"3-Maia\n";
+        cout<<"4-8x8 grid\n";
+        cout<<"5-Exit program\n";
+        string temp;
+        getline(cin, temp);
+
+
+
+        if (compare_str(temp, "5"))
+            exit(0);
+
+        if (compare_str(temp, "1")) {
+            base->loadGraph("..\\resources\\maps\\Porto\\nodes.txt", "..\\resources\\maps\\Porto\\edges.txt");
+            return;
+        }
+        else if (compare_str(temp, "2")) {
+            base->loadGraph("..\\resources\\maps\\Fafe\\nodes.txt", "..\\resources\\maps\\Fafe\\edges.txt");
+            return;
+        }else if (compare_str(temp, "3")) {
+            base->loadGraph("..\\resources\\maps\\Maia\\nodes.txt", "..\\resources\\maps\\Maia\\edges.txt");
+            return;
+        }else if (compare_str(temp, "4")) {
+            base->loadGraph("..\\resources\\maps\\8x8)\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
+            return;
+        }
+        else{
+            system("cls");
+            cout<<"Invalid input! Plz try again\n";
+        }
+    }while(true);
+
+
+}
+
+
+
+void chooseAlgorithm(Base * base,int id){
+    do {
+        cout<<"Choose algorithm?\n";
+        cout<<"1-FloydWarshall\n";
+        cout<<"2-Astar\n";
+        cout<<"3-Dijkstra\n";
+        cout<<"4-Exit program\n";
+        string temp;
+        getline(cin, temp);
+
+        if (compare_str(temp, "4"))
+            exit(0);
+
+        if (compare_str(temp, "1")) {
+            base->setAlgorithm("floydwarshall");
+            return;
+        }
+        else if (compare_str(temp, "2")) {
+            base->setAlgorithm("astar");
+            optionMenu(base,id);
+            return;
+        }else if (compare_str(temp, "3")) {
+            base->setAlgorithm("dijkstra");
+            return;
+        }
+        else{
+            system("cls");
+            cout<<"Invalid input! Plz try again\n";
+        }
+    }while(true);
+
+}
+
+
+void optionMenu(Base *base,int id){
+    do {
+        cout<<"What do you want to do?\n";
+        cout<<"1-Add Request\n";
+        cout<<"2-Run algorithm\n";
+        cout<<"3-See Map\n";
+        cout<<"4-See previour Journeys\n";
+        cout<<"5-Exit program\n";
+        string temp;
+        getline(cin, temp);
+
+        if (compare_str(temp, "5"))
+            exit(0);
+
+        if (compare_str(temp, "1")) {
+            request_menu(base,id);
+            return;
+        }
+        else if (compare_str(temp, "2")) {
+            base->run_algorithm();
+            return;
+        }else if (compare_str(temp, "3")) {
+            cout<<"Falta fazer call da map function\n";
+            system("cls");
+        }
+        else if (compare_str(temp, "4")) {
+            cout<<"Falta fazer a funcao para apresentar as journeys\n";
+            system("cls");
+        }
+        else{
+            system("cls");
+            cout<<"Invalid input! Plz try again\n";
+        }
+    }while(true);
+}
+
+
+
+
+
 
 
 Time* readTime(string timeType){

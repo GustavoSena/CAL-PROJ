@@ -37,6 +37,7 @@ private:
     string passengerFile;
     string algorithm;
 
+
 public:
 
     Base(string fileName);
@@ -70,6 +71,8 @@ public:
 
     void setDriverFile(string fileName);
 
+    void setAlgorithm(string alg);
+
     string getPassengerFile();
 
     string getDriverFile();
@@ -77,6 +80,8 @@ public:
     string getRequestFile();
 
     string getJourneyFile();
+
+    string getAlgorithm();
 
     Graph &getGraph() ;
 
@@ -127,6 +132,9 @@ public:
 
     vector<int> calculatePath(vector<int>ids, double &distance);
 
+
+    void run_algorithm();
+
     bool removePassengerRequests(Passenger * p);
 
     bool removeRequests(vector<Passenger*> passengers, DriverRequest * request);
@@ -153,7 +161,6 @@ public:
 
     void updatePeopleKnown(Driver *driver, vector<Passenger*> passengers);
 
-    void setAlgorithm(string alg);
 
     void loadFloydWarshall();
 

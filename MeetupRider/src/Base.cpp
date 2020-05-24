@@ -364,6 +364,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
             Vehicle v(lastCarId, cap, lastId);
             Driver d(lastId, name, network, address, &v);
             drivers.push_back(&d);
+            break;
         }while(true);
     }
 
@@ -837,7 +838,7 @@ void Base::updatePeopleKnown(Driver *driver, vector<Passenger*> passengers)
 
 void Base::writePassengers() {
     ofstream newfile;
-    newfile.open("newPassengerFile.txt");
+    newfile.open("..\\resources\\files\\"+passengerFile);
     for (auto p : passengers) {
         newfile << p->getId() << endl;
         newfile << p->getName() << endl;
@@ -857,15 +858,15 @@ void Base::writePassengers() {
         if(p!=*passengers.end())
            newfile << endl;
     }
-    const char* fileName = passengerFile.c_str();
+    //const char* fileName = ("..\\resources\\files\\"+passengerFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("newPassengerFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newPassengerFile.txt", fileName);
 }
 
 void Base::writeDrivers() {
     ofstream newfile;
-    newfile.open("newDriverFile.txt");
+    newfile.open("..\\resources\\files\\"+driverFile);
     for (auto d : drivers) {
         newfile <<d->getId() << endl;
         newfile << d->getName() << endl;
@@ -885,15 +886,15 @@ void Base::writeDrivers() {
         if(d!=*drivers.end())
             newfile << endl;
     }
-    const char* fileName = driverFile.c_str();
+    //const char* fileName = ("..\\resources\\files\\"+driverFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("newDriverFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newDriverFile.txt", fileName);
 }
 
 void Base::writeRequests() {
     ofstream newfile;
-    newfile.open("newRequestFile.txt");
+    newfile.open("..\\resources\\files\\"+requestFile);
     for (auto r : requests_passengers) {
         newfile<<r->getPassenger()->getId()<<endl;
         newfile<<r->getStartingId()<<endl;
@@ -914,15 +915,15 @@ void Base::writeRequests() {
         if(r!=*requests_drivers.end())
             newfile<<endl;
     }
-    const char* fileName = requestFile.c_str();
+    //const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("newRequestFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newRequestFile.txt", fileName);
 }
 
 void Base::writeJourneys() {
     ofstream newfile;
-    newfile.open("newJourneyFile.txt");
+    newfile.open("..\\resources\\files\\"+journeyFile);
     for (auto j : journeys) {
         newfile<<j->getDriver()->getId()<<endl;
         for (Passenger *p : j->getPassenger()) {
@@ -947,10 +948,10 @@ void Base::writeJourneys() {
             newfile<<endl;
     }
 
-    const char* fileName = journeyFile.c_str();
+    //const char* fileName = ("..\\resources\\files\\"+journeyFile).c_str();
     newfile.close();
-    remove(fileName);
-    int i=rename("newJourneyFile.txt", fileName);
+    //remove(fileName);
+    //int i=rename("..\\resources\\files\\newJourneyFile.txt", fileName);
 }
 
 void Base::setPassengerFile(string fileName) {
@@ -992,10 +993,26 @@ void Base::updateFiles() {
     writeRequests();
 }
 
-void Base::setAlgorithm(string alg)
-{
-    this->algorithm = alg;
+string Base::getAlgorithm() {
+    return algorithm;
 }
+
+void Base::setAlgorithm(string alg) {
+    algorithm=alg;
+
+}
+
+void Base::run_algorithm() {
+    int count=0;
+    for (DriverRequest*d : requests_drivers){
+        if(createJourney(d))
+            cout<<++count<<"- journey successeful\n";
+        else
+            cout<<++count<<"- nop possible to make journey\n";
+    }
+
+}
+
 
 void Base::loadFloydWarshall()
 {

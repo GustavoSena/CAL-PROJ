@@ -6,10 +6,10 @@
 #define MEETUPRIDER_FLOYDWARSHALL_H
 
 #include "NewGraph.h"
+#include <iostream>
+void writeMatrix(double **matrix);
 
-void writeMatrix(double **matrix, string text_file);
-
-double ** readMatrix(string text_file);
+double ** readMatrix();
 
 
 #endif //MEETUPRIDER_FLOYDWARSHALL_H

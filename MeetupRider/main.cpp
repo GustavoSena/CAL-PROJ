@@ -42,10 +42,18 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 
 int main() {
 
-    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
+    /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    Base b("..\\resources\\files\\Base.txt");
-    b.loadGraph(node_text, edge_text);
+    Base b("..\\resources\\files\\Base.txt");*/
+
+    double **matrix=readMatrix();
+    cout<<"read\n";
+    writeMatrix(matrix);
+    //int id=main_menu(b);
+   /* chooseCity(&b);
+    chooseAlgorithm(&b,id);
+
+
 
 /*
     vector<int> network;
