@@ -259,6 +259,7 @@ void chooseAlgorithm(Base * base,int id){
             return;
         }else if (compare_str(temp, "3")) {
             base->setAlgorithm("dijkstra");
+            optionMenu(base,id);
             return;
         }
         else{
