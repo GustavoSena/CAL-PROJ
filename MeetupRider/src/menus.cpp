@@ -212,17 +212,17 @@ void chooseCity(Base *base){
             exit(0);
 
         if (compare_str(temp, "1")) {
-            base->loadGraph("..\\resources\\maps\\Porto\\nodes.txt", "..\\resources\\maps\\Porto\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\Porto\\nodes_x_y_porto.txt", "..\\resources\\maps\\Porto\\edges_porto.txt");
             return;
         }
         else if (compare_str(temp, "2")) {
-            base->loadGraph("..\\resources\\maps\\Fafe\\nodes.txt", "..\\resources\\maps\\Fafe\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
             return;
         }else if (compare_str(temp, "3")) {
-            base->loadGraph("..\\resources\\maps\\Maia\\nodes.txt", "..\\resources\\maps\\Maia\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\Maia\\nodes_x_y_maia.txt", "..\\resources\\maps\\Maia\\edges_maia.txt");
             return;
         }else if (compare_str(temp, "4")) {
-            base->loadGraph("..\\resources\\maps\\8x8)\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\8x8\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
             return;
         }
         else{
@@ -251,6 +251,7 @@ void chooseAlgorithm(Base * base,int id){
 
         if (compare_str(temp, "1")) {
             base->setAlgorithm("floydwarshall");
+            floydwarshallMenu(base,id);
             return;
         }
         else if (compare_str(temp, "2")) {
@@ -356,20 +357,31 @@ void viewJourneys(Base *base){
 
 
 
-void floydwarshallMenu(Base*base){
+void floydwarshallMenu(Base*base,int id){
 
-    while(true){
-        cout<<"1-Do pre processing\n";
-        cout<<"2-Run FloydWarshall\n";
-        cout<<"3-Exit\n";
+    while(true) {
+        cout << "1-Watch pre-processing live\n";
+        cout << "2-Run FloydWarshall\n";
+        cout << "3-Exit\n";
 
-        cout<<"Input: ";
+        cout << "Input: ";
         string temp;
-        getline(cin,temp);
+        getline(cin, temp);
 
+        if (compare_str(temp, "1")){
+            //do pre processing
 
-
-
+        }
+        else if(compare_str(temp, "2")){
+            optionMenu(base, id);
+        }
+        else if(compare_str(temp, "3")){
+            exit(0);
+        }
+        else {
+            cout << "Invalid input try again\n";
+            continue;
+        }
 
     }
 

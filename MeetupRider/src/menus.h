@@ -25,4 +25,7 @@ void optionMenu(Base *base,int id);
 Time *readTime(string timeType);
 
 void viewJourneys(Base *base);
+
+void floydwarshallMenu(Base*base,int id);
+
 #endif //MEETUPRIDER_MENUS_H
