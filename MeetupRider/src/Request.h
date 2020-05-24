@@ -14,24 +14,24 @@ public:
 
     Request()=default;
 
-    Request(const Time &minStartTime, const Time &maxEndTime,
+    Request( Time minStartTime,  Time maxEndTime,
             int destinationId, int startingId);
 
-    const Time &getMinStartTime() const;
+     Time getMinStartTime();
 
-    void setMinStartTime(const Time &minStartTime);
+    void setMinStartTime( Time minStartTime);
 
-    const Time &getMaxEndTime() const;
+     Time getMaxEndTime();
 
-    void setMaxEndTime(const Time &maxEndTime);
+    void setMaxEndTime( Time maxEndTime);
 
-    const int &getDestinationId() const;
+    int getDestinationId();
 
-    void setDestinationId(const int &id);
+    void setDestinationId( int id);
 
-    const int &getStartingId() const;
+     int getStartingId() ;
 
-    void setStartingId(const int &id);
+    void setStartingId( int id);
 
     void setTimesNull();
 
@@ -49,12 +49,12 @@ protected:
 
 class PassengerRequest : public Request{
 public:
-    PassengerRequest(const Time &minStartTime, const Time &maxEndTime,
+    PassengerRequest( Time minStartTime,  Time maxEndTime,
                      int destinationId, int startingId, Passenger *passenger);
     PassengerRequest(int destinationId, int startingId, Passenger * passenger);
 
     PassengerRequest() =default;
-    Passenger *getPassenger() const;
+    Passenger *getPassenger();
 
     void setPassenger(Passenger *passenger);
 
@@ -67,7 +67,7 @@ private:
 
 class DriverRequest : public Request{
 public:
-    DriverRequest(const Time &minStartTime, const Time &maxEndTime, int destinationId,
+    DriverRequest( Time minStartTime,  Time maxEndTime, int destinationId,
                   int startingId, Driver *driver);
 
 
@@ -75,7 +75,7 @@ public:
 
     DriverRequest() = default;
 
-    Driver *getDriver() const;
+    Driver *getDriver();
 
     void setDriver(Driver *driver);
 

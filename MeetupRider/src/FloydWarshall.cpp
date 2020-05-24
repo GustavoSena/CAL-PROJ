@@ -31,8 +31,6 @@ void writeMatrix(double **matrix){
 
 }
 
-
-
 double ** readMatrix(){
 
     ifstream a_file;

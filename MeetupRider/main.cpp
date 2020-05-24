@@ -43,8 +43,8 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 int main() {
 
     /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
-    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    Base b("..\\resources\\files\\Base.txt");*/
+    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";*/
+    Base b("..\\resources\\files\\Base.txt");
 
     /*double **matrix=readMatrix();
     cout<<"read\n";
@@ -53,8 +53,8 @@ int main() {
 
 
 
-    //int id=main_menu(b);
-   /* chooseCity(&b);
+    int id=main_menu(b);
+    chooseCity(&b);
     chooseAlgorithm(&b,id);
 
 

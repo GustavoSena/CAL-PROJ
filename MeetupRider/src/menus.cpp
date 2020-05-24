@@ -109,22 +109,28 @@ void request_menu(Base *base, int id){
     cout<<"Time restriction? (y/n) (anything else to cancel): ";
     getline(cin,temp);
     cout<<endl;
-    if (compare_str(temp, "n")){
-        aux.setTimesNull();
-    }
-    else if (compare_str(temp, "y")){
-        Time *t=readTime("Minimum starting");
-        if(t==nullptr)
-            return;
-        aux.setMinStartTime(*t);
-        t=readTime("Maximum ending");
-        if(t==nullptr)
-            return;
-        aux.setMaxEndTime(*t);
 
-    }
-    else
-        return;
+        if (compare_str(temp, "n")) {
+            aux.setTimesNull();
+        } else if (compare_str(temp, "y")) {
+            while(true) {
+                Time *t = readTime("Minimum starting");
+                if (t == nullptr)
+                    return;
+                aux.setMinStartTime(*t);
+                t = readTime("Maximum ending");
+                if (t == nullptr)
+                    return;
+                aux.setMaxEndTime(*t);
+
+                if(aux.getMinStartTime()<aux.getMaxEndTime())
+                    break;
+                cout<<"Invalid times please try again\n";
+            }
+
+
+        } else
+            return;
 
     int point1;
     int point2;
@@ -396,11 +402,15 @@ Time* readTime(string timeType){
     do {
         string temp;
         Time t;
-        cout << timeType << " time (hh:mm:ss) (-1 to cancel)\n";
+        cout << timeType << " time (hh:mm:ss) (-1 to cancel): ";
         getline(cin,temp);
         if(compare_str(temp,"-1"))
             return nullptr;
         vector<string> parts = decompose(temp,':');
+        if(parts.size()!=3){
+            cout<<"Error with input! Please try again\n";
+            continue;
+        }
         try{
             t.setHour(stoi(parts[0]));
             t.setMinute(stoi(parts[1]));
