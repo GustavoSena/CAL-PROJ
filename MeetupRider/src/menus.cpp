@@ -11,6 +11,12 @@ int main_menu(Base base)
     do{
         system("cls");
         cout << "Welcome to Meetup Rider!" << endl;
+        cout << "   -           __\n"
+                " --          ~( @\\   \\\n"
+                "---   _________]_[__/_>________\n"
+                "     /  ____ \\ <>     |  ____  \\\n"
+                "    =\\_/ __ \\_\\_______|_/ __ \\__D\n"
+                "________(__)_____________(__)____" << endl;
         cout << "Are you a [P]assenger or a [D]river?" << endl;
         cout << "[C]lose"<< endl;
         getline(cin,answer);
