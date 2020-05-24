@@ -47,8 +47,9 @@ int main() {
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
-    b.getGraph().readFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
-    b.setAlgorithm("floydwarshall");
+    b.getGraph().floydWarshallShortestPath();
+    b.getGraph().writeFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
+
 
     /*vector<int> network;
     Vehicle car(0, 4, 0);
