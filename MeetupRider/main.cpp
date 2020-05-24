@@ -50,7 +50,36 @@ int main() {
     b.getGraph().readFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
     b.setAlgorithm("floydwarshall");
 
-
+    /*vector<int> network;
+    Vehicle car(0, 4, 0);
+    Driver d(0, "Joao", network, "rua", &car);
+    Passenger p1(0, "Maria", network, "rua");
+    Passenger p2(0, "Henrique", network, "rua");
+    Passenger p3(0, "Manel", network, "rua");
+    Passenger p4(0, "Julio", network, "rua");
+    b.addDriver(&d);
+    b.addPassenger(&p1);
+    b.addPassenger(&p2);
+    b.addPassenger(&p3);
+    b.addPassenger(&p4);
+    if(b.getGraph().areVertexConnected(4,25))
+        cout << "true"<< endl;
+    else
+        cout << "false" << endl;
+    Time t1(16, 0, 0);
+    Time t2(18,0,0);
+    DriverRequest request(t1, t2,25,4, &d);
+    PassengerRequest r1(t1, t2, 25,5,&p1);
+    PassengerRequest r2(t1,  t2,25, 6, &p2);
+    PassengerRequest r3(t1,  t2,25, 7, &p3);
+    PassengerRequest r4(t1,  t2, 16, 5, &p4);
+    b.addDriverRequest(&request);
+    b.addPassengerRequest(&r1);
+    b.addPassengerRequest(&r2);
+    b.addPassengerRequest(&r3);
+    b.addPassengerRequest(&r4);
+    d.addNetwork(4);
+    p3.addNetwork(5);*/
 
     /*double **matrix=readMatrix();
     cout<<"read\n";
@@ -67,7 +96,6 @@ int main() {
     /*double **matrix=readMatrix();
     cout<<"read\n";
     writeMatrix(matrix);*/
-
 
 
 /*
@@ -100,12 +128,7 @@ int main() {
     b.addPassengerRequest(&r3);
     b.addPassengerRequest(&r4);
     d.addNetwork(4);
-    p3.addNetwork(5);
-    if(b.createJourney(&request))
-        cout<< "True"<< endl;
-    else
-        cout << "False"<<endl;
-*/
+    p3.addNetwork(5);*/
 
 
 /*    Time t1("3:5:15");

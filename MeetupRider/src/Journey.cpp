@@ -66,7 +66,7 @@ string Journey::show(){
     ss<<"Path: ";
     for(int i:path){
         ss<<i;
-        if(i!= *path.end())
+        if(i!= *(path.end()-1))
             ss<<"->";
     }
 
