@@ -42,6 +42,7 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 
 int main() {
 
+
     string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
     Base b("..\\resources\\files\\Base.txt");
@@ -57,6 +58,15 @@ int main() {
     //int id=main_menu(b);
 /*    chooseCity(&b);
     chooseAlgorithm(&b,id);*/
+
+
+    /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
+    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";*/
+
+
+    /*double **matrix=readMatrix();
+    cout<<"read\n";
+    writeMatrix(matrix);*/
 
 
 
@@ -79,11 +89,11 @@ int main() {
         cout << "false" << endl;
     Time t1(16, 0, 0);
     Time t2(18,0,0);
-    DriverRequest request(t1, t2, t2,25,4, &d);
-    PassengerRequest r1(t1,t2, t2, 25,5,&p1);
-    PassengerRequest r2(t1, t2, t2,25, 6, &p2);
-    PassengerRequest r3(t1, t2, t2,25, 7, &p3);
-    PassengerRequest r4(t1, t2, t2, 16, 5, &p4);
+    DriverRequest request(t1, t2,25,4, &d);
+    PassengerRequest r1(t1, t2, 25,5,&p1);
+    PassengerRequest r2(t1,  t2,25, 6, &p2);
+    PassengerRequest r3(t1,  t2,25, 7, &p3);
+    PassengerRequest r4(t1,  t2, 16, 5, &p4);
     b.addDriverRequest(&request);
     b.addPassengerRequest(&r1);
     b.addPassengerRequest(&r2);

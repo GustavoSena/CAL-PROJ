@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include "Base.h"
+#include "graphDrawing.h"
 
 using namespace std;
 
@@ -23,4 +24,9 @@ void chooseCity(Base *base);
 void chooseAlgorithm(Base * base,int id);
 void optionMenu(Base *base,int id);
 Time *readTime(string timeType);
+
+void viewJourneys(Base *base);
+
+void floydwarshallMenu(Base*base,int id);
+
 #endif //MEETUPRIDER_MENUS_H

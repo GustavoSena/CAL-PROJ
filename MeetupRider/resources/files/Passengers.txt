@@ -2,17 +2,14 @@
 Leonor Gomes
 2, 3
 Rua Francisco Sá Carneiro 13
-
 ::::::::::
 3
 Ana Mafalda
 1, 2
 Rua Dr. Roberto Frias 12
-
 ::::::::::
 5
 Pedro Seixas
 1, 2, 4
 Rua da Alegria 32
-
 ::::::::::

@@ -4,6 +4,7 @@
 
 #include "Base.h"
 
+
 Base::Base(){
 
     this->algorithm = "astar";
@@ -73,13 +74,6 @@ void Base::loadPassengers(string fileName){
                 p.setAddress(temp);
                 break;
             case 4:
-                parts = decompose(temp,',');
-                for (string i : parts)
-                    aux.push_back(stoi(i));
-                p.setFreqPlaces(aux);
-                aux={};
-                break;
-            case 5:
                 passengers.push_back(new Passenger(p));
                 p= Passenger();
                 counter=-1;
@@ -121,17 +115,10 @@ void Base::loadDrivers(string fileName){
                 break;
             case 4:
                 parts = decompose(temp,',');
-                for (string i : parts)
-                    aux.push_back(stoi(i));
-                d.setFreqPlaces(aux);
-                aux={};
-                break;
-            case 5:
-                parts = decompose(temp,',');
                 v = Vehicle(stoi(parts[0]),stoi(parts[1]),d.getId());
                 d.setVehicle(new Vehicle(v));
                 break;
-            case 6:
+            case 5:
                 drivers.push_back(new Driver(d));
                 d= Driver();
                 counter=-1;
@@ -190,17 +177,11 @@ void Base::loadRequests(string fileName){
                 break;
             case 4:
                 if(pass)
-                    pr.setMinEndTime(Time(temp));
+                    pr.setMaxEndTime(Time(temp));
                 else
-                    pr.setMinEndTime(Time(temp));
+                    pr.setMaxEndTime(Time(temp));
                 break;
             case 5:
-                if(pass)
-                    pr.setMinEndTime(Time(temp));
-                else
-                    pr.setMinEndTime(Time(temp));
-                break;
-            case 6:
                 if(pass)
                     requests_passengers.push_back(new PassengerRequest(pr));
                 else
@@ -247,13 +228,13 @@ void Base::loadJourneys(string fileName){
             case 3:
                 j.setStartTime(Time(temp));
                 break;
-            case 4:
+            /*case 4:
                 parts = decompose(temp,',');
                 for (string i : parts)
                     times.push_back(Time(temp));
                 j.setArrivalTimes(times);
-                break;
-            case 5:
+                break;*/
+            case 4:
                 journeys.push_back(new Journey(j));
                 j= Journey();
                 counter=-1;
@@ -335,7 +316,6 @@ void Base::sign_up(string type) //type = passenger || type = driver
 {
     string name, address;
 
-    system("cls");
     cout << "Insert name\n";
     getline(cin, name);
     cout << "Insert address\n";
@@ -374,7 +354,6 @@ void Base::sign_up(string type) //type = passenger || type = driver
 int Base::sign_in(string type)
 {
     string answer;
-    system("cls");
     do{
         cout << "Choose your account:" << endl;
         int tmp_id = 1;
@@ -394,7 +373,6 @@ int Base::sign_in(string type)
 
             }catch(exception err){
             }
-            system("cls");
             cout << "Invalid answer! Try again" << endl;
 
         } else{
@@ -411,7 +389,6 @@ int Base::sign_in(string type)
 
             }catch(exception err){
             }
-            system("cls");
             cout << "Invalid answer! Try again" << endl;
         }
 
@@ -849,11 +826,6 @@ void Base::writePassengers() {
         }
 
         newfile << endl <<p->getAddress() << endl;
-        for (int i : p->getFreqPlaces()) {
-            newfile << i;
-            if(i!=*p->getFreqPlaces().end())
-                newfile<<", ";
-        }
         newfile <<endl << "::::::::::";
         if(p!=*passengers.end())
            newfile << endl;
@@ -876,11 +848,6 @@ void Base::writeDrivers() {
                 newfile<<", \n";
         }
         newfile << endl <<d->getAddress() << endl;
-        for (int i : d->getFreqPlaces()) {
-            newfile << i;
-            if(i!=*d->getFreqPlaces().end())
-                newfile<<", \n";
-        }
         newfile <<endl<< d->getVehicle()<<endl;
         newfile  << "::::::::::";
         if(d!=*drivers.end())
@@ -900,7 +867,6 @@ void Base::writeRequests() {
         newfile<<r->getStartingId()<<endl;
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
-        newfile<<r->getMinEndTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
         newfile<< "::::::::::"<<endl;
     }
@@ -909,7 +875,6 @@ void Base::writeRequests() {
         newfile<<r->getStartingId()<<endl;
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
-        newfile<<r->getMinEndTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
         newfile<< "::::::::::";
         if(r!=*requests_drivers.end())
@@ -938,11 +903,11 @@ void Base::writeJourneys() {
                 newfile<<", ";
         }
         newfile<<endl<<j->getStartTime()<<endl;
-        for (Time t: j->getArrivalTimes()) {
+        /*for (Time t: j->getArrivalTimes()) {
             newfile << t;
             if(!(t==*j->getArrivalTimes().end()))
                 newfile<<", ";
-        }
+        }*/
         newfile<<endl<< "::::::::::";
         if(j!=*journeys.end())
             newfile<<endl;
@@ -1016,6 +981,14 @@ void Base::run_algorithm() {
 
 void Base::loadFloydWarshall() {
     graph.floydWarshallShortestPath();
+}
+
+string Base::getMap() {
+    return map;
+}
+
+void Base::setMap(string m) {
+    map=m;
 }
 
 

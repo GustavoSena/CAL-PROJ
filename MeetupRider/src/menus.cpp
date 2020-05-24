@@ -9,7 +9,6 @@ int main_menu(Base base)
 
     string answer;
     do{
-        system("cls");
         cout << "Welcome to Meetup Rider!" << endl;
         cout << "   -           __\n"
                 " --          ~( @\\   \\\n"
@@ -65,7 +64,6 @@ int next_menu(Base base, string type)
         else if(compare_str(answer,"u"))
         {
             base.sign_up(type);
-            system("cls");
             cout<<"Successful sign up! You can now sign in:\n";
         }
         else if(compare_str(answer,"b"))
@@ -78,7 +76,6 @@ int next_menu(Base base, string type)
         }
         else
         {
-            system("cls");
             cout << "Invalid answer. Try again!\n";
         }
 
@@ -88,7 +85,6 @@ int next_menu(Base base, string type)
 
 
 void request_menu(Base *base, int id){
-    system("cls");
     do {
 
         cout << "\n\n\nMake request? (y/n)\n";
@@ -99,7 +95,6 @@ void request_menu(Base *base, int id){
             return;
         if (compare_str(input, "y"))
             break;
-        system("cls");
         cout<<"Invalid input!\n";
     }while(true);
 
@@ -109,26 +104,28 @@ void request_menu(Base *base, int id){
     cout<<"Time restriction? (y/n) (anything else to cancel): ";
     getline(cin,temp);
     cout<<endl;
-    if (compare_str(temp, "n")){
-        aux.setTimesNull();
-    }
-    else if (compare_str(temp, "y")){
-        Time *t=readTime("Minimum starting");
-        if(t==NULL)
-            return;
-        aux.setMinStartTime(*t);
-        t=readTime("Minimum ending");
-        if(t==NULL)
-            return;
-        aux.setMinEndTime(*t);
-        t=readTime("Maximum ending");
-        if(t==NULL)
-            return;
-        aux.setMaxEndTime(*t);
 
-    }
-    else
-        return;
+        if (compare_str(temp, "n")) {
+            aux.setTimesNull();
+        } else if (compare_str(temp, "y")) {
+            while(true) {
+                Time *t = readTime("Minimum starting");
+                if (t == nullptr)
+                    return;
+                aux.setMinStartTime(*t);
+                t = readTime("Maximum ending");
+                if (t == nullptr)
+                    return;
+                aux.setMaxEndTime(*t);
+
+                if(aux.getMinStartTime()<aux.getMaxEndTime())
+                    break;
+                cout<<"Invalid times please try again\n";
+            }
+
+
+        } else
+            return;
 
     int point1;
     int point2;
@@ -137,8 +134,7 @@ void request_menu(Base *base, int id){
         getline(cin, temp);
         cout<<endl;
         if (compare_str(temp, "y")){
-            cout<<"Falta fazer call da map function\n";
-            system("cls");
+            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),vector<int>{},false);
         }
         else if(compare_str(temp, "n")){
             //nothing
@@ -212,21 +208,24 @@ void chooseCity(Base *base){
             exit(0);
 
         if (compare_str(temp, "1")) {
-            base->loadGraph("..\\resources\\maps\\Porto\\nodes.txt", "..\\resources\\maps\\Porto\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\Porto\\nodes_x_y_porto.txt", "..\\resources\\maps\\Porto\\edges_porto.txt");
+            base->setMap("Porto");
             return;
         }
         else if (compare_str(temp, "2")) {
-            base->loadGraph("..\\resources\\maps\\Fafe\\nodes.txt", "..\\resources\\maps\\Fafe\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
+            base->setMap("Fafe");
             return;
         }else if (compare_str(temp, "3")) {
-            base->loadGraph("..\\resources\\maps\\Maia\\nodes.txt", "..\\resources\\maps\\Maia\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\Maia\\nodes_x_y_maia.txt", "..\\resources\\maps\\Maia\\edges_maia.txt");
+            base->setMap("Maia");
             return;
         }else if (compare_str(temp, "4")) {
-            base->loadGraph("..\\resources\\maps\\8x8)\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
+            base->loadGraph("..\\resources\\maps\\8x8\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
+            base->setMap("8x8");
             return;
         }
         else{
-            system("cls");
             cout<<"Invalid input! Plz try again\n";
         }
     }while(true);
@@ -251,6 +250,7 @@ void chooseAlgorithm(Base * base,int id){
 
         if (compare_str(temp, "1")) {
             base->setAlgorithm("floydwarshall");
+            floydwarshallMenu(base,id);
             return;
         }
         else if (compare_str(temp, "2")) {
@@ -259,10 +259,10 @@ void chooseAlgorithm(Base * base,int id){
             return;
         }else if (compare_str(temp, "3")) {
             base->setAlgorithm("dijkstra");
+            optionMenu(base,id);
             return;
         }
         else{
-            system("cls");
             cout<<"Invalid input! Plz try again\n";
         }
     }while(true);
@@ -292,20 +292,98 @@ void optionMenu(Base *base,int id){
             base->run_algorithm();
             return;
         }else if (compare_str(temp, "3")) {
-            cout<<"Falta fazer call da map function\n";
-            system("cls");
+            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),vector<int>{},false);
         }
         else if (compare_str(temp, "4")) {
-            cout<<"Falta fazer a funcao para apresentar as journeys\n";
-            system("cls");
+            viewJourneys(base);
         }
         else{
-            system("cls");
             cout<<"Invalid input! Plz try again\n";
         }
     }while(true);
 }
 
+
+
+
+
+void viewJourneys(Base *base){
+
+    vector<Journey*> j= base->getJourneys();
+
+    for (int i=0; i<j.size();i++){
+        cout<<i+1<<" -"<<j[i]->showSimp()<<endl;
+    }
+    cout<<"See detailed? (input id to see detailed and 0 to go back): ";
+
+    string temp;
+    getline(cin, temp);
+
+    int x;
+
+    try{
+        trim(temp);
+        x=stoi(temp);
+        if(x==0)
+            return;
+        j[x-1]->show();
+        cout<<"See path in map? (y to confirm, anything else to cancel): ";
+        getline(cin, temp);
+        if(compare_str(temp,"y"))
+            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),j[x-1]->getPath(),true);
+
+        return;
+
+
+
+
+    }catch(exception err){
+        cout<<"Error with input: 1 to try again, anything else to cancel: ";
+        getline(cin,temp);
+        if(compare_str(temp,("1")))
+            viewJourneys(base);
+
+
+        return;
+
+    }
+
+
+}
+
+
+
+
+void floydwarshallMenu(Base*base,int id){
+
+    while(true) {
+        cout << "1-Watch pre-processing live\n";
+        cout << "2-Run FloydWarshall\n";
+        cout << "3-Exit\n";
+
+        cout << "Input: ";
+        string temp;
+        getline(cin, temp);
+
+        if (compare_str(temp, "1")){
+            //do pre processing
+        }
+        else if(compare_str(temp, "2")){
+            optionMenu(base, id);
+            return;
+        }
+        else if(compare_str(temp, "3")){
+            exit(0);
+        }
+        else {
+            cout << "Invalid input try again\n";
+            continue;
+        }
+
+    }
+
+
+}
 
 
 
@@ -316,11 +394,15 @@ Time* readTime(string timeType){
     do {
         string temp;
         Time t;
-        cout << timeType << " time (hh:mm:ss) (0 to cancel)\n";
+        cout << timeType << " time (hh:mm:ss) (-1 to cancel): ";
         getline(cin,temp);
-        if(compare_str(temp,"0"))
-            return NULL;
+        if(compare_str(temp,"-1"))
+            return nullptr;
         vector<string> parts = decompose(temp,':');
+        if(parts.size()!=3){
+            cout<<"Error with input! Please try again\n";
+            continue;
+        }
         try{
             t.setHour(stoi(parts[0]));
             t.setMinute(stoi(parts[1]));
