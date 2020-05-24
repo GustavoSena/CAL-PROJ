@@ -768,7 +768,6 @@ Time Base::predictTime(double distance)
 
 bool Base::conditionTime(Request *r, Time t)
 {
-    //return (r->getMinStartTime() <= r->getMaxEndTime() - t) && (r->getMinEndTime() <= r->getMinStartTime() + t);
     return r->getMinStartTime() <= r->getMaxEndTime() - t;
 }
 

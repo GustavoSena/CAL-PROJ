@@ -47,6 +47,7 @@ int main() {
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
 
+/*
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -82,6 +83,7 @@ int main() {
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
+*/
 
 
 /*    Time t1("3:5:15");
