@@ -321,7 +321,7 @@ void viewJourneys(Base *base){
     string temp;
     getline(cin, temp);
 
-    int x=0;
+    int x;
 
     try{
         trim(temp);

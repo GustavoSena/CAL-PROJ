@@ -38,7 +38,7 @@ void Journey::setDriver(Driver *driver) {
     Journey::driver = driver;
 }
 
-void Journey::setPath(const vector<int> &path) {
+void Journey::setPath( vector<int> path) {
     Journey::path=path;
 
 }

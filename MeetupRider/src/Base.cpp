@@ -76,13 +76,6 @@ void Base::loadPassengers(string fileName){
                 p.setAddress(temp);
                 break;
             case 4:
-                parts = decompose(temp,',');
-                for (string i : parts)
-                    aux.push_back(stoi(i));
-                p.setFreqPlaces(aux);
-                aux={};
-                break;
-            case 5:
                 passengers.push_back(new Passenger(p));
                 p= Passenger();
                 counter=-1;
@@ -124,17 +117,10 @@ void Base::loadDrivers(string fileName){
                 break;
             case 4:
                 parts = decompose(temp,',');
-                for (string i : parts)
-                    aux.push_back(stoi(i));
-                d.setFreqPlaces(aux);
-                aux={};
-                break;
-            case 5:
-                parts = decompose(temp,',');
                 v = Vehicle(stoi(parts[0]),stoi(parts[1]),d.getId());
                 d.setVehicle(new Vehicle(v));
                 break;
-            case 6:
+            case 5:
                 drivers.push_back(new Driver(d));
                 d= Driver();
                 counter=-1;
@@ -193,9 +179,9 @@ void Base::loadRequests(string fileName){
                 break;
             case 4:
                 if(pass)
-                    pr.setMinEndTime(Time(temp));
+                    pr.setMaxEndTime(Time(temp));
                 else
-                    pr.setMinEndTime(Time(temp));
+                    pr.setMaxEndTime(Time(temp));
                 break;
             case 5:
                 if(pass)
@@ -846,11 +832,6 @@ void Base::writePassengers() {
         }
 
         newfile << endl <<p->getAddress() << endl;
-        for (int i : p->getFreqPlaces()) {
-            newfile << i;
-            if(i!=*p->getFreqPlaces().end())
-                newfile<<", ";
-        }
         newfile <<endl << "::::::::::";
         if(p!=*passengers.end())
            newfile << endl;
@@ -873,11 +854,6 @@ void Base::writeDrivers() {
                 newfile<<", \n";
         }
         newfile << endl <<d->getAddress() << endl;
-        for (int i : d->getFreqPlaces()) {
-            newfile << i;
-            if(i!=*d->getFreqPlaces().end())
-                newfile<<", \n";
-        }
         newfile <<endl<< d->getVehicle()<<endl;
         newfile  << "::::::::::";
         if(d!=*drivers.end())

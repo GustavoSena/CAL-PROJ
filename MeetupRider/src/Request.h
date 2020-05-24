@@ -14,16 +14,12 @@ public:
 
     Request()=default;
 
-    Request(const Time &minStartTime,  const Time &minEndTime, const Time &maxEndTime,
+    Request(const Time &minStartTime, const Time &maxEndTime,
             int destinationId, int startingId);
 
     const Time &getMinStartTime() const;
 
     void setMinStartTime(const Time &minStartTime);
-
-    const Time &getMinEndTime() const;
-
-    void setMinEndTime(const Time &minEndTime);
 
     const Time &getMaxEndTime() const;
 
@@ -39,13 +35,11 @@ public:
 
     void setTimesNull();
 
-    void calculateMaxStartTime(Time time);
 
 
 
 protected:
     Time minStartTime;
-    Time minEndTime;
     Time maxEndTime;
     int destinationId;
     int startingId;
@@ -55,7 +49,7 @@ protected:
 
 class PassengerRequest : public Request{
 public:
-    PassengerRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime,
+    PassengerRequest(const Time &minStartTime, const Time &maxEndTime,
                      int destinationId, int startingId, Passenger *passenger);
     PassengerRequest(int destinationId, int startingId, Passenger * passenger);
 
@@ -73,7 +67,7 @@ private:
 
 class DriverRequest : public Request{
 public:
-    DriverRequest(const Time &minStartTime, const Time &minEndTime, const Time &maxEndTime, int destinationId,
+    DriverRequest(const Time &minStartTime, const Time &maxEndTime, int destinationId,
                   int startingId, Driver *driver);
 
 
