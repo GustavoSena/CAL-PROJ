@@ -72,6 +72,7 @@ int next_menu(Base base, string type)
         }
         else if(compare_str(answer,"c"))
         {
+            base.updateFiles();
             exit(0);
         }
         else
@@ -204,9 +205,10 @@ void chooseCity(Base *base){
 
 
 
-        if (compare_str(temp, "5"))
+        if (compare_str(temp, "5")) {
+            base->updateFiles();
             exit(0);
-
+        }
         if (compare_str(temp, "1")) {
             base->loadGraph("..\\resources\\maps\\Porto\\nodes_x_y_porto.txt", "..\\resources\\maps\\Porto\\edges_porto.txt");
             base->setMap("Porto");
@@ -245,9 +247,10 @@ void chooseAlgorithm(Base * base,int id){
         string temp;
         getline(cin, temp);
 
-        if (compare_str(temp, "4"))
+        if (compare_str(temp, "4")) {
+            base->updateFiles();
             exit(0);
-
+        }
         if (compare_str(temp, "1")) {
             base->setAlgorithm("floydwarshall");
             floydwarshallMenu(base,id);
@@ -281,16 +284,15 @@ void optionMenu(Base *base,int id){
         string temp;
         getline(cin, temp);
 
-        if (compare_str(temp, "5"))
+        if (compare_str(temp, "5")) {
+            base->updateFiles();
             exit(0);
-
+        }
         if (compare_str(temp, "1")) {
             request_menu(base,id);
-            return;
         }
         else if (compare_str(temp, "2")) {
             base->run_algorithm();
-            return;
         }else if (compare_str(temp, "3")) {
             mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),vector<int>{},false);
         }
@@ -333,10 +335,6 @@ void viewJourneys(Base *base){
             mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),j[x-1]->getPath(),true);
 
         return;
-
-
-
-
     }catch(exception err){
         cout<<"Error with input: 1 to try again, anything else to cancel: ";
         getline(cin,temp);
@@ -359,7 +357,7 @@ void floydwarshallMenu(Base*base,int id){
     while(true) {
         cout << "1-Watch pre-processing live\n";
         cout << "2-Run FloydWarshall\n";
-        cout << "3-Exit\n";
+        cout << "3-Exit program\n";
 
         cout << "Input: ";
         string temp;
@@ -373,6 +371,7 @@ void floydwarshallMenu(Base*base,int id){
             return;
         }
         else if(compare_str(temp, "3")){
+            base->updateFiles();
             exit(0);
         }
         else {

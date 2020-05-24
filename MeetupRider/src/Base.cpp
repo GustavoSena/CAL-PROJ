@@ -821,13 +821,13 @@ void Base::writePassengers() {
         newfile << p->getName() << endl;
         for (int i : p->getNetwork()) {
             newfile << i;
-            if(i!=*p->getNetwork().end())
+            if(i!=*(p->getNetwork().end()-1))
                 newfile<<", ";
         }
 
         newfile << endl <<p->getAddress() << endl;
         newfile <<endl << "::::::::::";
-        if(p!=*passengers.end())
+        if(p!=*(passengers.end()-1))
            newfile << endl;
     }
     //const char* fileName = ("..\\resources\\files\\"+passengerFile).c_str();
@@ -844,13 +844,13 @@ void Base::writeDrivers() {
         newfile << d->getName() << endl;
         for (int i : d->getNetwork()) {
             newfile << i;
-            if(i!=*d->getNetwork().end())
-                newfile<<", \n";
+            if(i!=*(d->getNetwork().end()-1))
+                newfile<<", ";
         }
         newfile << endl <<d->getAddress() << endl;
-        newfile <<endl<< d->getVehicle()<<endl;
+        newfile <<endl<< *d->getVehicle()<<endl;
         newfile  << "::::::::::";
-        if(d!=*drivers.end())
+        if(d!=*(drivers.end()-1))
             newfile << endl;
     }
     //const char* fileName = ("..\\resources\\files\\"+driverFile).c_str();
@@ -893,13 +893,13 @@ void Base::writeJourneys() {
         newfile<<j->getDriver()->getId()<<endl;
         for (Passenger *p : j->getPassenger()) {
             newfile << p->getId();
-            if(p!=*j->getPassenger().end())
+            if(p!=*(j->getPassenger().end()-1))
                 newfile<<", ";
         }
         newfile<<endl;
         for (int i: j->getPath()) {
             newfile << i;
-            if(i!=*j->getPath().end())
+            if(i!=*(j->getPath().end()-1))
                 newfile<<", ";
         }
         newfile<<endl<<j->getStartTime()<<endl;
@@ -909,7 +909,7 @@ void Base::writeJourneys() {
                 newfile<<", ";
         }*/
         newfile<<endl<< "::::::::::";
-        if(j!=*journeys.end())
+        if(j!=*(journeys.end()-1))
             newfile<<endl;
     }
 

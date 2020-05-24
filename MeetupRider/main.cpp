@@ -112,7 +112,7 @@ int main() {
     t3-=t4;
     cout<<t3<<endl;*/
 
-    //b.updateFiles();
+    b.updateFiles();
 
 }
 
