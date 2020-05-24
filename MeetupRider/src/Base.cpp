@@ -1014,10 +1014,8 @@ void Base::run_algorithm() {
 }
 
 
-void Base::loadFloydWarshall()
-{
+void Base::loadFloydWarshall() {
     graph.floydWarshallShortestPath();
-    //escrever nas matrizes
 }
 
 

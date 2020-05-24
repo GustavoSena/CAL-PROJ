@@ -161,7 +161,6 @@ public:
 
     void updatePeopleKnown(Driver *driver, vector<Passenger*> passengers);
 
-
     void loadFloydWarshall();
 
 

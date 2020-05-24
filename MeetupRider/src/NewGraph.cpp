@@ -230,6 +230,10 @@ double ** Graph::getW()
     return W;
 }
 
+int ** Graph::getP()
+{
+    return P;
+}
 
 //Connectivity - https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices-in-a-given-graph/
 bool Graph::areVertexConnected(int id1, int id2)
@@ -377,6 +381,8 @@ void Graph::AStar(int orig_id, int dest_id)
     }
 }
 
+
+
 /*
 void testAlgoritmsPerformance(){
     srand(time(NULL));
@@ -399,3 +405,17 @@ void testAlgoritmsPerformance(){
     graphFile.close();
 }
 */
+
+
+void Graph::writeFiles(string path_file, string distance_file)
+{
+    writeDistanceMatrix(W, distance_file, vertexSet.size());
+    writePathMatrix(P, path_file, vertexSet.size());
+
+}
+
+void Graph::readFiles(string path_file, string distance_file)
+{
+    W = readDistanceMatrix(distance_file);
+    P = readPathMatrix(path_file);
+}

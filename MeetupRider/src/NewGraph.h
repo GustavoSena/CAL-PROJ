@@ -14,6 +14,7 @@
 #include <cmath>
 
 #include "MutablePriorityQueue.h"
+#include "FloydWarshall.h"
 
 using namespace std;
 
@@ -124,6 +125,7 @@ public:
     void floydWarshallShortestPath();
     vector<int> getFloydWarshallPath(const int orig, const int dest) const;
     double ** getW();
+    int ** getP();
 
 
     bool areVertexConnected(int id1, int id2);
@@ -138,6 +140,10 @@ public:
     double heuristic(Vertex * orig, Vertex * dest);
     bool relaxA(Vertex *v, Vertex *w, Vertex *dest, double weight);
     void AStar(int orig_id, int dest_id);
+
+    void writeFiles(string path_file, string distance_file);
+
+    void readFiles(string path_file, string distance_file);
 };
 
 #endif //MEETUPRIDER_NEWGRAPH_H

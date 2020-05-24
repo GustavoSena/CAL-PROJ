@@ -42,20 +42,25 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 
 int main() {
 
-    /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
+    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    Base b("..\\resources\\files\\Base.txt");*/
+    Base b("..\\resources\\files\\Base.txt");
+    b.loadGraph(node_text, edge_text);
+    b.getGraph().readFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
+    b.setAlgorithm("floydwarshall");
 
-    double **matrix=readMatrix();
+
+
+    /**double **matrix=readMatrix();
     cout<<"read\n";
-    writeMatrix(matrix);
+    writeMatrix(matrix);*/
     //int id=main_menu(b);
-   /* chooseCity(&b);
-    chooseAlgorithm(&b,id);
+/*    chooseCity(&b);
+    chooseAlgorithm(&b,id);*/
 
 
 
-/*
+
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -86,12 +91,11 @@ int main() {
     b.addPassengerRequest(&r4);
     d.addNetwork(4);
     p3.addNetwork(5);
-    b.setAlgorithm("dijkstra");
     if(b.createJourney(&request))
         cout<< "True"<< endl;
     else
         cout << "False"<<endl;
-*/
+
 
 
 /*    Time t1("3:5:15");
