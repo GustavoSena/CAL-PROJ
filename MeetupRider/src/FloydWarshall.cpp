@@ -19,7 +19,7 @@ void writeDistanceMatrix(double **matrix, string text_file, int size){
     while(i<row){
         int j=0;
         while(j+1<col){
-            newfile<<matrix[i][j]<<" , ";
+            newfile<<matrix[i][j]<<",";
 
 
             j++;
@@ -81,7 +81,7 @@ void writePathMatrix(int **matrix, string text_file, int size)
     while(i<row){
         int j=0;
         while(j+1<col){
-            newfile<<matrix[i][j]<<" , ";
+            newfile<<matrix[i][j]<<",";
 
 
             j++;

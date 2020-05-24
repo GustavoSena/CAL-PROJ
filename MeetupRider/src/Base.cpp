@@ -42,6 +42,7 @@ Base::Base(string fileName) {
         counter++;
     }
     this->algorithm = "astar";
+    setlastIDs();
     a_file.close();
 }
 
@@ -342,7 +343,7 @@ void Base::sign_up(string type) //type = passenger || type = driver
                 continue;
             }
             Vehicle v(lastCarId, cap, lastId);
-            Driver d(lastId, name, network, address, &v);
+            Driver d(lastId, name, network, address, new Vehicle(v));
             drivers.push_back(&d);
             break;
         }while(true);
@@ -826,7 +827,7 @@ void Base::writePassengers() {
         }
 
         newfile << endl <<p->getAddress() << endl;
-        newfile <<endl << "::::::::::";
+        newfile << "::::::::::";
         if(p!=*(passengers.end()-1))
            newfile << endl;
     }
@@ -848,7 +849,7 @@ void Base::writeDrivers() {
                 newfile<<", ";
         }
         newfile << endl <<d->getAddress() << endl;
-        newfile <<endl<< *d->getVehicle()<<endl;
+        newfile << *d->getVehicle()<<endl;
         newfile  << "::::::::::";
         if(d!=*(drivers.end()-1))
             newfile << endl;
@@ -908,7 +909,7 @@ void Base::writeJourneys() {
             if(!(t==*j->getArrivalTimes().end()))
                 newfile<<", ";
         }*/
-        newfile<<endl<< "::::::::::";
+        newfile<< "::::::::::";
         if(j!=*(journeys.end()-1))
             newfile<<endl;
     }
@@ -989,6 +990,24 @@ string Base::getMap() {
 
 void Base::setMap(string m) {
     map=m;
+}
+
+void Base::setlastIDs() {
+    int id=0;
+    int carId=0;
+    for (Passenger * p: passengers)
+        if(p->getId()>id)
+            id=p->getId();
+    for (Driver * d: drivers) {
+        if (d->getId() > id)
+            id = d->getId();
+        if(d->getVehicle()->getId()>carId)
+            carId=d->getVehicle()->getId();
+    }
+
+    lastId=id;
+    lastCarId=carId;
+
 }
 
 
