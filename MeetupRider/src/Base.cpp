@@ -7,7 +7,7 @@
 
 Base::Base(){
 
-    this->algorithm = "astar";
+    this->algorithm = "floydwarshall";
 
 }
 

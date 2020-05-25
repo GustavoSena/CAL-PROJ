@@ -13,13 +13,17 @@
 using namespace std;
 
 
+
+//menu em que se escolhe se se é um passageiro ou um condutor
 int main_menu(Base base);
 
+//menu em que se escolhe se se faz sign up ou sign in
 int next_menu(Base base, string type);
 
+//menu em que o utilizador faz um pedido de boleia ou oferece boleia
 void request_menu(Base *base,int id);
 
-
+//menu de escolha de mapa
 void chooseCity(Base *base);
 
 //menu de escolha de algoritmo a ser utilizado

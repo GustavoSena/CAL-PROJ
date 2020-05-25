@@ -54,8 +54,9 @@ int main() {
     string temp;
     //getline(cin, temp);
     //if(compare_str(temp,"y")) {
-        testAlgoritmsPerformance(b);
-        return 0;
+    b.getGraph().readFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");
+    testAlgoritmsPerformance(b);
+    return 0;
    // }
 
 
