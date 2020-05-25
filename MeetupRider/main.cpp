@@ -46,8 +46,7 @@ int main() {
 
     string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    //Base b("..\\resources\\files\\Base.txt");
-    Base b;
+    Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
 
     cout <<"Go into test mode? (y/n): ";

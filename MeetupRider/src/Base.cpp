@@ -5,11 +5,6 @@
 #include "Base.h"
 
 
-Base::Base(){
-
-    this->algorithm = "astar";
-
-}
 
 Base::Base(string fileName) {
 
@@ -46,6 +41,11 @@ Base::Base(string fileName) {
     a_file.close();
 }
 
+Base::Base(){
+
+    this->algorithm = "astar";
+    maxSpeed = 50;
+}
 
 
 void Base::loadPassengers(string fileName){
@@ -229,12 +229,6 @@ void Base::loadJourneys(string fileName){
             case 3:
                 j.setStartTime(Time(temp));
                 break;
-            /*case 4:
-                parts = decompose(temp,',');
-                for (string i : parts)
-                    times.push_back(Time(temp));
-                j.setArrivalTimes(times);
-                break;*/
             case 4:
                 journeys.push_back(new Journey(j));
                 j= Journey();
@@ -246,39 +240,6 @@ void Base::loadJourneys(string fileName){
         counter++;
     }
     a_file.close();
-}
-
-Graph &Base::getGraph()  {
-    return graph;
-}
-
-void Base::setGraph(const Graph &graph) {
-    Base::graph = graph;
-}
-
-const vector<Passenger*> Base::getPassengers() const{
-    return passengers;
-}
-
-void Base::setPassengers(vector<Passenger*> passengers) {
-    Base::passengers = passengers;
-}
-
-const vector<Driver*> Base::getDrivers() const{
-    return drivers;
-}
-
-void Base::setDrivers(vector<Driver*> drivers) {
-    Base::drivers = drivers;
-}
-
-
-const vector<Journey*> Base::getJourneys() const{
-    return journeys;
-}
-
-void Base::setJourneys(const vector<Journey*> journeys) {
-    Base::journeys = journeys;
 }
 
 void Base::loadGraph(string node_text, string edge_text) {
@@ -313,10 +274,271 @@ void Base::loadGraph(string node_text, string edge_text) {
 
 }
 
+void Base::setPassengerFile(string fileName) {
+    passengerFile=fileName;
+}
+
+void Base::setJourneyFile(string fileName) {
+    journeyFile=fileName;
+}
+
+void Base::setRequestFile(string fileName) {
+    requestFile=fileName;
+}
+
+void Base::setDriverFile(string fileName) {
+    driverFile=fileName;
+}
+
+void Base::setAlgorithm(string alg) {
+    algorithm=alg;
+
+}
+
+void Base::setMap(string m) {
+    map=m;
+}
+
+void Base::setGraph(const Graph &graph) {
+    Base::graph = graph;
+}
+
+void Base::setPassengers(vector<Passenger*> passengers) {
+    Base::passengers = passengers;
+}
+
+void Base::setDrivers(vector<Driver*> drivers) {
+    Base::drivers = drivers;
+}
+
+void Base::setJourneys(const vector<Journey*> journeys) {
+    Base::journeys = journeys;
+}
+
+void Base::setlastIDs() {
+    int id=0;
+    int carId=0;
+    for (Passenger * p: passengers)
+        if(p->getId()>id)
+            id=p->getId();
+    for (Driver * d: drivers) {
+        if (d->getId() > id)
+            id = d->getId();
+        if(d->getVehicle()->getId()>carId)
+            carId=d->getVehicle()->getId();
+    }
+
+    lastId=id;
+    lastCarId=carId;
+
+}
+
+string Base::getPassengerFile() {
+    return passengerFile;
+}
+
+string Base::getDriverFile() {
+    return driverFile;
+}
+
+string Base::getRequestFile(){
+    return requestFile;
+}
+
+string Base::getJourneyFile(){
+    return journeyFile;
+}
+
+string Base::getAlgorithm() {
+    return algorithm;
+}
+
+string Base::getMap() {
+    return map;
+}
+
+
+Graph &Base::getGraph()  {
+    return graph;
+}
+
+
+
+const vector<Passenger*> Base::getPassengers() const{
+    return passengers;
+}
+
+
+
+const vector<Driver*> Base::getDrivers() const{
+    return drivers;
+}
+
+
+
+const vector<Journey*> Base::getJourneys() const{
+    return journeys;
+}
+
+
+void Base::writePassengers() {
+    ofstream newfile;
+    newfile.open("..\\resources\\files\\"+passengerFile);
+    for (auto p : passengers) {
+        newfile << p->getId() << endl;
+        newfile << p->getName() << endl;
+        for (int i : p->getNetwork()) {
+            newfile << i;
+            if(i!=*(p->getNetwork().end()-1))
+                newfile<<", ";
+        }
+
+        newfile << endl <<p->getAddress() << endl;
+        newfile << "::::::::::";
+        if(p!=*(passengers.end()-1))
+            newfile << endl;
+    }
+    newfile.close();
+}
+
+void Base::writeDrivers() {
+    ofstream newfile;
+    newfile.open("..\\resources\\files\\"+driverFile);
+    for (auto d : drivers) {
+        newfile <<d->getId() << endl;
+        newfile << d->getName() << endl;
+        for (int i : d->getNetwork()) {
+            newfile << i;
+            if(i!=*(d->getNetwork().end()-1))
+                newfile<<", ";
+        }
+        newfile << endl <<d->getAddress() << endl;
+        newfile << *d->getVehicle()<<endl;
+        newfile  << "::::::::::";
+        if(d!=*(drivers.end()-1))
+            newfile << endl;
+    }
+    newfile.close();
+}
+
+void Base::writeRequests() {
+    ofstream newfile;
+    newfile.open("..\\resources\\files\\"+requestFile);
+    for (auto r : requests_passengers) {
+        newfile<<r->getPassenger()->getId()<<endl;
+        newfile<<r->getStartingId()<<endl;
+        newfile<<r->getDestinationId()<<endl;
+        newfile<<r->getMinStartTime()<<endl;
+        newfile<<r->getMaxEndTime()<<endl;
+        newfile<< "::::::::::";
+        if(r!=*(requests_passengers.end()-1))
+            newfile<<endl;
+    }
+    for (auto r : requests_drivers) {
+        newfile<<endl<<r->getDriver()->getId()<<endl;
+        newfile<<r->getStartingId()<<endl;
+        newfile<<r->getDestinationId()<<endl;
+        newfile<<r->getMinStartTime()<<endl;
+        newfile<<r->getMaxEndTime()<<endl;
+        newfile<< "::::::::::";
+    }
+    newfile.close();
+}
+
+void Base::writeJourneys() {
+    ofstream newfile;
+    newfile.open("..\\resources\\files\\"+journeyFile);
+    for (auto j : journeys) {
+        newfile<<j->getDriver()->getId()<<endl;
+        for (Passenger *p : j->getPassenger()) {
+            newfile << p->getId();
+            if(p!=*(j->getPassenger().end()-1))
+                newfile<<", ";
+        }
+        newfile<<endl;
+        for (int i: j->getPath()) {
+            newfile << i;
+            if(i!=*(j->getPath().end()-1))
+                newfile<<", ";
+        }
+        newfile<<endl<<j->getStartTime()<<endl;
+        newfile<< "::::::::::";
+        if(j!=*(journeys.end()-1))
+            newfile<<endl;
+    }
+
+
+    newfile.close();
+}
+
+void Base::updateFiles() {
+    writeDrivers();
+    writeJourneys();
+    writePassengers();
+    writeRequests();
+}
+
+
+void Base::addDriverRequest(DriverRequest * request)
+{
+    requests_drivers.push_back(request);
+}
+
+void Base::addPassengerRequest(PassengerRequest * request)
+{
+    requests_passengers.push_back(request);
+}
+
+void Base::addPassenger(Passenger * passenger)
+{
+    lastId++;
+    passenger->setId(lastId);
+    passengers.push_back(passenger);
+}
+
+void Base::addDriver(Driver * driver)
+{
+    lastId++;
+    driver->setId(lastId);
+    lastCarId++;
+    driver->getVehicle()->setDriverId(lastId);
+    driver->getVehicle()->setId(lastCarId);
+    drivers.push_back(driver);
+}
+
+Driver *Base::findDriver(int id) {
+    for (Driver *i:drivers){
+        if(i->getId()==id){
+            return i;
+        }
+    }
+    return nullptr;
+}
+
+Passenger *Base::findPassenger(int id) {
+    for (Passenger *i:passengers){
+        if(i->getId()==id){
+            return i;
+        }
+    }
+    return nullptr;
+}
+
+vector<Passenger *> Base::findPassengers(vector<int> ids) {
+    vector<Passenger *> aux;
+    for (int i: ids){
+        Passenger *p = findPassenger(i);
+        if(p!=nullptr){
+            aux.push_back(p);
+        }
+    }
+    return aux;
+}
+
+
 void Base::sign_up(string type) //type = passenger || type = driver
 {
     string name, address;
-
     cout << "Insert name\n";
     getline(cin, name);
     cout << "Insert address\n";
@@ -397,34 +619,6 @@ int Base::sign_in(string type)
 
 }
 
-Driver *Base::findDriver(int id) {
-    for (Driver *i:drivers){
-        if(i->getId()==id){
-            return i;
-        }
-    }
-    return nullptr;
-}
-
-Passenger *Base::findPassenger(int id) {
-    for (Passenger *i:passengers){
-        if(i->getId()==id){
-            return i;
-        }
-    }
-    return nullptr;
-}
-
-vector<Passenger *> Base::findPassengers(vector<int> ids) {
-    vector<Passenger *> aux;
-    for (int i: ids){
-        Passenger *p = findPassenger(i);
-        if(p!=nullptr){
-            aux.push_back(p);
-        }
-    }
-    return aux;
-}
 
 
 vector<PassengerRequest *> Base::getPossibleRequests(DriverRequest * request){
@@ -460,23 +654,6 @@ double Base::getDistance(int id1, int id2)
         return graph.getW()[i1][i2];
     }
 
-}
-
-PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id){
-    double temp = INF;
-    PassengerRequest * result = NULL;
-    int pos = requests.size();
-    for(int i = 0; i < requests.size(); i++)
-    {
-        if(temp>getDistance(dest_id, requests[i]->getStartingId()))
-        {
-            temp = getDistance(dest_id, requests[i]->getStartingId());
-            result = requests[i];
-            pos = i;
-        }
-    }
-    requests.erase(requests.begin() + pos);
-    return result;
 }
 
 
@@ -572,6 +749,80 @@ vector<int> Base::recalculatePath(vector<Request*> requests)
 
 }
 
+Time Base::predictTime(double distance)
+{
+    double time = (distance*0.001)/maxSpeed;
+    return Time(time);
+}
+
+bool Base::conditionTime(Request *r, Time t)
+{
+    return r->getMinStartTime() <= r->getMaxEndTime() - t;
+}
+
+vector<int> Base::getRequestPath(vector<int> ids, Request * request)
+{
+    vector<int> result;
+    int pos_inicial = -1;
+    for(int i = 0; i < ids.size(); i++)
+    {
+        if(ids[i] == request->getStartingId() || pos_inicial>0)
+        {
+            result.push_back(ids[i]);
+            if(pos_inicial == -1)
+                pos_inicial = i;
+            if(ids[i] == request->getDestinationId())
+                break;
+        }
+    }
+    return result;
+}
+
+bool Base::checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request)
+{
+    requests.push_back(possible_request);
+    vector<int> possible_path = recalculatePath(requests);
+    requests.push_back(possible_request);
+    double distance = 0;
+    for(int i = 0; i < requests.size(); i++)
+    {
+        calculatePath(getRequestPath(possible_path, requests[i]), distance);
+        if(!conditionTime(requests[i], predictTime(distance)))
+            return false;
+
+    }
+    return true;
+}
+
+
+int Base::getNumberPeopleKnown(Driver *driver, vector<Passenger*> passengers, Passenger* possible_passenger )
+{
+    int result = 0;
+    if(in(driver->getNetwork(), possible_passenger->getId()))
+        result++;
+    for(int i = 0; i < passengers.size(); i++)
+    {
+        if(in(passengers[i]->getNetwork(), possible_passenger->getId()))
+            result++;
+    }
+    return result;
+}
+
+void Base::updatePeopleKnown(Driver *driver, vector<Passenger*> passengers)
+{
+    vector<Person*> people;
+    people.push_back(driver);
+    for(auto p : passengers)
+    {
+        people.push_back(p);
+    }
+    for(auto p : people)
+    {
+        p->addNetwork(people);
+    }
+}
+
+
 vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> *ids){
     vector<Passenger*> result;
     vector<Request *> aux;
@@ -589,12 +840,10 @@ vector<Passenger *> Base::fillVehicle(DriverRequest *driverRequest, vector<int> 
             counter++;
             aux.push_back(tmp);
         }
-    
-    }
 
+    }
     *ids = recalculatePath(aux);
     return result;
-
 }
 
 
@@ -624,14 +873,11 @@ vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já e
             if(algorithm == "astar")
             {
                 graph.AStar(ids[i], ids[i+1]);
-
             }
             else if(algorithm == "dijkstra")
             {
                 graph.dijkstraShortestPath(ids[i]);
-
             }
-
             auto v = graph.findVertex(ids[i+1]);
             distance += v->getDist();
             tmp = graph.getPath(ids[i], ids[i+1]);
@@ -641,9 +887,7 @@ vector<int> Base::calculatePath(vector<int>ids, double &distance) //os ids já e
             int id2 = graph.findVertexIdx(ids[i+1]);
             distance += graph.getW()[id1][id2];
             tmp = graph.getFloydWarshallPath(ids[i], ids[i+1]);
-
         }
-
 
         int j;
         if(i==0)
@@ -709,266 +953,8 @@ bool Base::createJourney(DriverRequest * request)
     journeys.push_back(j);
     return true;
 
-
 }
 
-void Base::addDriverRequest(DriverRequest * request)
-{
-    requests_drivers.push_back(request);
-}
-
-void Base::addPassengerRequest(PassengerRequest * request)
-{
-    requests_passengers.push_back(request);
-}
-
-void Base::addPassenger(Passenger * passenger)
-{
-    lastId++;
-    passenger->setId(lastId);
-    passengers.push_back(passenger);
-}
-
-void Base::addDriver(Driver * driver)
-{
-    lastId++;
-    driver->setId(lastId);
-    lastCarId++;
-    driver->getVehicle()->setDriverId(lastId);
-    driver->getVehicle()->setId(lastCarId);
-    drivers.push_back(driver);
-}
-
-Time Base::predictTime(double distance)
-{
-
-    double time = (distance*0.001)/maxSpeed;
-    return Time(time);
-
-}
-
-bool Base::conditionTime(Request *r, Time t)
-{
-    return r->getMinStartTime() <= r->getMaxEndTime() - t;
-}
-
-vector<int> Base::getRequestPath(vector<int> ids, Request * request)
-{
-    vector<int> result;
-    int pos_inicial = -1;
-    for(int i = 0; i < ids.size(); i++)
-    {
-        if(ids[i] == request->getStartingId() || pos_inicial>0)
-        {
-            result.push_back(ids[i]);
-            if(pos_inicial == -1)
-                pos_inicial = i;
-            if(ids[i] == request->getDestinationId())
-                break;
-        }
-    }
-    return result;
-}
-
-bool Base::checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request)
-{
-
-    requests.push_back(possible_request);
-    vector<int> possible_path = recalculatePath(requests);
-    requests.push_back(possible_request);
-    double distance = 0;
-    for(int i = 0; i < requests.size(); i++)
-    {
-        calculatePath(getRequestPath(possible_path, requests[i]), distance);
-        if(!conditionTime(requests[i], predictTime(distance)))
-            return false;
-
-    }
-    return true;
-
-}
-
-
-int Base::getNumberPeopleKnown(Driver *driver, vector<Passenger*> passengers, Passenger* possible_passenger )
-{
-    int result = 0;
-    if(in(driver->getNetwork(), possible_passenger->getId()))
-        result++;
-    for(int i = 0; i < passengers.size(); i++)
-    {
-        if(in(passengers[i]->getNetwork(), possible_passenger->getId()))
-            result++;
-    }
-    return result;
-}
-
-void Base::updatePeopleKnown(Driver *driver, vector<Passenger*> passengers)
-{
-    vector<Person*> people;
-    people.push_back(driver);
-    for(auto p : passengers)
-    {
-        people.push_back(p);
-    }
-    for(auto p : people)
-    {
-        p->addNetwork(people);
-    }
-}
-
-void Base::writePassengers() {
-    ofstream newfile;
-    newfile.open("..\\resources\\files\\"+passengerFile);
-    for (auto p : passengers) {
-        newfile << p->getId() << endl;
-        newfile << p->getName() << endl;
-        for (int i : p->getNetwork()) {
-            newfile << i;
-            if(i!=*(p->getNetwork().end()-1))
-                newfile<<", ";
-        }
-
-        newfile << endl <<p->getAddress() << endl;
-        newfile << "::::::::::";
-        if(p!=*(passengers.end()-1))
-           newfile << endl;
-    }
-    //const char* fileName = ("..\\resources\\files\\"+passengerFile).c_str();
-    newfile.close();
-    //remove(fileName);
-    //int i=rename("..\\resources\\files\\newPassengerFile.txt", fileName);
-}
-
-void Base::writeDrivers() {
-    ofstream newfile;
-    newfile.open("..\\resources\\files\\"+driverFile);
-    for (auto d : drivers) {
-        newfile <<d->getId() << endl;
-        newfile << d->getName() << endl;
-        for (int i : d->getNetwork()) {
-            newfile << i;
-            if(i!=*(d->getNetwork().end()-1))
-                newfile<<", ";
-        }
-        newfile << endl <<d->getAddress() << endl;
-        newfile << *d->getVehicle()<<endl;
-        newfile  << "::::::::::";
-        if(d!=*(drivers.end()-1))
-            newfile << endl;
-    }
-    //const char* fileName = ("..\\resources\\files\\"+driverFile).c_str();
-    newfile.close();
-    //remove(fileName);
-    //int i=rename("..\\resources\\files\\newDriverFile.txt", fileName);
-}
-
-void Base::writeRequests() {
-    ofstream newfile;
-    newfile.open("..\\resources\\files\\"+requestFile);
-    for (auto r : requests_passengers) {
-        newfile<<r->getPassenger()->getId()<<endl;
-        newfile<<r->getStartingId()<<endl;
-        newfile<<r->getDestinationId()<<endl;
-        newfile<<r->getMinStartTime()<<endl;
-        newfile<<r->getMaxEndTime()<<endl;
-        newfile<< "::::::::::";
-        if(r!=*(requests_passengers.end()-1))
-            newfile<<endl;
-    }
-    for (auto r : requests_drivers) {
-        newfile<<endl<<r->getDriver()->getId()<<endl;
-        newfile<<r->getStartingId()<<endl;
-        newfile<<r->getDestinationId()<<endl;
-        newfile<<r->getMinStartTime()<<endl;
-        newfile<<r->getMaxEndTime()<<endl;
-        newfile<< "::::::::::";
-    }
-    //const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
-    newfile.close();
-    //remove(fileName);
-    //int i=rename("..\\resources\\files\\newRequestFile.txt", fileName);
-}
-
-void Base::writeJourneys() {
-    ofstream newfile;
-    newfile.open("..\\resources\\files\\"+journeyFile);
-    for (auto j : journeys) {
-        newfile<<j->getDriver()->getId()<<endl;
-        for (Passenger *p : j->getPassenger()) {
-            newfile << p->getId();
-            if(p!=*(j->getPassenger().end()-1))
-                newfile<<", ";
-        }
-        newfile<<endl;
-        for (int i: j->getPath()) {
-            newfile << i;
-            if(i!=*(j->getPath().end()-1))
-                newfile<<", ";
-        }
-        newfile<<endl<<j->getStartTime()<<endl;
-        /*for (Time t: j->getArrivalTimes()) {
-            newfile << t;
-            if(!(t==*j->getArrivalTimes().end()))
-                newfile<<", ";
-        }*/
-        newfile<< "::::::::::";
-        if(j!=*(journeys.end()-1))
-            newfile<<endl;
-    }
-
-    //const char* fileName = ("..\\resources\\files\\"+journeyFile).c_str();
-    newfile.close();
-    //remove(fileName);
-    //int i=rename("..\\resources\\files\\newJourneyFile.txt", fileName);
-}
-
-void Base::setPassengerFile(string fileName) {
-    passengerFile=fileName;
-}
-
-void Base::setJourneyFile(string fileName) {
-    journeyFile=fileName;
-}
-
-void Base::setRequestFile(string fileName) {
-    requestFile=fileName;
-}
-
-void Base::setDriverFile(string fileName) {
-    driverFile=fileName;
-}
-
-string Base::getPassengerFile() {
-    return passengerFile;
-}
-
-string Base::getDriverFile() {
-    return driverFile;
-}
-
-string Base::getRequestFile(){
-    return requestFile;
-}
-
-string Base::getJourneyFile(){
-    return journeyFile;
-}
-
-void Base::updateFiles() {
-    writeDrivers();
-    writeJourneys();
-    writePassengers();
-    writeRequests();
-}
-
-string Base::getAlgorithm() {
-    return algorithm;
-}
-
-void Base::setAlgorithm(string alg) {
-    algorithm=alg;
-
-}
 
 void Base::run_algorithm() {
     int count = 0;
@@ -980,43 +966,10 @@ void Base::run_algorithm() {
             cout<<++count<<" -journey unsuccessful"<<endl;
 
     }
-
-
-
-
-
-
 }
 
 
-void Base::loadFloydWarshall() {
-    graph.floydWarshallShortestPath();
-}
 
-string Base::getMap() {
-    return map;
-}
 
-void Base::setMap(string m) {
-    map=m;
-}
-
-void Base::setlastIDs() {
-    int id=0;
-    int carId=0;
-    for (Passenger * p: passengers)
-        if(p->getId()>id)
-            id=p->getId();
-    for (Driver * d: drivers) {
-        if (d->getId() > id)
-            id = d->getId();
-        if(d->getVehicle()->getId()>carId)
-            carId=d->getVehicle()->getId();
-    }
-
-    lastId=id;
-    lastCarId=carId;
-
-}
 
 

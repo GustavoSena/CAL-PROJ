@@ -57,6 +57,32 @@ public:
     //função que vai buscar a informação das journeys ao ficheiro e adiciona à base
     void loadJourneys(string fileName);
 
+    //função que a partir dos ficheiros dos nodes e das edges, cria o grafo com essas informações
+    void loadGraph(string node_text, string edge_text);
+
+    void setPassengerFile(string fileName);
+    void setJourneyFile(string fileName);
+    void setRequestFile(string fileName);
+    void setDriverFile(string fileName);
+    void setAlgorithm(string alg);
+    void setMap(string m);
+    void setGraph(const Graph &graph);
+    void setPassengers( vector<Passenger*>  passengers);
+    void setDrivers( vector<Driver*>  drivers);
+    void setJourneys(vector<Journey*> journeys);
+    void setlastIDs();
+
+    string getPassengerFile();
+    string getDriverFile();
+    string getRequestFile();
+    string getJourneyFile();
+    string getAlgorithm();
+    string getMap();
+    Graph &getGraph();
+    const vector<Passenger*> getPassengers() const;
+    const vector<Driver*>  getDrivers() const;
+    const vector<Journey*> getJourneys() const;
+    
     //função que escreve no ficheiro a informação dos passengers
     void writePassengers();
 
@@ -72,55 +98,17 @@ public:
     //função que chama as funções de escrita de forma a atualizar tudo
     void updateFiles();
 
-    void setPassengerFile(string fileName);
+    //adiciona um driverRequest aos driver requests da base
+    void addDriverRequest(DriverRequest * request);
 
-    void setJourneyFile(string fileName);
+    //adiciona um passengerRequest aos passenger requests da base
+    void addPassengerRequest(PassengerRequest * request);
 
-    void setRequestFile(string fileName);
+    //adiciona um passageiro à base
+    void addPassenger(Passenger * passenger);
 
-    void setDriverFile(string fileName);
-
-    void setAlgorithm(string alg);
-
-    void setMap(string m);
-
-    string getPassengerFile();
-
-    string getDriverFile();
-
-    string getRequestFile();
-
-    string getJourneyFile();
-
-    string getAlgorithm();
-
-    string getMap();
-
-    Graph &getGraph() ;
-
-    void setGraph(const Graph &graph);
-
-    const vector<Passenger*> getPassengers() const;
-
-    void setPassengers( vector<Passenger*>  passengers);
-
-    const vector<Driver*>  getDrivers() const;
-
-    void setDrivers( vector<Driver*>  drivers);
-
-
-    const vector<Journey*> getJourneys() const;
-
-    void setJourneys(vector<Journey*> journeys);
-
-    //função que a partir dos ficheiros dos nodes e das edges, cria o grafo com essas informações
-    void loadGraph(string node_text, string edge_text);
-
-    //função que permite a um utilizador inscrever-se na aplicação
-    void sign_up(string type);
-
-    //função que permite a um utilizador entrar na aplicação
-    int sign_in(string type);
+    //adiciona um driver à base
+    void addDriver(Driver * driver);
 
     //função que retorna o endereço para o driver que tem o id do parâmetro
     Driver *findDriver(int id);
@@ -131,6 +119,12 @@ public:
     //função que retorna um vetor com endereços para os passangers correspondentes aos ids do parametro do vetor
     vector<Passenger*> findPassengers(vector<int> ids);
 
+    //função que permite a um utilizador inscrever-se na aplicação
+    void sign_up(string type);
+
+    //função que permite a um utilizador entrar na aplicação
+    int sign_in(string type);
+
     //a partir do driver request, retornar o vetor de requests de passengers que à partida serão possíveis de atender
     //analisando a conetividade dos ids de cada passenger request com os ids de partida e chegada do driver request
     vector<PassengerRequest *> getPossibleRequests(DriverRequest * request);
@@ -138,8 +132,6 @@ public:
     //retorna a distância entre dois vértices
     //usa o algoritmo definido na base
     double getDistance(int id1, int id2);
-
-    PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, int dest_id);
 
     //retorna o passenger request que é melhor para o caso atual
     //o passenger request melhor é aquele que tem o melhor compromisso entre as distancias do request do driver e o numero de pessoas conhecidas no carro
@@ -154,42 +146,6 @@ public:
 
     //retorna o vetor de ids com a ordem certa pela qual o driver terá que passar obrigatoriamente (startingIds e destinationIds)
     vector<int> recalculatePath(vector<Request*> requests);
-
-    //retorna o vetor de endereços para os passageiros que vão com o condutor na sua viagem
-    //o vector de ids terá a ordem dos ids dos vértices pela qual o driver terá que passar obrigatoriamente (startingIds e destinationIds)
-    vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
-
-    //verifica se há a conexão necessária entre os ids
-    //Vetor ids já está com a ordem certa
-    bool setup(vector<int> ids);
-
-    //calcula o path completo que o driver tem que passar
-    vector<int> calculatePath(vector<int>ids, double &distance);
-
-    void run_algorithm();
-
-    //remove o endereço do passanger do vetor de passenger requests da base
-    //retorna true se o fez com sucesso
-    bool removePassengerRequests(Passenger * p);
-
-    //remove os requests que estão nos parâmetros
-    //retorna true se o fez com sucesso
-    bool removeRequests(vector<Passenger*> passengers, DriverRequest * request);
-
-    //cria uma journey, adiciona-a à base e retorna verdadeiro se o fez com sucesso
-    bool createJourney(DriverRequest * request);
-
-    //adiciona um driverRequest aos driver requests da base
-    void addDriverRequest(DriverRequest * request);
-
-    //adiciona um passengerRequest aos passenger requests da base
-    void addPassengerRequest(PassengerRequest * request);
-
-    //adiciona um passageiro à base
-    void addPassenger(Passenger * passenger);
-
-    //adiciona um driver à base
-    void addDriver(Driver * driver);
 
     //retorna o tempo previsto de acordo com a distância
     Time predictTime(double distance);
@@ -209,9 +165,30 @@ public:
     //adiciona à network das pessoas o id das outras (se ainda não estiver lá)
     void updatePeopleKnown(Driver *driver, vector<Passenger*> passengers);
 
-    void loadFloydWarshall();
+    //retorna o vetor de endereços para os passageiros que vão com o condutor na sua viagem
+    //o vector de ids terá a ordem dos ids dos vértices pela qual o driver terá que passar obrigatoriamente (startingIds e destinationIds)
+    vector<Passenger*> fillVehicle(DriverRequest *driverRequest, vector<int> *ids);
 
-    void setlastIDs();
+    //verifica se há a conexão necessária entre os ids
+    //Vetor ids já está com a ordem certa
+    bool setup(vector<int> ids);
+
+    //calcula o path completo que o driver tem que passar
+    vector<int> calculatePath(vector<int>ids, double &distance);
+
+    //remove o endereço do passanger do vetor de passenger requests da base
+    //retorna true se o fez com sucesso
+    bool removePassengerRequests(Passenger * p);
+
+    //remove os requests que estão nos parâmetros
+    //retorna true se o fez com sucesso
+    bool removeRequests(vector<Passenger*> passengers, DriverRequest * request);
+
+    //cria uma journey, adiciona-a à base e retorna verdadeiro se o fez com sucesso
+    bool createJourney(DriverRequest * request);
+
+    void run_algorithm();
+
 
 };
 
