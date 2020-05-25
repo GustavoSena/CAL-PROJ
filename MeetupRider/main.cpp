@@ -43,8 +43,8 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 int main() {
 
 
-    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
-    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
+    string node_text = "..\\resources\\maps\\Maia\\nodes_x_y_maia.txt";
+    string edge_text = "..\\resources\\maps\\Maia\\edges_maia.txt";
     Base b("..\\resources\\files\\Base.txt");
     b.loadGraph(node_text, edge_text);
 
@@ -68,10 +68,10 @@ int main() {
         cout << "false" << endl;
     Time t1(16, 0, 0);
     Time t2(18,0,0);
-    DriverRequest request(t1, t2,26130570,26130564, &d);
-    PassengerRequest r1(t1, t2,26130570,26130566,&p1);
-    PassengerRequest r2(t1,  t2,90379619, 90379614, &p2);
-    PassengerRequest r3(t1,  t2,90380150, 90379617, &p3);
+    DriverRequest request(t1, t2,25,4, &d);
+    PassengerRequest r1(t1, t2,25,5,&p1);
+    PassengerRequest r2(t1,  t2,25, 6, &p2);
+    PassengerRequest r3(t1,  t2,25, 7, &p3);
     PassengerRequest r4(t1,  t2, 16, 5, &p4);
     b.addDriverRequest(&request);
     b.addPassengerRequest(&r1);
@@ -80,12 +80,13 @@ int main() {
     b.addPassengerRequest(&r4);
 
 
+
     /*double **matrix=readMatrix();
     cout<<"read\n";
     writeMatrix(matrix);*/
-    int id=main_menu(b);
+/*    int id=main_menu(b);
     chooseCity(&b);
-    chooseAlgorithm(&b,id);
+    chooseAlgorithm(&b,id);*/
 
 
     /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
