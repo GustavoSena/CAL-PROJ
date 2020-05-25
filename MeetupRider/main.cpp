@@ -8,6 +8,7 @@
 #include "src/Base.h"
 #include "src/menus.h"
 #include "src/graphDrawing.h"
+#include "src/resultGenerator.h"
 
 
 using namespace std;
@@ -45,11 +46,24 @@ int main() {
 
     string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    Base b("..\\resources\\files\\Base.txt");
+    //Base b("..\\resources\\files\\Base.txt");
+    Base b;
     b.loadGraph(node_text, edge_text);
+
+    cout <<"Go into test mode? (y/n): ";
+    string temp;
+    getline(cin, temp);
+    if(compare_str(temp,"y")) {
+        testAlgoritmsPerformance(b);
+        return 0;
+    }
+
+
+
     //b.loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
     //b.getGraph().floydWarshallShortestPath();
     //b.getGraph().writeFiles("..\\resources\\FloydWarshall\\fafepath.txt", "..\\resources\\FloydWarshall\\fafedist.txt");
+
 
 
     vector<int> network;
@@ -100,6 +114,7 @@ int main() {
     writeMatrix(matrix);*/
 
 
+
 /*
     vector<int> network;
     Vehicle car(0, 4, 0);
@@ -119,6 +134,8 @@ int main() {
         cout << "false" << endl;
     Time t1(16, 0, 0);
     Time t2(18,0,0);
+    Time t3(-1,0,0);
+    Time t4(-1, 0, 0);
     DriverRequest request(t1, t2,25,4, &d);
     PassengerRequest r1(t1, t2, 25,5,&p1);
     PassengerRequest r2(t1,  t2,25, 6, &p2);
@@ -130,7 +147,12 @@ int main() {
     b.addPassengerRequest(&r3);
     b.addPassengerRequest(&r4);
     d.addNetwork(4);
-    p3.addNetwork(5);*/
+    p3.addNetwork(5);
+    if(b.createJourney(&request))
+        cout<< "True"<< endl;
+    else
+        cout << "False"<<endl;*/
+
 
 
 /*    Time t1("3:5:15");
@@ -147,7 +169,7 @@ int main() {
     t3-=t4;
     cout<<t3<<endl;*/
 
-    b.updateFiles();
+    //b.updateFiles();
 
 }
 
