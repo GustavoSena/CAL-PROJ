@@ -82,7 +82,7 @@ public:
     const vector<Passenger*> getPassengers() const;
     const vector<Driver*>  getDrivers() const;
     const vector<Journey*> getJourneys() const;
-    
+
     //função que escreve no ficheiro a informação dos passengers
     void writePassengers();
 
@@ -188,7 +188,6 @@ public:
     bool createJourney(DriverRequest * request);
 
     void run_algorithm();
-
 
 };
 

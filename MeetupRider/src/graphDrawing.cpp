@@ -81,8 +81,6 @@ void mapViewer(Graph *g, bool city_map, vector<int> path, bool show_path)
         }
     }
 
-
-
     gv->rearrange();
     string input;
     getline(cin, input);
