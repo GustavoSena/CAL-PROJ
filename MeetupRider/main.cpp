@@ -52,11 +52,11 @@ int main() {
 
     cout <<"Go into test mode? (y/n): ";
     string temp;
-    getline(cin, temp);
-    if(compare_str(temp,"y")) {
+    //getline(cin, temp);
+    //if(compare_str(temp,"y")) {
         testAlgoritmsPerformance(b);
         return 0;
-    }
+   // }
 
 
 
