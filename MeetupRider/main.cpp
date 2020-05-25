@@ -46,9 +46,14 @@ int main() {
 
     string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
     string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
-    Base b("..\\resources\\files\\Base.txt");
-    b.loadGraph(node_text, edge_text);
+    //Base b("..\\resources\\files\\Base.txt");
+    //b.loadGraph(node_text, edge_text);
+    Base b;
+    int id=main_menu(b);
+    chooseCity(&b);
+    chooseAlgorithm(&b,id);
 
+/*
     cout <<"Go into test mode? (y/n): ";
     string temp;
     getline(cin, temp);
@@ -56,6 +61,7 @@ int main() {
         testAlgoritmsPerformance(b);
         return 0;
     }
+*/
 
 
 
@@ -101,9 +107,7 @@ int main() {
     /*double **matrix=readMatrix();
     cout<<"read\n";
     writeMatrix(matrix);*/
-/*    int id=main_menu(b);
-    chooseCity(&b);
-    chooseAlgorithm(&b,id);*/
+
 
 
     /*string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
