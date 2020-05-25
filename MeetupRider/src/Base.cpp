@@ -493,7 +493,7 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
         double dest_dist = getDistance(requests[i]->getDestinationId(), driver->getDestinationId());
         double median = (orig_dist+dest_dist)/2;
         int people_known = getNumberPeopleKnown(d, current_passengers, requests[i]->getPassenger());
-        if((people_known==temp_people && median < temp) || (people_known>temp_people && (temp < (median+300))) || (temp_people>people_known && temp>=(median+300)))
+        if((people_known==temp_people && median < temp) || (people_known>temp_people && (temp > (median+300))) || (temp_people>people_known && temp<=(median+300)))
         {
             temp = median;
             result = requests[i];

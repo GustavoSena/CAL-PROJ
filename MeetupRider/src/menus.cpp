@@ -273,7 +273,7 @@ void optionMenu(Base *base,int id){
         cout<<"1-Add Request\n";
         cout<<"2-Run algorithm\n";
         cout<<"3-See Map\n";
-        cout<<"4-See previour Journeys\n";
+        cout<<"4-See previous Journeys\n";
         cout<<"5-Exit program\n";
         string temp;
         getline(cin, temp);
