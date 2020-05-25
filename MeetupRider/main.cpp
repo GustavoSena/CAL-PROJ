@@ -8,6 +8,7 @@
 #include "src/Base.h"
 #include "src/menus.h"
 #include "src/graphDrawing.h"
+#include "src/resultGenerator.h"
 
 
 using namespace std;
@@ -43,13 +44,28 @@ void testing_algorithms(Graph b,int orig_id, int dest_id)
 int main() {
 
 
-    string node_text = "..\\resources\\maps\\Maia\\nodes_x_y_maia.txt";
-    string edge_text = "..\\resources\\maps\\Maia\\edges_maia.txt";
-    Base b("..\\resources\\files\\Base.txt");
+    string node_text = "..\\resources\\maps\\8x8\\nodes.txt";
+    string edge_text = "..\\resources\\maps\\8x8\\edges.txt";
+    //Base b("..\\resources\\files\\Base.txt");
+    Base b;
     b.loadGraph(node_text, edge_text);
 
+    cout <<"Go into test mode? (y/n): ";
+    string temp;
+    getline(cin, temp);
+    if(compare_str(temp,"y")) {
+        testAlgoritmsPerformance(b);
+        return 0;
+    }
 
 
+
+    //b.loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
+    //b.getGraph().floydWarshallShortestPath();
+    //b.getGraph().writeFiles("..\\resources\\FloydWarshall\\fafepath.txt", "..\\resources\\FloydWarshall\\fafedist.txt");
+
+
+/*
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Vrum Vrum", network, "rua", &car);
@@ -79,8 +95,10 @@ int main() {
     b.addPassengerRequest(&r3);
     b.addPassengerRequest(&r4);
 
+    d.addNetwork(4);
+    p3.addNetwork(5);
 
-
+*/
     /*double **matrix=readMatrix();
     cout<<"read\n";
     writeMatrix(matrix);*/
@@ -100,7 +118,7 @@ int main() {
 /*
 
 
-
+/*
     vector<int> network;
     Vehicle car(0, 4, 0);
     Driver d(0, "Joao", network, "rua", &car);
@@ -136,9 +154,9 @@ int main() {
     if(b.createJourney(&request))
         cout<< "True"<< endl;
     else
-        cout << "False"<<endl;
+        cout << "False"<<endl;*/
 
-*/
+
 
 
 /*    Time t1("3:5:15");

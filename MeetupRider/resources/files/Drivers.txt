@@ -10,39 +10,3 @@ Goncalo Batalhao
 Rua da Travagem 512
 2, 9
 ::::::::::
-6
-Joao
-4, 7, 8, 10
-rua
-3, 4
-::::::::::
-10
-Vrum Vrum
-13, 11, 12
-rua
-4, 4
-::::::::::
-15
-Vrum Vrum
-18, 16, 17
-rua
-5, 4
-::::::::::
-20
-Vrum Vrum
-21
-rua
-6, 4
-::::::::::
-25
-Vrum Vrum
-26
-rua
-7, 4
-::::::::::
-30
-Vrum Vrum
-33, 31, 32
-rua
-8, 4
-::::::::::

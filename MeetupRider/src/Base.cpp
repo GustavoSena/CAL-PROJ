@@ -871,17 +871,17 @@ void Base::writeRequests() {
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
-        newfile<< "::::::::::"<<endl;
+        newfile<< "::::::::::";
+        if(r!=*(requests_passengers.end()-1))
+            newfile<<endl;
     }
     for (auto r : requests_drivers) {
-        newfile<<r->getDriver()->getId()<<endl;
+        newfile<<endl<<r->getDriver()->getId()<<endl;
         newfile<<r->getStartingId()<<endl;
         newfile<<r->getDestinationId()<<endl;
         newfile<<r->getMinStartTime()<<endl;
         newfile<<r->getMaxEndTime()<<endl;
         newfile<< "::::::::::";
-        if(r!=*requests_drivers.end())
-            newfile<<endl;
     }
     //const char* fileName = ("..\\resources\\files\\"+requestFile).c_str();
     newfile.close();
