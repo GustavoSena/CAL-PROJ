@@ -56,7 +56,6 @@ int main() {
 /*
     cout <<"Go into test mode? (y/n): ";
     string temp;
-
     //getline(cin, temp);
     //if(compare_str(temp,"y")) {
     b.getGraph().readFiles("..\\resources\\FloydWarshall\\GridGraphPathFW.txt", "..\\resources\\FloydWarshall\\GridGraphDistanceFW.txt");

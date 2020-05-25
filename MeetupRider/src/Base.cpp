@@ -27,10 +27,6 @@ Base::Base(string fileName) {
                 setJourneyFile(temp);
                 loadJourneys(temp);
                 break;
-            case 3:
-                setRequestFile(temp);
-                loadRequests(temp);
-                break;
             default:
                 break;
         }

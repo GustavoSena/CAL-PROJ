@@ -28,7 +28,6 @@ void chooseCity(Base *base);
 //menu de escolha de algoritmo a ser utilizado
 void chooseAlgorithm(Base * base,int id);
 
-<<<<<<< HEAD
 //menu que da a opçao de adicionar pedidos, ver o mapa, correr o algoritmo (processando os pedidios ja existentes) e ver as viagens já realizadas
 void optionMenu(Base *base,int id);
 
@@ -38,7 +37,6 @@ Time *readTime(string timeType);
 //menu de visualização das viagens ja realizadas
 void viewJourneys(Base *base);
 
-//menu onde se da a escolha de fazer o processamento de dados no momento ou usar os preprocessados
 //menu que da a opção de adicionar pedidos, ver o mapa, correr o algoritmo (processando os pedidos já existentes) e ver as viagens já realizadas
 void optionMenu(Base *base,int id);
 

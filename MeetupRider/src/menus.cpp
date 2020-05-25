@@ -201,19 +201,27 @@ void chooseCity(Base *base){
             exit(0);
         }
         if (compare_str(temp, "1")) {
+            base->setDriverFile("portoRequests.txt");
+            base->loadRequests("portoRequests.txt");
             base->loadGraph("..\\resources\\maps\\Porto\\nodes_x_y_porto.txt", "..\\resources\\maps\\Porto\\edges_porto.txt");
             base->setMap("Porto");
             return;
         }
         else if (compare_str(temp, "2")) {
+            base->setDriverFile("fafeRequests.txt");
+            base->loadRequests("fafeRequests.txt");
             base->loadGraph("..\\resources\\maps\\Fafe\\nodes_x_y_fafe.txt", "..\\resources\\maps\\Fafe\\edges_fafe.txt");
             base->setMap("Fafe");
             return;
         }else if (compare_str(temp, "3")) {
+            base->setDriverFile("maiaRequests.txt");
+            base->loadRequests("maiaRequests.txt");
             base->loadGraph("..\\resources\\maps\\Maia\\nodes_x_y_maia.txt", "..\\resources\\maps\\Maia\\edges_maia.txt");
             base->setMap("Maia");
             return;
         }else if (compare_str(temp, "4")) {
+            base->setDriverFile("8x8Requests.txt");
+            base->loadRequests("8x8Requests.txt");
             base->loadGraph("..\\resources\\maps\\8x8\\nodes.txt", "..\\resources\\maps\\8x8\\edges.txt");
             base->setMap("8x8");
             return;
