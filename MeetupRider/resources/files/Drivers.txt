@@ -6,7 +6,7 @@ Rua Nova de S. Crispim 516
 ::::::::::
 4
 Goncalo Batalhao
-1, 2
+1, 2, 5, 3
 Rua da Travagem 512
 2, 9
 ::::::::::

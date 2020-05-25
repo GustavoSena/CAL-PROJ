@@ -5,11 +5,7 @@
 #include "src/graphDrawing.h"
 #include "src/resultGenerator.h"
 
-
 using namespace std;
-
-
-
 
 
 int main() {
@@ -18,6 +14,7 @@ int main() {
     int id=main_menu(b);
     chooseCity(&b);
     chooseAlgorithm(&b,id);
+
 
     b.updateFiles();
 
