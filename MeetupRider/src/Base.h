@@ -172,33 +172,44 @@ public:
     //retorna true se o fez com sucesso
     bool removePassengerRequests(Passenger * p);
 
+    //remove os requests que estão nos parâmetros
     //retorna true se o fez com sucesso
     bool removeRequests(vector<Passenger*> passengers, DriverRequest * request);
 
+    //cria uma journey, adiciona-a à base e retorna verdadeiro se o fez com sucesso
     bool createJourney(DriverRequest * request);
 
+    //adiciona um driverRequest aos driver requests da base
     void addDriverRequest(DriverRequest * request);
 
+    //adiciona um passengerRequest aos passenger requests da base
     void addPassengerRequest(PassengerRequest * request);
 
+    //adiciona um passageiro à base
     void addPassenger(Passenger * passenger);
 
+    //adiciona um driver à base
     void addDriver(Driver * driver);
 
+    //retorna o tempo previsto de acordo com a distância
     Time predictTime(double distance);
 
+    //testa se o tempo que iria demorar a ir do starting id ao destination id do request bate certo com a restrição de tempo
     bool conditionTime(Request *r, Time t);
 
+    //vai buscar o path que o request terá que percorrer
     vector<int> getRequestPath(vector<int> ids, Request * request);
 
+    //testa se as restrições temporais são cumpridas se o possible_request fosse adicionado à viagem
     bool checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request);
 
+    //retorna o número de pessoas conhecidas que estão dentro do veículo (driver e passengers) do possible_passenger
     int getNumberPeopleKnown(Driver *driver, vector<Passenger*> passengers, Passenger* possible_passenger);
 
+    //adiciona à network das pessoas o id das outras (se ainda não estiver lá)
     void updatePeopleKnown(Driver *driver, vector<Passenger*> passengers);
 
     void loadFloydWarshall();
-
 
     void setlastIDs();
 
