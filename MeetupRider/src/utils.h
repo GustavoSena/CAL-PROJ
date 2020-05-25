@@ -15,29 +15,26 @@
 
 using namespace std;
 
-
+//tira os espaços brancos da string
 void trim(string &str);
 
+//divide a string em várias strings com a char sep e retorna o vetor com essas strings
 vector<string> decompose(string s, char sep);
 
+//compara as strings
 bool compare_str(string str1, string str2);
 
+//separa uma string em várias strings com a char delimiter e retorna o vetor de strings sem espaços
 vector<string> split(string str, char delimiter, size_t max_splits);
 
+//vai buscar os valores para um vértice a partir duma linha
+vector<int> getNodeValues(string text_line);
 
-vector<int> getNodeValues(string text_line); //Atm only for grid graphs
-
-
+//vai buscar os valores para uma aresta a partir duma linha
 vector<int> getEdgeValues(string text_line);
 
 
-void mapViewer(string edge_file, string node_file);
 
-void pathViewer(Graph graph, vector<int> path);
-
-void AStarView(Graph b, int orig_id, int dest_id);
-
-void DijkstraView(Graph b, int orig_id, int dest_id);
 
 vector<int> subVector(vector<int> init, int pos);
 

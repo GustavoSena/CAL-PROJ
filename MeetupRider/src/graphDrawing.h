@@ -12,7 +12,9 @@
 
 
 
-
+//desenha o grafo de acordo com os parametros
+//  se for mapa de cidade ou não
+//  se quer desenhar um caminho específico de maneira diferente ou não
 void mapViewer(Graph *g, bool city_map, vector<int> path, bool show_path);
 
 

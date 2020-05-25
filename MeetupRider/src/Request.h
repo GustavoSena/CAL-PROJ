@@ -10,33 +10,6 @@
 #include "Person.h"
 
 class Request {
-public:
-
-    Request()=default;
-
-    Request( Time minStartTime,  Time maxEndTime,
-            int destinationId, int startingId);
-
-     Time getMinStartTime();
-
-    void setMinStartTime( Time minStartTime);
-
-     Time getMaxEndTime();
-
-    void setMaxEndTime( Time maxEndTime);
-
-    int getDestinationId();
-
-    void setDestinationId( int id);
-
-     int getStartingId() ;
-
-    void setStartingId( int id);
-
-    void setTimesNull();
-
-
-
 
 protected:
     Time minStartTime;
@@ -44,13 +17,39 @@ protected:
     int destinationId;
     int startingId;
 
+public:
+    Request()=default;
+
+    Request( Time minStartTime,  Time maxEndTime,
+             int destinationId, int startingId);
+
+    Time getMinStartTime();
+
+    void setMinStartTime( Time minStartTime);
+
+    Time getMaxEndTime();
+
+    void setMaxEndTime( Time maxEndTime);
+
+    int getDestinationId();
+
+    void setDestinationId( int id);
+
+    int getStartingId() ;
+
+    void setStartingId( int id);
+
+    void setTimesNull();
 
 };
 
 class PassengerRequest : public Request{
+
+private:
+    Passenger * passenger;
 public:
     PassengerRequest( Time minStartTime,  Time maxEndTime,
-                     int destinationId, int startingId, Passenger *passenger);
+                      int destinationId, int startingId, Passenger *passenger);
     PassengerRequest(int destinationId, int startingId, Passenger * passenger);
 
     PassengerRequest() =default;
@@ -58,17 +57,17 @@ public:
 
     void setPassenger(Passenger *passenger);
 
-private:
-    Passenger * passenger;
-
-
 };
 
 
 class DriverRequest : public Request{
+
+private:
+    Driver * driver;
+
 public:
     DriverRequest( Time minStartTime,  Time maxEndTime, int destinationId,
-                  int startingId, Driver *driver);
+                   int startingId, Driver *driver);
 
 
     DriverRequest(int destinationId, int startingId, Driver * driver);
@@ -81,8 +80,6 @@ public:
 
     int getCapacity();
 
-private:
-    Driver * driver;
 };
 
 #endif //CAL_PROJ_REQUEST_H

@@ -9,6 +9,12 @@
 #include "NewGraph.h"
 
 class Vehicle{
+
+private:
+    int id;
+    int capacity;
+    int driver_id;
+
 public:
     Vehicle(int id, int capacity, int driverId);
 
@@ -27,12 +33,6 @@ public:
     void setDriverId(int driverId);
 
     friend ostream &operator<<(ostream &out, const Vehicle &v);
-
-private:
-
-    int id;
-    int capacity;
-    int driver_id;
 
 };
 

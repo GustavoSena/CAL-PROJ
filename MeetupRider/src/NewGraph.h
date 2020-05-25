@@ -70,9 +70,6 @@ public:
     friend class MutablePriorityQueue<Vertex>;
 };
 
-
-
-
 //Edge
 class Edge{
 private:
