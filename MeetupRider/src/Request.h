@@ -52,6 +52,10 @@ public:
                       int destinationId, int startingId, Passenger *passenger);
     PassengerRequest(int destinationId, int startingId, Passenger * passenger);
 
+    PassengerRequest(Request r, Passenger* p):Request(r){
+        passenger=p;
+    }
+
     PassengerRequest() =default;
     Passenger *getPassenger();
 
@@ -71,6 +75,9 @@ public:
 
 
     DriverRequest(int destinationId, int startingId, Driver * driver);
+    DriverRequest(Request r, Driver* d):Request(r){
+        driver=d;
+    }
 
     DriverRequest() = default;
 
