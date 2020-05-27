@@ -18,6 +18,7 @@ int main_menu(Base *base)
                 "________(__)_____________(__)____" << endl;
         cout << "Are you a [P]assenger or a [D]river?" << endl;
         cout << "[C]lose"<< endl;
+        cout << "Input: ";
         getline(cin,answer);
         if(compare_str(answer,"p"))
         {
@@ -38,7 +39,7 @@ int main_menu(Base *base)
         }
         else
         {
-            cout << "Invalid answer. Try again!\n";
+            cout << "\nInvalid answer. Try again!\n";
         }
 
     }while(true);
@@ -51,10 +52,11 @@ int next_menu(Base *base, string type)
     string answer;
     do{
 
-        cout << "Sign [I]n"<< endl;
+        cout << "\nSign [I]n"<< endl;
         cout << "Sign [U]p" << endl;
-        cout << "\n\nGo [B]ack" << endl;
+        cout << "\nGo [B]ack" << endl;
         cout << "[C]lose" << endl;
+        cout<<"Input: ";
         getline(cin,answer);
         if(compare_str(answer,"i"))
         {
@@ -175,24 +177,24 @@ int request_menu(Base *base, int id, string type){
 
 int chooseCity(Base *base, int id,string type){
     do {
-        cout<<"Which city are you in?\n";
-        cout<<"1-Porto\n";
-        cout<<"2-Fafe\n";
-        cout<<"3-Maia\n";
-        cout<<"4-8x8 grid\n";
-        cout<<"\n\n5-Go Back\n";
-        cout<<"6-Exit Program\n";
-        cout<<"Input: ";
+        cout << "Which city are you in?\n";
+        cout << "1-Porto\n";
+        cout << "2-Fafe\n";
+        cout << "3-Maia\n";
+        cout << "4-8x8 grid\n";
+        cout << "\n5-Go Back\n";
+        cout << "6-Exit Program\n";
+        cout << "Input: ";
         string temp;
         getline(cin, temp);
 
 
-        if (compare_str(temp, "6"))
+        if (compare_str(temp, "6")){
             return 0;
-
-        else if (compare_str(temp, "5"))
+        }
+        else if (compare_str(temp, "5")){
             return 1;
-
+        }
         else if (compare_str(temp, "1")) {
             base->setRequestFile("portoRequests.txt");
             base->loadRequests("portoRequests.txt");
@@ -241,24 +243,24 @@ int chooseCity(Base *base, int id,string type){
 
 int chooseAlgorithm(Base * base,int id, string type){
     do {
-        cout<<"\nChoose algorithm?\n";
-        cout<<"1-Astar\n";
-        cout<<"2-Dijkstra\n";
-        if(compare_str(base->getMap(),"8x8"))
-            cout<<"3-FloydWarshall\n";
-        cout<<"\n\n4-Go Back\n";
-        cout<<"5-Exit Program\n";
-        cout<<"Input: ";
+        cout << "\nChoose algorithm?\n";
+        cout << "1-Astar\n";
+        cout << "2-Dijkstra\n";
+        if (compare_str(base->getMap(), "8x8"))
+            cout << "3-FloydWarshall\n";
+        cout << "\n4-Go Back\n";
+        cout << "5-Exit Program\n";
+        cout << "Input: ";
         string temp;
         getline(cin, temp);
 
 
-        if (compare_str(temp, "5"))
+        if (compare_str(temp, "5")){
             return 0;
-
-        else if (compare_str(temp, "4"))
+        }
+        else if (compare_str(temp, "4")){
             return 1;
-
+        }
         else if ((compare_str(base->getMap(),"8x8")) && compare_str(temp, "3")) {
             base->setAlgorithm("floydwarshall");
             if(floydwarshallMenu(base,id, type))
@@ -286,35 +288,34 @@ int chooseAlgorithm(Base * base,int id, string type){
 
 int optionMenu(Base *base,int id, string type){
     do {
-        cout<<"\nWhat do you want to do?\n";
-        cout<<"1-Add Request\n";
-        cout<<"2-Run algorithm\n";
-        cout<<"3-See Map\n";
-        cout<<"4-See previous Journeys\n";
-        cout<<"\n\n5-Go Back\n";
-        cout<<"6-Exit Program\n";
-        cout<<"Input: ";
+        cout << "\nWhat do you want to do?\n";
+        cout << "1-Add Request\n";
+        cout << "2-Run algorithm\n";
+        cout << "3-See Map\n";
+        cout << "4-See previous Journeys\n";
+        cout << "\n5-Go Back\n";
+        cout << "6-Exit Program\n";
+        cout << "Input: ";
         string temp;
         getline(cin, temp);
-        if (compare_str(temp, "6"))
+        if (compare_str(temp, "6")) {
             return 0;
-
-        else if (compare_str(temp, "5"))
+        } else if (compare_str(temp, "5")){
             return 1;
-
-        else if (compare_str(temp, "1"))
-            if(request_menu(base,id, type))
+        }
+        else if (compare_str(temp, "1")){
+            if (request_menu(base, id, type))
                 continue;
-
-        else if (compare_str(temp, "2"))
+        }
+        else if (compare_str(temp, "2")) {
             base->run_algorithm();
-
-        else if (compare_str(temp, "3"))
-            mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),vector<int>{},false);
-
-        else if (compare_str(temp, "4"))
+        }
+        else if (compare_str(temp, "3") ) {
+            mapViewer(&base->getGraph(), !compare_str(base->getMap(), "8x8"), vector<int>{}, false);
+        }
+        else if (compare_str(temp, "4")) {
             viewJourneys(base);
-
+        }
         else
             cout<<"\nInvalid input! Plz try again\n";
 
@@ -373,7 +374,7 @@ int floydwarshallMenu(Base*base,int id, string type){
     while(true) {
         cout << "\n1-Use pre-processed values\n";
         cout << "2-Run FloydWarshall\n";
-        cout << "\n\n3-Go Back\n";
+        cout << "\n3-Go Back\n";
         cout << "4-Exit program\n";
 
         cout << "Input: ";

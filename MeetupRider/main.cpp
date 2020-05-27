@@ -2,8 +2,6 @@
 #include <sstream>
 #include "src/Base.h"
 #include "src/menus.h"
-#include "src/graphDrawing.h"
-#include "src/resultGenerator.h"
 
 using namespace std;
 
