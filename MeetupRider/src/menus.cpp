@@ -180,7 +180,7 @@ int chooseCity(Base *base, int id,string type){
         cout<<"2-Fafe\n";
         cout<<"3-Maia\n";
         cout<<"4-8x8 grid\n";
-        cout<<"5-\n\nGo Back\n";
+        cout<<"\n\n5-Go Back\n";
         cout<<"6-Exit Program\n";
         cout<<"Input: ";
         string temp;
