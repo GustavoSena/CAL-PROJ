@@ -662,6 +662,23 @@ double Base::getDistance(int id1, int id2)
 }
 
 
+bool Base::comparing_condition(double dist_temp, int people_temp, double median, int people_known)
+{
+    if(people_known == people_temp)
+        return median < dist_temp;
+    else if(people_known > people_temp)
+    {
+        if (median <= dist_temp)
+            return true;
+        else return (median-dist_temp) < 300;
+    } else
+    {
+        if(median >= dist_temp)
+            return false;
+        else return (dist_temp - median) >=300;
+    }
+}
+
 PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver, vector<Passenger*> current_passengers){
 
     double temp = INF;
@@ -675,7 +692,7 @@ PassengerRequest * Base::getClosestToRequest(vector<PassengerRequest *> &request
         double dest_dist = getDistance(requests[i]->getDestinationId(), driver->getDestinationId());
         double median = (orig_dist+dest_dist)/2;
         int people_known = getNumberPeopleKnown(d, current_passengers, requests[i]->getPassenger());
-        if((people_known==temp_people && median < temp) || (people_known>temp_people && (temp > (median+300))) || (temp_people>people_known && temp<=(median+300)))
+        if(comparing_condition(temp, temp_people, median, people_known))
         {
             temp = median;
             result = requests[i];
@@ -760,9 +777,10 @@ Time Base::predictTime(double distance)
     return Time(time);
 }
 
-bool Base::conditionTime(Request *r, Time t)
+bool Base::conditionTime(Request *r, Time t, Time initial_time)
 {
-    return r->getMinStartTime() <= r->getMaxEndTime() - t;
+    Time temp = r->getMaxEndTime() -t;
+    return (initial_time <= r->getMaxEndTime() - t);
 }
 
 vector<int> Base::getRequestPath(vector<int> ids, Request * request)
@@ -775,10 +793,22 @@ vector<int> Base::getRequestPath(vector<int> ids, Request * request)
         {
             result.push_back(ids[i]);
             if(pos_inicial == -1)
-                pos_inicial = i;
+                pos_inicial = 1;
             if(ids[i] == request->getDestinationId())
                 break;
         }
+    }
+    return result;
+}
+
+vector<int> Base::getPartialPath(Request * request, vector<int> path)
+{
+    vector<int> result;
+    for(int i = 0; i < path.size(); i++)
+    {
+        result.push_back(path[i]);
+        if(path[i] == request->getStartingId())
+            break;
     }
     return result;
 }
@@ -789,10 +819,13 @@ bool Base::checkTimeRestrictions(vector<Request*> requests, PassengerRequest * p
     vector<int> possible_path = recalculatePath(requests);
     requests.push_back(possible_request);
     double distance = 0;
+    double initial_distance = 0;
     for(int i = 0; i < requests.size(); i++)
     {
         calculatePath(getRequestPath(possible_path, requests[i]), distance);
-        if(!conditionTime(requests[i], predictTime(distance)))
+        calculatePath(getPartialPath(requests[i], possible_path), initial_distance);
+        Time initial_time = predictTime(initial_distance) + requests[0]->getMinStartTime();
+        if(!conditionTime(requests[i], predictTime(distance), initial_time))
             return false;
 
     }

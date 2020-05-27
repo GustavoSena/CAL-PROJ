@@ -133,6 +133,9 @@ public:
     //usa o algoritmo definido na base
     double getDistance(int id1, int id2);
 
+    //testa se os valores de um pedido são melhores que outro
+    bool comparing_condition(double dist_temp, int people_temp, double median, int people_known);
+
     //retorna o passenger request que é melhor para o caso atual
     //o passenger request melhor é aquele que tem o melhor compromisso entre as distancias do request do driver e o numero de pessoas conhecidas no carro
     PassengerRequest * getClosestToRequest(vector<PassengerRequest *> &requests, DriverRequest * driver, vector<Passenger*> current_passengers);
@@ -151,10 +154,13 @@ public:
     Time predictTime(double distance);
 
     //testa se o tempo que iria demorar a ir do starting id ao destination id do request bate certo com a restrição de tempo
-    bool conditionTime(Request *r, Time t);
+    bool conditionTime(Request *r, Time t, Time initial_time);
 
     //vai buscar o path que o request terá que percorrer
     vector<int> getRequestPath(vector<int> ids, Request * request);
+
+    //vai buscar o path entre o starting id do condutor e do passageiro
+    vector<int> getPartialPath(Request * request, vector<int> path);
 
     //testa se as restrições temporais são cumpridas se o possible_request fosse adicionado à viagem
     bool checkTimeRestrictions(vector<Request*> requests, PassengerRequest * possible_request);

@@ -1,21 +1,21 @@
 1
 Leonor Gomes
-2, 3, 4, 5
+2, 3, 4, 5, 6, 7
 Rua Francisco Sá Carneiro 13
 ::::::::::
 3
 Ana Mafalda
-1, 2, 4, 5
+1, 2, 4, 5, 6
 Rua Dr. Roberto Frias 12
 ::::::::::
 5
 Pedro Seixas
-1, 2, 4, 3
+1, 2, 4, 3, 6, 7
 Rua da Alegria 32
 ::::::::::
 6
 Andre Bidonesca
-1, 2, 4, 5
+1, 2, 4, 5, 3, 7
 Rua da Senhora da Hora
 ::::::::::
 9
