@@ -206,26 +206,29 @@ void Base::loadJourneys(string fileName){
     while(getline(a_file, temp)) {
         switch(counter){
             case 0:
-                j.setDriver(findDriver(stoi(temp)));
+                j.setCity(temp);
                 break;
             case 1:
+                j.setDriver(findDriver(stoi(temp)));
+                break;
+            case 2:
                 parts = decompose(temp,',');
                 for (string i : parts)
                     aux.push_back(stoi(i));
                 j.setPassenger(findPassengers(aux));
                 aux={};
                 break;
-            case 2:
+            case 3:
                 parts = decompose(temp,',');
                 for (string i : parts)
                     aux.push_back(stoi(i));
                 j.setPath(aux);
                 aux={};
                 break;
-            case 3:
+            case 4:
                 j.setStartTime(Time(temp));
                 break;
-            case 4:
+            case 5:
                 journeys.push_back(new Journey(j));
                 j= Journey();
                 counter=-1;
@@ -445,6 +448,7 @@ void Base::writeJourneys() {
     ofstream newfile;
     newfile.open("..\\resources\\files\\"+journeyFile);
     for (auto j : journeys) {
+        newfile<<j->getCity()<<endl;
         newfile<<j->getDriver()->getId()<<endl;
         for (Passenger *p : j->getPassenger()) {
             newfile << p->getId();
@@ -945,6 +949,7 @@ bool Base::createJourney(DriverRequest * request)
     vector<Passenger*> passengers = fillVehicle(request, &places);
     if(!setup(places)) return false;
     path = calculatePath(places, distance);
+    j->setCity(getMap());
     j->setDriver(request->getDriver());
     j->setPassenger(passengers);
     j->setStartTime(request->getMinStartTime());

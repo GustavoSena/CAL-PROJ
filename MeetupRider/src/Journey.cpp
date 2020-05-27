@@ -6,15 +6,15 @@
 
 
 
-const Time &Journey::getStartTime() const {
+Time Journey::getStartTime()  {
     return startTime;
 }
 
-void Journey::setStartTime(const Time &startTime) {
+void Journey::setStartTime( Time startTime) {
     Journey::startTime = startTime;
 }
 
-const vector<Passenger*> Journey::getPassenger() const{
+vector<Passenger*> Journey::getPassenger() {
     return passenger;
 }
 
@@ -22,7 +22,7 @@ void Journey::setPassenger(vector<Passenger*> passenger) {
     this->passenger = passenger;
 }
 
-Driver *Journey::getDriver() const {
+Driver *Journey::getDriver()  {
     return driver;
 }
 
@@ -62,4 +62,12 @@ string Journey::showSimp() {
     stringstream ss;
     ss<<"driver: "<<driver->getName()<<" -from: "<<path[0]<<" -to: "<<path[path.size()-1];
     return ss.str();
+}
+
+string Journey::getCity() {
+    return city;
+}
+
+void Journey::setCity(string city) {
+    this->city=city;
 }

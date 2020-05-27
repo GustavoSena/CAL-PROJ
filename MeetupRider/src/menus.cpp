@@ -260,8 +260,6 @@ int chooseAlgorithm(Base * base,int id, string type){
             return 1;
 
         else if ((compare_str(base->getMap(),"8x8")) && compare_str(temp, "3")) {
-
-
             base->setAlgorithm("floydwarshall");
             if(floydwarshallMenu(base,id, type))
                 continue;
@@ -332,7 +330,8 @@ void viewJourneys(Base *base){
     vector<Journey*> j= base->getJourneys();
     cout<<endl;
     for (int i=0; i<j.size();i++){
-        cout<<i+1<<" -"<<j[i]->showSimp()<<endl;
+        if(compare_str(j[i]->getCity(),base->getMap()))
+            cout<<i+1<<" -"<<j[i]->showSimp()<<endl;
     }
     cout<<"See detailed? (input id to see detailed and 0 to go back): ";
 
@@ -347,18 +346,17 @@ void viewJourneys(Base *base){
         if(x==0)
             return;
         cout<<j[x-1]->show()<<endl;
-        cout<<"See path in map? (y to confirm, anything else to cancel): ";
+        cout<<"\nSee path in map? (y to confirm, anything else to cancel): ";
         getline(cin, temp);
         if(compare_str(temp,"y"))
             mapViewer(&base->getGraph(),!compare_str(base->getMap(),"8x8"),j[x-1]->getPath(),true);
 
         return;
     }catch(exception err){
-        cout<<"Error with input: 1 to try again, anything else to cancel: ";
+        cout<<"\nError with input: 1 to try again, anything else to cancel: ";
         getline(cin,temp);
         if(compare_str(temp,("1")))
             viewJourneys(base);
-
 
         return;
 
@@ -403,8 +401,6 @@ int floydwarshallMenu(Base*base,int id, string type){
 
         else
             cout << "\nInvalid input try again\n";
-
-
 
     }
 

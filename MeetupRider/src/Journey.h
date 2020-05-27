@@ -12,6 +12,7 @@
 class Journey {
 
 private:
+    string city;
     Time startTime;
     vector<int> path;
     vector<Passenger*> passenger;
@@ -20,15 +21,15 @@ private:
 public:
     Journey() = default;
 
-    const Time &getStartTime() const;
+     Time getStartTime();
 
-    void setStartTime(const Time &startTime);
+    void setStartTime( Time startTime);
 
-    const vector<Passenger*>  getPassenger() const;
+    vector<Passenger*>  getPassenger() ;
 
-    void setPassenger(const vector<Passenger*>  passenger);
+    void setPassenger( vector<Passenger*>  passenger);
 
-    Driver *getDriver() const;
+    Driver *getDriver() ;
 
     void setDriver(Driver *driver);
 
@@ -39,6 +40,10 @@ public:
     void setPath( vector<int> path);
 
     vector<int> getPath();
+
+    string getCity();
+
+    void setCity(string city);
 
 };
 
