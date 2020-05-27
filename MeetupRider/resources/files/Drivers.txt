@@ -6,13 +6,13 @@ Rua Nova de S. Crispim 516
 ::::::::::
 4
 Goncalo Batalhao
-1, 2, 5, 3
+1, 2, 5, 3, 6
 Rua da Travagem 512
 2, 9
 ::::::::::
 7
 Vrum Vrum
-
+6, 1, 5
 rua
 3, 4
 ::::::::::
