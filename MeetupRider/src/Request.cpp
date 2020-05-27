@@ -38,9 +38,6 @@ void Request::setStartingId( int id) {
     Request::startingId=id;
 }
 
-
-
-
 Request::Request( Time minStartTime,  Time maxEndTime,
                  int destinationId, int startingId) : minStartTime(minStartTime), maxEndTime(maxEndTime),
                                                                       destinationId(destinationId),

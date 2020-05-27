@@ -3,7 +3,7 @@
 //
 
 #include "Base.h"
-
+#include "menus.h"
 
 
 Base::Base(string fileName) {
@@ -535,11 +535,10 @@ vector<Passenger *> Base::findPassengers(vector<int> ids) {
 void Base::sign_up(string type) //type = passenger || type = driver
 {
     string name, address;
-    cout << "Insert name\n";
+    cout << "\nInsert name: ";
     getline(cin, name);
-    cout << "Insert address\n";
+    cout << "\nInsert address: ";
     getline(cin, address);
-    //ver como fazer para adicionar as pessoas conhecidas - mostrar os utilizadores e perguntar quem conhece?
     vector<int> network;
     lastId++;
     if(type == "passenger")
@@ -553,11 +552,11 @@ void Base::sign_up(string type) //type = passenger || type = driver
             int cap=0;
             try {
                 string capacity;
-                cout << "Insert vehicle capacity\n";
+                cout << "\nInsert vehicle capacity";
                 getline(cin, capacity);
                 cap=stoi(capacity);
             }catch(exception err){
-                cout<<"Invalid capacity! Try again.\n";
+                cout<<"\nInvalid capacity! Try again.\n";
                 continue;
             }
             Vehicle v(lastCarId, cap, lastId);
@@ -574,21 +573,24 @@ int Base::sign_in(string type)
 {
     string answer;
     do{
-        cout << "Choose your account:" << endl;
+        cout << "\nChoose your account:" << endl;
         int tmp_id = 1;
         if(type == "passenger")
         {
             for(auto p : passengers)
                 cout << tmp_id++ << ". " <<p->getName()<< endl;
 
-            cout<< "type 0 to cancel"<<endl;
+            cout<< "type 0 to cancel";
             getline(cin,answer);
             if(compare_str(answer,"0"))
-                return -1;
+                return 0;
             try{
                 int id=stoi(answer);
-                if (id >= 1 && id <= passengers.size())
-                    return passengers[id-1]->getId();
+                if (id >= 1 && id <= passengers.size()) {
+                    if (chooseCity(this, passengers[id - 1]->getId(), type))
+                        continue;
+                    return 0;
+                }
 
             }catch(exception err){
             }
@@ -600,11 +602,14 @@ int Base::sign_in(string type)
             cout<< "type 0 to cancel"<<endl;
             getline(cin,answer);
             if(compare_str(answer,"0"))
-                return -1;
-            try{
-                int id=stoi(answer);
-                if( id>= 1 && id <= drivers.size())
-                    return drivers[id-1]->getId();
+                return 0;
+            try {
+                int id = stoi(answer);
+                if (id >= 1 && id <= drivers.size()){
+                    if (chooseCity(this, drivers[id - 1]->getId(), type))
+                        continue;
+                return 0;
+                }
 
             }catch(exception err){
             }

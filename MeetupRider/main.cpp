@@ -11,11 +11,7 @@ using namespace std;
 int main() {
 
     Base b("..\\resources\\files\\Base.txt");
-    int id=main_menu(b);
-    chooseCity(&b);
-    chooseAlgorithm(&b,id);
-
-
+    main_menu(&b);
     b.updateFiles();
 
     exit(0);
